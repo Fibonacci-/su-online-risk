@@ -53,11 +53,13 @@ namespace StateMachines
                 }
                 lock (this)
                 {
+                    //it is your turn. Make a whatever move.
                     bPending = false;
                     Console.Out.WriteLine(name + ">> doing work at state = " + request.state);
                     acknowledge = request;
+                    //let the client knows what you did.
                     client.Accept(acknowledge);
-                    if(request.state == MainState.Over)
+                    if (acknowledge.state == MainState.Over)
                     {
                         break;
                     }

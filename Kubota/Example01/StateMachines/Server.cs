@@ -98,7 +98,7 @@ namespace StateMachines
                     }
                     acks[i] = false;
                     clients[i].Request(outgoing[i]);
-                    while(acks[i] == false)
+                    while(clients[i].bRunning && acks[i] == false)
                     {
                         Thread.Sleep(100);
                     }

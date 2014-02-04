@@ -68,14 +68,20 @@ namespace StateMachines
                 {
                     Thread.Sleep(100);
                 }
-                bPending = false;
-                player.Request(request);
+                lock (this)
+                {
+                    bPending = false;
+                    player.Request(request);
+                }
                 while(bAck == false)
                 {
                     Thread.Sleep(100);
                 }
-                bAck = false;
-                server.Accept(this, acknowledge);
+                lock (this)
+                {
+                    bAck = false;
+                    server.Accept(this, acknowledge);
+                }
                 if(player.bRunning == false)
                 {
                     break;
