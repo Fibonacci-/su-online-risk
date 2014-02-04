@@ -7,3 +7,6 @@ Z:\472\Example01\Example01\obj\Debug\Example01.Properties.Resources.resources
 Z:\472\Example01\Example01\obj\Debug\Example01.csproj.GenerateResource.Cache
 Z:\472\Example01\Example01\obj\Debug\Example01.exe
 Z:\472\Example01\Example01\obj\Debug\Example01.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\bin\Debug\Example01.exe.config
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\obj\Debug\Example01.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\obj\Debug\Example01.pdb
