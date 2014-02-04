@@ -1,0 +1,6 @@
+T:\Profiles\kubota\Desktop\FileIOExample\bin\Debug\FileIOExample.exe.config
+T:\Profiles\kubota\Desktop\FileIOExample\bin\Debug\FileIOExample.exe
+T:\Profiles\kubota\Desktop\FileIOExample\bin\Debug\FileIOExample.pdb
+T:\Profiles\kubota\Desktop\FileIOExample\obj\Debug\FileIOExample.csprojResolveAssemblyReference.cache
+T:\Profiles\kubota\Desktop\FileIOExample\obj\Debug\FileIOExample.exe
+T:\Profiles\kubota\Desktop\FileIOExample\obj\Debug\FileIOExample.pdb
