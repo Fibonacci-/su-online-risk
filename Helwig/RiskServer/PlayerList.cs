@@ -12,7 +12,7 @@ namespace RiskServer
         private static PlayerList instance;
         private static List<Player> playerList;
         private Random random;
-
+        //singleton class
         private PlayerList() 
         {
             playerList = new List<Player>();
@@ -31,6 +31,7 @@ namespace RiskServer
             }
         }
 
+        //send message to all connected players
         public void broadcast(String message)
         {
             int count = 0;
@@ -42,17 +43,27 @@ namespace RiskServer
             Console.WriteLine("Broadcast send to " + count + " connected players.");
         }
 
+        //adds player to playerlist
         public void addPlayer(Player player)
         {
             playerList.Add(player);
             Console.WriteLine("PlayerList recieved " + player.getName());
         }
 
+        //returns Random object
         public Random getRandom()
         {
             return random;
         }
+
+        //rolls dice
+        public int diceRoll()
+        {
+            //returns random int between 1 and 6
+            return (this.getRandom().Next(1, 7));
+        }
         
+        //find connected player, given player ID
         public Player findPlayer(String playerID)
         {
             foreach (Player player in playerList)
@@ -65,6 +76,7 @@ namespace RiskServer
             return null;
         }
 
+        //find and update player socket
         public Boolean updatePlayer(String playerID, Socket newClient)
         {
             try
@@ -80,6 +92,7 @@ namespace RiskServer
             return false;
         }
 
+        //I don't know why this is here, I'm pretty sure it's never used
         public List<Player> getList()
         {
             return playerList;

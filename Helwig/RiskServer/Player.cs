@@ -11,6 +11,7 @@ namespace RiskServer
 {
     class Player
     {
+        //constructor
         public Player(Socket client, String name, String PID, String authCode)
         {
             this.client = client;
@@ -18,14 +19,17 @@ namespace RiskServer
             this.pid = PID;
             this.authcode = authCode;
             this.inGame = false;
+            this.host = false;
             startListening();
         }
 
-
+        
         private void startListening()
         {
+            //new thread for listening to client
             Thread dataCollection = new Thread(() =>
             {
+                //same general implementation as ClientHandler
                 Console.WriteLine("Starting player listening thread");
                 while (true)
                 {
@@ -69,7 +73,10 @@ namespace RiskServer
 
         private void dataParse(string input)
         {
-            throw new NotImplementedException();
+            if(input.Equals("gameStart"))
+            {
+                myGame.beginGame(this);
+            }
         }
 
         Socket client;
@@ -82,6 +89,12 @@ namespace RiskServer
 
         public void setGame(Game game, Boolean host){
             myGame = game;
+        }
+
+        public void setHost()
+        {
+            host = true;
+            this.sendMessage("host");
         }
 
         public void leaveGame()

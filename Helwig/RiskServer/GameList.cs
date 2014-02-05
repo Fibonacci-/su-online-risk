@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RiskServer
 {
+    //singleton class
     class GameList
     {
         private static GameList instance;
@@ -43,6 +44,7 @@ namespace RiskServer
 
         }
 
+        //makes a new game
         public void newGame(Player host)
         {
             Game game = new Game(ClientHandler.generateID(6));
