@@ -15,11 +15,18 @@ namespace RiskMap
         protected int id;
 
         // Constructor.
-        private Continent(string name, int unit, List<Territory> ter)
+        public Continent(string name, int unit, List<Territory> ter = null)
         {
             this.name = name;
             this.unitBonus = unit;
-            this.territories = ter;
+            if (ter != null)
+            {
+                this.territories = ter;
+            }
+            else
+            {
+                this.territories = new List<Territory>();
+            }
         }
 
         // Getting name.
@@ -33,6 +40,12 @@ namespace RiskMap
         {
             // Will work on this later.
             return (false);
+        }
+
+        //adding a territory
+        public void addTerritory(Territory t)
+        {
+            territories.Add(t);
         }
 
         // Getting territory list.

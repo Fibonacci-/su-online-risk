@@ -19,13 +19,20 @@ namespace RiskMap
         protected string owner;
 
         // Constructor.
-        private Territory(int x, int y, string name, Continent continent, List<Territory> links)
+        public Territory(int x, int y, string name, Continent continent, List<Territory> links = null)
         {
             this.x = x;
             this.y = y;
             this.name = name;
             this.continent = continent;
-            this.neighbors = links;
+            if (links == null)
+            {
+                this.neighbors = new List<Territory>();
+            }
+            else
+            {
+                this.neighbors = links;
+            }
             this.owner = "unoccupied";
         }
 
@@ -52,5 +59,25 @@ namespace RiskMap
 
         // Getting name.
         public string getName() { return (name); }
+
+        //add a neighbor
+        public bool addNeighbor(Territory t)
+        {
+            if (neighbors.Contains(t)) return false;
+            else
+            {
+                neighbors.Add(t);
+                return true;
+            }
+        }
+
+        public string getOwner()
+        {
+            return owner;
+        }
+        public void setOwner(string owner)
+        {
+            this.owner = owner;
+        }
     }
 }

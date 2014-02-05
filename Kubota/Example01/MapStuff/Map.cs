@@ -3,6 +3,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Drawing;
 
 namespace RiskMap
 {
@@ -13,17 +15,76 @@ namespace RiskMap
         protected List<Continent> continents;
         protected List<Territory> territories;
         protected string fileName;
-        //protected imageFile;
+        protected Bitmap bitmap;
 
         // Constructor.
-        private Map(string file)
+        public Map(string file)
         {
-            // Note:    File string does not include extensions. This is so we only need one
-            //          variable, and also because the filename of the image and code are
-            //          going to be the same.
-
             this.fileName = file;
-            // Will be done next week.
+            this.continents = new List<Continent>();
+            this.territories = new List<Territory>();
+            try
+            {
+                bitmap = new Bitmap(this.fileName);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Console.Error.WriteLine("Map: File " + this.fileName + " does not exists.");
+            }
+            try
+            {
+                bitmap = new Bitmap(this.fileName);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Console.Error.WriteLine("Map: File " + this.fileName + " does not exists.");
+            }
+        }
+
+        public Map(Bitmap bitmap)
+        {
+            this.fileName = "Not given";
+            this.continents = new List<Continent>();
+            this.territories = new List<Territory>();
+            this.bitmap = (Bitmap) bitmap.Clone();
+        }
+
+        //add a continent
+        public void addContinent(Continent c)
+        {
+            continents.Add(c);
+        }
+
+        //add a territory
+        public bool addTerritory(Territory t, Continent c)
+        {
+            if(continents.Exists(x => x.getName()==c.getName()))
+            {
+                Continent continent = continents.Find(x=>x.getName()==c.getName());
+                continent.addTerritory(t);
+                territories.Add(t);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /*
+         * find a territory by its name.
+         * return null if there is no such territory.
+         */
+        public Territory getTerritory(string name)
+        {
+            if(territories.Exists(x=> x.getName()==name))
+            {
+                return territories.Find(x => x.getName() == name);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         // Returning a specific continent.
@@ -39,26 +100,63 @@ namespace RiskMap
         public List<Territory> getAllTerritories() { return territories; }
 
         // Saving the map.
-        protected void saveMap()
+        public void saveMap(string path)
         {
-            // Will work on this later.
+            Stream stream = null;
+            try
+            {
+                stream = File.Create(path);
+            }
+            catch(System.IO.DirectoryNotFoundException)
+            {
+                Console.Error.WriteLine("Path, " + path + ", does not exist.");
+            }
+            BinaryFormatter formatter = new BinaryFormatter();
+            try
+            {
+                formatter.Serialize(stream, this); 
+            }
+            catch(System.Runtime.Serialization.SerializationException)
+            {
+                Console.Error.WriteLine("Serialization failed. Could not save the map");
+            }
+            finally
+            {
+                stream.Close();
+            }
         }
 
         // Loading the necessary files and deciphering the mapcode.
-        protected bool loadMap()
+        public static Map loadMap(string path)
         {
-            // Loading files.
-            if (!File.Exists(fileName + ".txt") || !File.Exists(fileName + ".png")) return false;
-            else
+            Stream stream = null;
+            try
             {
-                FileStream fileRead = File.OpenRead(fileName + ".txt");
-                // Load image file later.
+                stream = File.OpenRead(path);
             }
-
-            // Deserializing map code.
-
-            // Ending.
-            return true;
+            catch(Exception ex)
+            {
+                if(ex is System.IO.DirectoryNotFoundException || ex is System.IO.FileNotFoundException)
+                {
+                    Console.Error.WriteLine("Path, " + path + ", does not exist.");
+                }
+                throw;
+            }
+            BinaryFormatter formatter = new BinaryFormatter();
+            Map map = null;
+            try
+            {
+                map = (Map) formatter.Deserialize(stream); 
+            }
+            catch(System.Runtime.Serialization.SerializationException)
+            {
+                Console.Error.WriteLine("Serialization failed. Could not save the map");
+            }
+            finally
+            {
+                stream.Close();
+            }
+            return map;
         }
     }
 }

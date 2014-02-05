@@ -1,0 +1,6 @@
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\bin\Debug\MapStuff.exe.config
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\bin\Debug\MapStuff.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\bin\Debug\MapStuff.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\obj\Debug\MapStuff.csprojResolveAssemblyReference.cache
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\obj\Debug\MapStuff.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\obj\Debug\MapStuff.pdb
