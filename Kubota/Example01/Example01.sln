@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapStuff", "MapStuff\MapStu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileIOExample", "FileIOExample\FileIOExample.csproj", "{5C408ADB-F859-4E87-8C38-586817574334}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LewisGUIExample", "LewisGUIExample\LewisGUIExample.csproj", "{484F55A7-0158-4A02-A811-10C2CF494329}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapLibrary", "MapLibrary\MapLibrary.csproj", "{2C4AE2A5-C055-4E25-B0F5-6996F56D8A13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{5C408ADB-F859-4E87-8C38-586817574334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C408ADB-F859-4E87-8C38-586817574334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C408ADB-F859-4E87-8C38-586817574334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{484F55A7-0158-4A02-A811-10C2CF494329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{484F55A7-0158-4A02-A811-10C2CF494329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{484F55A7-0158-4A02-A811-10C2CF494329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{484F55A7-0158-4A02-A811-10C2CF494329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4AE2A5-C055-4E25-B0F5-6996F56D8A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4AE2A5-C055-4E25-B0F5-6996F56D8A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4AE2A5-C055-4E25-B0F5-6996F56D8A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4AE2A5-C055-4E25-B0F5-6996F56D8A13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

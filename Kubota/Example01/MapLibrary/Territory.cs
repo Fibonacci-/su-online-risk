@@ -6,7 +6,7 @@ using System.Text;
 namespace RiskMap
 {
     [Serializable]
-    class Territory
+    public class Territory
     {
         // Variables.
         protected int x;

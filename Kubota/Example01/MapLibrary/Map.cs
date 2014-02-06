@@ -9,7 +9,7 @@ using System.Drawing;
 namespace RiskMap
 {
     [Serializable]
-    class Map
+    public class Map
     {
         // Variables.
         protected List<Continent> continents;
@@ -98,6 +98,9 @@ namespace RiskMap
 
         // Returning all territories.
         public List<Territory> getAllTerritories() { return territories; }
+
+        // Retrive the bitmap
+        public Bitmap getBitmap() { return bitmap; }
 
         // Saving the map.
         public void saveMap(string path)

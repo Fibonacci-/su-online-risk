@@ -12,7 +12,7 @@ namespace MapStuff
     {
         static void Main(string[] args)
         {
-            bool makemap = true;
+            bool makemap = false;
             if (makemap)
             {
                 Bitmap bitmap = new Bitmap(@"..\..\SimpleRiskMap.png");
