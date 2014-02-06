@@ -15,10 +15,11 @@ namespace RiskMap
         protected int id;
 
         // Constructor.
-        public Continent(string name, int unit, List<Territory> ter = null)
+        public Continent(string name, int unit, int id, List<Territory> ter = null)
         {
             this.name = name;
             this.unitBonus = unit;
+            this.id = id;
             if (ter != null)
             {
                 this.territories = ter;

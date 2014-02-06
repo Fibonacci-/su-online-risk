@@ -12,7 +12,7 @@ namespace MapStuff
     {
         static void Main(string[] args)
         {
-            bool makemap = false;
+            bool makemap = true;
             if (makemap)
             {
                 Bitmap bitmap = new Bitmap(@"..\..\SimpleRiskMap.png");
@@ -30,12 +30,12 @@ namespace MapStuff
                 for (int i = 0; i < cnames.Length; ++i )
                 {
                     string c = cnames[i];
-                    Continent continent = new Continent(c, 1);
+                    Continent continent = new Continent(c, 1, i);
                     map.addContinent(continent);
                     for (int j = 0; j < tnames[i].Length; ++j )
                     {
                         string t = tnames[i][j];
-                        Territory territory = new Territory(x[count], y[count], t, continent, null);
+                        Territory territory = new Territory(x[count], y[count], t, count, continent);
                         //continent.addTerritory(territory);
                         map.addTerritory(territory, continent);
                         count++;

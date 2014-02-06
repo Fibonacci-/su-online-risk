@@ -19,11 +19,12 @@ namespace RiskMap
         protected string owner;
 
         // Constructor.
-        public Territory(int x, int y, string name, Continent continent, List<Territory> links = null)
+        public Territory(int x, int y, string name, int id, Continent continent, List<Territory> links = null)
         {
             this.x = x;
             this.y = y;
             this.name = name;
+            this.id = id;
             this.continent = continent;
             if (links == null)
             {
