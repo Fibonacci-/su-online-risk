@@ -15,7 +15,7 @@ namespace LewisGUIExample
     public partial class Form1 : Form
     {
         Map map;
-        string mapfilename = @"..\..\SimpleRisk.map";
+        string mapfilename = @"..\..\..\MapStuff\SimpleRisk.map";
         public Form1()
         {
             InitializeComponent();
