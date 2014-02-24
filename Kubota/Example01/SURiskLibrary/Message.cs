@@ -12,6 +12,11 @@ namespace SUOnlineRisk
     {
         public MainState state;
         public string playerName;
+        public Message()
+        {
+            state = MainState.Unknown;
+            playerName = "unknown";
+        }
         public Message(MainState state, string name)
         {
             this.state = state;
@@ -26,6 +31,7 @@ namespace SUOnlineRisk
     [Serializable]
     public class AttackMessage : Message, ICloneable
     {
+        public AttackMessage(): base() {}
         public AttackMessage(MainState state, string name) : base(state, name) { }
 
         public string from; //name of a territory to attack from
@@ -39,6 +45,7 @@ namespace SUOnlineRisk
     [Serializable]
     public class AttackDoneMessage : Message, ICloneable
     {
+        public AttackDoneMessage() : base() { }
         public AttackDoneMessage(MainState state, string name) : base(state, name) { }
         override public object Clone()
         {
@@ -49,6 +56,7 @@ namespace SUOnlineRisk
     [Serializable]
     public class ReinforcementCardMessage : Message, ICloneable
     {
+        public ReinforcementCardMessage() : base() { }
         public ReinforcementCardMessage(MainState state, string name) : base(state, name) { }
         public ReinforcementCard card; //given if a territory has been conquered.
         override public object Clone()
@@ -60,6 +68,7 @@ namespace SUOnlineRisk
     [Serializable]
     public class RollMessage : Message, ICloneable
     {
+        public RollMessage() : base() { }
         public RollMessage(MainState state, string name) : base(state, name) { }
         public int[] roll; //contains the result of dice roll. Numbers outside 1 and 6 are ignored.
         override public object Clone()
@@ -71,6 +80,7 @@ namespace SUOnlineRisk
     [Serializable]
     public class TradeCardMessage : Message, ICloneable
     {
+        public TradeCardMessage() : base() { }
         public TradeCardMessage(MainState state, string name) : base(state, name) { }
         public int[] cardIds; //used to cash in reinforcement cards
         override public object Clone()
@@ -82,7 +92,8 @@ namespace SUOnlineRisk
     [Serializable]
     public class ArmyPlacementMessage: Message, ICloneable
     {
-        public ArmyPlacementMessage(MainState state, string name) : base(state, name) { territory_army = new List<ArmyPlacement>(); }
+        public ArmyPlacementMessage() : base() { territory_army = new List<ArmyPlacement>(); }
+        public ArmyPlacementMessage(MainState state = MainState.Unknown, string name = "unknown") : base(state, name) { territory_army = new List<ArmyPlacement>(); }
         public List<ArmyPlacement> territory_army; //each item describe how armies are placed. Use 'any' if the armies can be placed anywhere. 
         override public object Clone()
         {

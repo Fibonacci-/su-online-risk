@@ -365,6 +365,11 @@ namespace ClientDemo
                     queue.Enqueue(outgoing);
                 }
             }
+            else if (currentState == MainState.ReinforcementCard)
+            {
+                Message outgoing = new Message(MainState.Fortify, current.name);
+                queue.Enqueue(outgoing);
+            }
             else if (currentState == MainState.Fortify)
             {
                 //end of this player's turn. Move to the next player

@@ -1,5 +1,4 @@
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\SURiskLibrary\obj\Debug\SURiskLibrary.csprojResolveAssemblyReference.cache
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\SURiskLibrary\bin\Debug\SURiskLibrary.dll
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\SURiskLibrary\bin\Debug\SURiskLibrary.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\SURiskLibrary\obj\Debug\SURiskLibrary.dll
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\SURiskLibrary\obj\Debug\SURiskLibrary.pdb

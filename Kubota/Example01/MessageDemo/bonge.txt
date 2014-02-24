@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArmyPlacementMessage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <state>Initialize</state>
+  <playerName>gonbe</playerName>
+  <territory_army>
+    <ArmyPlacement>
+      <territory>PA</territory>
+      <owner>gonbe</owner>
+      <numArmies>5</numArmies>
+    </ArmyPlacement>
+    <ArmyPlacement>
+      <territory>Snyder</territory>
+      <owner>gonbe</owner>
+      <numArmies>3</numArmies>
+    </ArmyPlacement>
+  </territory_army>
+</ArmyPlacementMessage>
