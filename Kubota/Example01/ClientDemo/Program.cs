@@ -379,14 +379,21 @@ namespace ClientDemo
             }
             else if (currentState == MainState.Start)
             {
-                //anything to do?
+                //the game is about to start. Let the first one to initialize
+                current = clients[0];
+                Message outgoing = new Message(MainState.Initialize, current.name);
+                queue.Enqueue(outgoing);
+            }
+            else if (currentState == MainState.Idle)
+            {
+                //nothing to do
             }
             return queue;
         }
         public void Run()
         {
             Queue<Message> incomingQueue = new Queue<Message>();
-            Message message = new Message(MainState.Initialize, clients[0].name);
+            Message message = new Message(MainState.Start, "nobody");
             incomingQueue.Enqueue(message);
             while (incomingQueue.Count > 0)
             {
