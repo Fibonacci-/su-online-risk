@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -34,13 +34,23 @@ namespace RiskServer
         //send message to all connected players
         public void broadcast(String message)
         {
+            //TODO need to put players in a queue so we don't get that error
+            Queue<Player> broadcastQueue = new Queue<Player>();
+            broadcastQueue.Enqueue(null);
             int count = 0;
+            //add all players to queue
             foreach (Player player in playerList)
             {
-                player.sendMessage(message);
+                broadcastQueue.Enqueue(player);
                 count++;
             }
+            while(broadcastQueue.Peek() != null)
+            {
+                Player player = broadcastQueue.Dequeue();
+                player.sendMessage(message);
+            }
             Console.WriteLine("Broadcast send to " + count + " connected players.");
+            broadcastQueue=null;//make sure that nothing remains AHAHAHAHAHAHAHA
         }
 
         //adds player to playerlist
@@ -50,13 +60,20 @@ namespace RiskServer
             Console.WriteLine("PlayerList recieved " + player.getName());
         }
 
+        //removes a player from the list
+        public void remPlayer(Player player)
+        {
+            playerList.Remove(player);
+            Console.WriteLine("Removed player " + player.getName());
+        }
+
         //returns Random object
         public Random getRandom()
         {
             return random;
         }
 
-        //rolls dice
+        //rolls dice 
         public int diceRoll()
         {
             //returns random int between 1 and 6
@@ -68,7 +85,7 @@ namespace RiskServer
         {
             foreach (Player player in playerList)
             {
-                if (player.getID().Equals(playerID))
+                if (string.Compare(player.getID(),playerID, true) == 0)
                 {
                     return player;
                 }

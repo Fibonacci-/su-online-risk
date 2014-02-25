@@ -7,3 +7,8 @@ C:\Users\Tyler\SkyDrive\VS\RiskServer\RiskServer\obj\Debug\RiskServer.pdb
 C:\Users\Tyler\SkyDrive\VS\RiskServer\git\Helwig\RiskServer\bin\Debug\RiskServer.exe.config
 C:\Users\Tyler\SkyDrive\VS\RiskServer\git\Helwig\RiskServer\obj\Debug\RiskServer.exe
 C:\Users\Tyler\SkyDrive\VS\RiskServer\git\Helwig\RiskServer\obj\Debug\RiskServer.pdb
+C:\Users\Tyler\SkyDrive\VS\RiskServer\git\Helwig\RiskServer\bin\Debug\RiskServer.exe
+C:\Users\Tyler\SkyDrive\VS\RiskServer\git\Helwig\RiskServer\bin\Debug\RiskServer.pdb
+C:\Users\Tyler\SkyDrive\VS\RiskServer\git\Helwig\RiskServer\obj\Debug\RiskServer.csprojResolveAssemblyReference.cache
+C:\Users\Tyler\SkyDrive\VS\RiskServer\git\Helwig\RiskServer\bin\Debug\SURiskLibrary.dll
+C:\Users\Tyler\SkyDrive\VS\RiskServer\git\Helwig\RiskServer\bin\Debug\SURiskLibrary.pdb
