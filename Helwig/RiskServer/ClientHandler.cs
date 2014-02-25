@@ -34,6 +34,7 @@ namespace RiskServer
                         catch (Exception e)
                         {
                             Console.WriteLine("Error: " + e);
+                            break;
                         }
                         //if data has been recieved
                         if (size2 != 0)
@@ -53,6 +54,7 @@ namespace RiskServer
                             //if client can be passed to another class,
                             //this method returns true.
                             //false if ClientHandler needs to keep listening to the client.
+                            size2 = 0;
                             if (this.parse(toParse))
                             {
                                 break;
@@ -151,8 +153,17 @@ namespace RiskServer
                 //request re-login
                 else
                 {
-                    byte[] byteData = Encoding.ASCII.GetBytes("req");
-                    client.Send(byteData);
+                    Console.WriteLine("Client message not recognized. Requesting clarification");
+                    try
+                    {
+                        byte[] byteData = Encoding.ASCII.GetBytes("req");
+                        client.Send(byteData);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Error: " + e);
+                        return false;
+                    }
                     return false;
                 }
             }

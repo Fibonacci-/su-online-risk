@@ -47,46 +47,53 @@ namespace RiskServer
                 //after client listening thread has been created and started, wait for text commands
                 while (true)
                 {
-                    Console.WriteLine("Ready for command . . .");
-                    String command = Console.ReadLine();
-                    //quit server
-                    if (command.Equals("stop"))
+                    try
                     {
-                        listener.Stop();
-                        Environment.Exit(0);
-                    }
-                    //send message to everyone
-                    else if (command.Equals("broadcast"))
-                    {
-                        Console.WriteLine("Message to broadcast to clients: ");
-                        String message = Console.ReadLine();
-                        PlayerList.Instance.broadcast(message);
-                    }
-                    //send message to desired player
-                    else if (command.Equals("player message"))
-                    {
-                        Console.WriteLine("Enter player ID");
-                        String playerID = Console.ReadLine();
-                        Player player = PlayerList.Instance.findPlayer(playerID);
-                        if (player != null)
+                        Console.WriteLine("Ready for command . . .");
+                        String command = Console.ReadLine();
+                        //quit server
+                        if (command.Equals("stop"))
                         {
-                            Console.WriteLine("Found player " + player.getName() + ". Enter message");
+                            listener.Stop();
+                            Environment.Exit(0);
+                        }
+                        //send message to everyone
+                        else if (command.Equals("broadcast"))
+                        {
+                            Console.WriteLine("Message to broadcast to clients: ");
                             String message = Console.ReadLine();
-                            player.sendMessage(message);
+                            PlayerList.Instance.broadcast(message);
                         }
-                        else
+                        //send message to desired player
+                        else if (command.Equals("player message"))
                         {
-                            Console.WriteLine("Couldn't find player with id " + playerID);
+                            Console.WriteLine("Enter player ID");
+                            String playerID = Console.ReadLine();
+                            Player player = PlayerList.Instance.findPlayer(playerID);
+                            if (player != null)
+                            {
+                                Console.WriteLine("Found player " + player.getName() + ". Enter message");
+                                String message = Console.ReadLine();
+                                player.sendMessage(message);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Couldn't find player with id " + playerID);
+                            }
+                        }
+                        //list all currently connected players 
+                        else if (command.Equals("list players"))
+                        {
+                            List<Player> playerlist = PlayerList.Instance.getList();
+                            foreach (Player player in playerlist)
+                            {
+                                Console.WriteLine(player.getName());
+                            }
                         }
                     }
-                    //list all currently connected players
-                    else if (command.Equals("list players"))
+                    catch (Exception e)
                     {
-                        List<Player> playerlist = PlayerList.Instance.getList();
-                        foreach (Player player in playerlist)
-                        {
-                            Console.WriteLine(player.getName());
-                        }
+                        Console.WriteLine("Error: " + e);
                     }
                 }
 

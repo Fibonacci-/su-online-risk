@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SUOnlineRisk;
 
 namespace RiskServer
 {
@@ -35,7 +36,7 @@ namespace RiskServer
             foreach(Game game in gameList)
             {
                 String checkID = game.getID();
-                if(checkID.Equals(gameID))
+                if(string.Compare(checkID,gameID, false) == 0)
                 {
                     return game;
                 }
@@ -45,11 +46,13 @@ namespace RiskServer
         }
 
         //makes a new game
-        public void newGame(Player host)
+        public Game newGame(Player player, String mapFilePath)
         {
-            Game game = new Game(ClientHandler.generateID(6));
+            Map map = SUOnlineRisk.Map.loadMap(mapFilePath);
+            Game game = new Game(ClientHandler.generateID(6),map,player);
             gameList.Add(game);
-            game.addPlayer(host);
+            Console.WriteLine("GL made game " + game.getID() + " and added to game list.");
+            return game;
         }
     }
 }
