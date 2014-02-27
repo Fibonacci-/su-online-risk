@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace SUOnlineRisk
 {
-    public abstract class Player
+    public class Player
     {
         //list of variables
         public String nickname;
