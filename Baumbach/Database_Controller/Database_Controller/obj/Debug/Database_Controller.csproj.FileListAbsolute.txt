@@ -1,0 +1,28 @@
+c:\users\roger\documents\visual studio 2013\Projects\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe.config
+C:\Users\Roger\Documents\Visual Studio 2013\Projects\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe
+C:\Users\Roger\Documents\Visual Studio 2013\Projects\Database_Controller\Database_Controller\bin\Debug\Database_Controller.pdb
+C:\Users\Roger\Documents\Visual Studio 2013\Projects\Database_Controller\Database_Controller\bin\Debug\MySql.Data.dll
+C:\Users\Roger\Documents\Visual Studio 2013\Projects\Database_Controller\Database_Controller\obj\Debug\Database_Controller.csprojResolveAssemblyReference.cache
+C:\Users\Roger\Documents\Visual Studio 2013\Projects\Database_Controller\Database_Controller\obj\Debug\Database_Controller.exe
+C:\Users\Roger\Documents\Visual Studio 2013\Projects\Database_Controller\Database_Controller\obj\Debug\Database_Controller.pdb
+C:\Users\Roger\Desktop\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe.config
+C:\Users\Roger\Desktop\Database_Controller\Database_Controller\obj\Debug\Database_Controller.exe
+C:\Users\Roger\Desktop\Database_Controller\Database_Controller\obj\Debug\Database_Controller.pdb
+C:\Users\Roger\Desktop\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe
+C:\Users\Roger\Desktop\Database_Controller\Database_Controller\bin\Debug\Database_Controller.pdb
+C:\Users\Roger\Desktop\Database_Controller\Database_Controller\bin\Debug\MySql.Data.dll
+C:\Users\Roger\Desktop\Database_Controller\Database_Controller\obj\Debug\Database_Controller.csprojResolveAssemblyReference.cache
+E:\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe.config
+E:\Database_Controller\Database_Controller\obj\Debug\Database_Controller.exe
+E:\Database_Controller\Database_Controller\obj\Debug\Database_Controller.pdb
+E:\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe
+E:\Database_Controller\Database_Controller\bin\Debug\Database_Controller.pdb
+E:\Database_Controller\Database_Controller\bin\Debug\MySql.Data.dll
+E:\Database_Controller\Database_Controller\obj\Debug\Database_Controller.csprojResolveAssemblyReference.cache
+H:\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe.config
+H:\Database_Controller\Database_Controller\obj\Debug\Database_Controller.exe
+H:\Database_Controller\Database_Controller\obj\Debug\Database_Controller.pdb
+H:\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe
+H:\Database_Controller\Database_Controller\bin\Debug\Database_Controller.pdb
+H:\Database_Controller\Database_Controller\bin\Debug\MySql.Data.dll
+H:\Database_Controller\Database_Controller\obj\Debug\Database_Controller.csprojResolveAssemblyReference.cache
