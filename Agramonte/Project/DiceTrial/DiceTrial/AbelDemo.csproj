@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EAD21F72-510B-4637-9465-20EBCCF94042}</ProjectGuid>
+    <ProjectGuid>{484F55A7-0158-4A02-A811-10C2CF494329}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DiceTrial</RootNamespace>
-    <AssemblyName>DiceTrial</AssemblyName>
+    <RootNamespace>LewisGUIExample</RootNamespace>
+    <AssemblyName>LewisGUIExample</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SURiskLibrary">
-      <HintPath>C:\Users\Abel\Desktop\su-online-risk\Kubota\Example01\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
+      <HintPath>..\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -119,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dice_blank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MapStuff\MapStuff.csproj">
+      <Project>{047012b7-4757-49b1-b7b9-3c32a6c804eb}</Project>
+      <Name>MapStuff</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
