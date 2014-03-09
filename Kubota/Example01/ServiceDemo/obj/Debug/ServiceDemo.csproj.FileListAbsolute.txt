@@ -1,0 +1,8 @@
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemo\obj\Debug\ServiceDemo.csprojResolveAssemblyReference.cache
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemo\bin\Debug\ServiceDemo.dll.config
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemo\bin\Debug\ServiceDemo.dll
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemo\bin\Debug\ServiceDemo.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemo\bin\Debug\SURiskLibrary.dll
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemo\bin\Debug\SURiskLibrary.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemo\obj\Debug\ServiceDemo.dll
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemo\obj\Debug\ServiceDemo.pdb

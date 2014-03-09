@@ -6,6 +6,25 @@ using System.Threading.Tasks;
 
 namespace SUOnlineRisk
 {
+    [Serializable]
+    public class RiskMessage
+    {
+        public MainState state;
+        public string playerName;
+        public string from; //name of a territory to attack from
+        public string to;   //name of a territory to attack to
+        public ReinforcementCard card; //given if a territory has been conquered.
+        public int[] roll; //contains the result of dice roll. Numbers outside 1 and 6 are ignored.
+        Boolean attacker; //identify if the roller is attacker or not
+        public int[] cardIds; //used to cash in reinforcement cards
+        public List<ArmyPlacement> territory_army; //each item describe how armies are placed. Use 'any' if the armies can be placed anywhere. 
+        public RiskMessage(MainState state, string name)
+        {
+            this.state = state;
+            this.playerName = name;
+            territory_army = new List<ArmyPlacement>();
+        }
+    }
     //general purpose message - a base class for other messages.
     [Serializable]
     public class Message: ICloneable
@@ -62,7 +81,7 @@ namespace SUOnlineRisk
     {
         public RollMessage(MainState state, string name, Boolean attacking = true) : base(state, name) { attacker = attacking; }
         public int[] roll; //contains the result of dice roll. Numbers outside 1 and 6 are ignored.
-        Boolean attacker;
+        public Boolean attacker;
         override public object Clone()
         {
             return this.MemberwiseClone();

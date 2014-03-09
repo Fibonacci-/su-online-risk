@@ -3,15 +3,16 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using SUOnlineRisk;
-
+using System.Collections.Generic;
 namespace LewisGUIExample
 {
     public partial class MainForm : Form
     {
         Map map;
-        string mapfilename = @"..\..\..\MapStuff\SimpleRisk.map";
+        string mapfilename = @"..\..\SimpleRisk.map";
         bool selectedTerr = false;
         Territory attackFrom;
+        List<Player> players;
         public MainForm()
         {
             InitializeComponent();
@@ -22,8 +23,9 @@ namespace LewisGUIExample
             }
             map = Map.loadMap(mapfilename);
             this.pictureBox1.Image = map.getBitmap();
-            map.addPlayer(new Player("Attacker", Color.Blue));
-            map.addPlayer(new Player("Defender", Color.Red));
+            players = new List<Player>();
+            players.Add(new Player("Attacker", Color.Blue, map));
+            players.Add(new Player("Defender", Color.Red, map));
             for (int i = 0; i < map.getAllTerritories().Count; i++)
             {
                 if (i <= (map.getAllTerritories().Count / 2))
@@ -48,7 +50,7 @@ namespace LewisGUIExample
                 {
                     if (((p.X > t.returnX() - 10) && (p.X < t.returnX() + 10)) && ((p.Y > t.returnY() - 10) && (p.Y < t.returnY() + 10)))
                     {
-                        foreach (Player thisp in map.getAllPlayers())
+                        foreach (Player thisp in players)
                         {
                             string name = thisp.nickname;
                             if (t.getOwner() == name)

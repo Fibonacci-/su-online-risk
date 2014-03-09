@@ -16,13 +16,7 @@ namespace SUOnlineRisk
         public string territory;
         public string owner;
         public int numArmies;
-        public ArmyPlacement()
-        {
-            territory = "unknown";
-            owner = "na";
-            numArmies = 0;
-        }
-        public ArmyPlacement(string t, string o, int n)
+        public ArmyPlacement(string t="unknown", string o="na", int n=0)
         {
             territory = t;
             owner = o;

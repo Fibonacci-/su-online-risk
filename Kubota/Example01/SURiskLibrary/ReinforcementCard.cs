@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SUOnlineRisk
 {
-    public enum ReinforcemenCardUnit { Infantry, Cavalry, Artillery };
+    public enum ReinforcemenCardUnit { Infantry, Cavalry, Artillery, Wild };
     [Serializable]
     public class ReinforcementCard
     {

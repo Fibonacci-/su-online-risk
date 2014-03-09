@@ -17,14 +17,20 @@ namespace SUOnlineRisk
         public List<Territory> Territories;
         public List<ReinforcementCard> ReinforcementCards;
         public List<Army> armies;
-        public MainState state;
+        public MainState state; // maintains which state the player is in: e.g. Attack, Reinforce, Conquer, etc.
 
-        public Player(String username, Color ArmyColor)
+        public Map map;
+
+        public Player(String username, Color ArmyColor, Map map)
         {
             nickname = username;
             this.ArmyColor = ArmyColor;
             this.numOfTerritories = 0;
             this.ArmySize = 0;
+            this.map = map;
+            Territories = new List<Territory>();
+            ReinforcementCards = new List<ReinforcementCard>();
+            armies = new List<Army>();
         }
 
         public String getName()
@@ -125,7 +131,7 @@ namespace SUOnlineRisk
 
 
         /*
-         * The following virtual methods can be override to provide custome behavior for a bot and a human player.
+         * The following virtual methods can be override to provide custom behavior for a bot and a human player.
          */
         virtual public Message Update(Message incoming)
         {
