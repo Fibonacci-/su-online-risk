@@ -403,7 +403,7 @@ namespace ClientDemo
             {
                 Message incoming = incomingQueue.Dequeue();
                 MainState state = incoming.state;
-
+                Console.Out.WriteLine(state + " " + incoming.playerName);
                 Queue<Message> queue = Update(incoming);
                 foreach (Message m in queue)
                 {
