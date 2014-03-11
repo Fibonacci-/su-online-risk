@@ -10,3 +10,6 @@ Z:\472\Example01\Example01\obj\Debug\Example01.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\bin\Debug\Example01.exe.config
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\obj\Debug\Example01.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\obj\Debug\Example01.pdb
+C:\Users\Roger\Desktop\Risk\Kubota\Example01\Example01\bin\Debug\Example01.exe.config
+C:\Users\Roger\Desktop\Risk\Kubota\Example01\Example01\obj\Debug\Example01.exe
+C:\Users\Roger\Desktop\Risk\Kubota\Example01\Example01\obj\Debug\Example01.pdb

@@ -19,7 +19,12 @@ namespace MessageDemo
             m.territory_army.Add(new ArmyPlacement("PA", "gonbe", 5));
             m.territory_army.Add(new ArmyPlacement("Snyder", "gonbe", 3));
             XmlSerializer ser = new XmlSerializer(typeof(ArmyPlacementMessage));
+            Console.Out.WriteLine(ser);
             TextWriter writer = new StreamWriter(filename);
+            string s = File.ReadAllText(@"../../bonge.txt");
+            Database_Controller Session = new Database_Controller();
+
+
             ser.Serialize(writer, m);
             writer.Close();
 
