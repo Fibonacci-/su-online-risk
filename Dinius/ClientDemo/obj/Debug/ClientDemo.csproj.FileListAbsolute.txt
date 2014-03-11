@@ -1,0 +1,16 @@
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\obj\Debug\ClientDemo.csprojResolveAssemblyReference.cache
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\bin\Debug\ClientDemo.exe.config
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\bin\Debug\ClientDemo.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\bin\Debug\ClientDemo.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\bin\Debug\SURiskLibrary.dll
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\bin\Debug\SURiskLibrary.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\obj\Debug\ClientDemo.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\obj\Debug\ClientDemo.pdb
+C:\Users\Phil\Desktop\suOnline2\Dinius\ClientDemo\bin\Debug\ClientDemo.exe.config
+C:\Users\Phil\Desktop\suOnline2\Dinius\ClientDemo\obj\Debug\ClientDemo.exe
+C:\Users\Phil\Desktop\suOnline2\Dinius\ClientDemo\obj\Debug\ClientDemo.pdb
+C:\Users\Phil\Desktop\suOnline2\Dinius\ClientDemo\bin\Debug\ClientDemo.exe
+C:\Users\Phil\Desktop\suOnline2\Dinius\ClientDemo\bin\Debug\ClientDemo.pdb
+C:\Users\Phil\Desktop\suOnline2\Dinius\ClientDemo\bin\Debug\SURiskLibrary.dll
+C:\Users\Phil\Desktop\suOnline2\Dinius\ClientDemo\bin\Debug\SURiskLibrary.pdb
+C:\Users\Phil\Desktop\suOnline2\Dinius\ClientDemo\obj\Debug\ClientDemo.csprojResolveAssemblyReference.cache

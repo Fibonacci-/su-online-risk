@@ -21,6 +21,8 @@ namespace SUOnlineRisk
             _Counter++;
         }
         private static int _Counter = 0;
+
+        /*
         public static int numArmies(ReinforcemenCardUnit type)
         {
             if (type == ReinforcemenCardUnit.Infantry) return 1;
@@ -28,5 +30,6 @@ namespace SUOnlineRisk
             else if (type == ReinforcemenCardUnit.Artillery) return 10;
             else return 0;
         }
+        */
     }
 }
