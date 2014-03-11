@@ -92,7 +92,7 @@ namespace SUOnlineRisk
         }
     }
     [Serializable]
-    public class RiskMessage
+    public class RiskMessage: Message
     {
         public MainState state;
         public string playerName;
@@ -100,10 +100,10 @@ namespace SUOnlineRisk
         public string to;   //name of a territory to attack to
         public ReinforcementCard card; //given if a territory has been conquered.
         public int[] roll; //contains the result of dice roll. Numbers outside 1 and 6 are ignored.
-        Boolean attacker; //identify if the roller is attacker or not
+        public Boolean attacker; //identify if the roller is attacker or not
         public int[] cardIds; //used to cash in reinforcement cards
         public List<ArmyPlacement> territory_army; //each item describe how armies are placed. Use 'any' if the armies can be placed anywhere. 
-        public RiskMessage(MainState state, string name)
+        public RiskMessage(MainState state, string name): base(state, name)
         {
             this.state = state;
             this.playerName = name;
