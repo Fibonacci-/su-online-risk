@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace SUOnlineRisk
 {
-    [Serializable]
     //general purpose message - a base class for other messages.
     [Serializable]
     public class Message: ICloneable
