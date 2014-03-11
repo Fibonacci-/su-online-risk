@@ -10,3 +10,6 @@ C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\StateMachine
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\StateMachines\bin\Debug\StateMachines.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\StateMachines\bin\Debug\StateMachines.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\StateMachines\obj\Debug\StateMachines.csprojResolveAssemblyReference.cache
+C:\Users\Phil\Desktop\suOnline2\Dinius\StateMachines\bin\Debug\StateMachines.exe.config
+C:\Users\Phil\Desktop\suOnline2\Dinius\StateMachines\obj\Debug\StateMachines.exe
+C:\Users\Phil\Desktop\suOnline2\Dinius\StateMachines\obj\Debug\StateMachines.pdb
