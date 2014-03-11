@@ -1,0 +1,5 @@
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapLibrary\obj\Debug\MapLibrary.csprojResolveAssemblyReference.cache
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapLibrary\bin\Debug\MapLibrary.dll
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapLibrary\bin\Debug\MapLibrary.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapLibrary\obj\Debug\MapLibrary.dll
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapLibrary\obj\Debug\MapLibrary.pdb
