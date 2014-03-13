@@ -1,0 +1,11 @@
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\bin\Debug\RiskGUI.exe.config
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\bin\Debug\RiskGUI.exe
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\bin\Debug\RiskGUI.pdb
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.csprojResolveAssemblyReference.cache
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.Properties.Resources.resources
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.csproj.GenerateResource.Cache
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.exe
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.pdb
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.Form_MainMenu.resources
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.Form2.resources
+C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.Form3.resources
