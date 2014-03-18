@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SUOnlineRisk;
+using ComputerImplementation02;
 
 namespace ClientDemo
 {
@@ -139,16 +140,19 @@ namespace ClientDemo
                 if (message is TradeCardMessage)
                 {
                     TradeCardMessage message2 = (TradeCardMessage)message;
-                    foreach (int id in message2.cardIds)
+                    if (message2.cardIds != null) //there is a set of cards to be traded for armies.
                     {
-                        ReinforcementCard card = usedPiles.Find(x => x.CardId == id);
-                        ArmyPlacement a = new ArmyPlacement();
-                        a.numArmies = ReinforcementCard.numArmies(card.UnitType);
-                        a.territory = card.TerritoryName;
-                        changes.Add(a);
-                        tradedCards.Add(card);
+                        foreach (int id in message2.cardIds)
+                        {
+                            ReinforcementCard card = usedPiles.Find(x => x.CardId == id);
+                            ArmyPlacement a = new ArmyPlacement();
+                            a.numArmies = ReinforcementCard.numArmies(card.UnitType);
+                            a.territory = card.TerritoryName;
+                            changes.Add(a);
+                            tradedCards.Add(card);
+                        }
+                        tradedCount++;
                     }
-                    tradedCount++;
                 }
             }
             else if (message.state == MainState.AdditionalArmies)
@@ -399,7 +403,7 @@ namespace ClientDemo
             {
                 Message incoming = incomingQueue.Dequeue();
                 MainState state = incoming.state;
-
+                Console.Out.WriteLine(state + " " + incoming.playerName);
                 Queue<Message> queue = Update(incoming);
                 foreach (Message m in queue)
                 {
@@ -417,7 +421,7 @@ namespace ClientDemo
             }
         }
     }
-    class MockPlayer: Player
+    /*class MockPlayer: Player
     {
         public Map map
         {
@@ -427,12 +431,12 @@ namespace ClientDemo
         public MockPlayer(string n, System.Drawing.Color color): base(n, color)
         {
         }
-    }
+    }*/
     class MockClient
     {
         Message incoming;
         Message outgoing;
-        public MockPlayer player
+        public Player player
         {
             get;
             set;
@@ -510,8 +514,9 @@ namespace ClientDemo
     {
         static void Main(string[] args)
         {
-            Map map = new Map(@"..\..\SimpleRiskMap.png"); //We will be using the same map - this needs to be changed
-            MockPlayer[] players = new MockPlayer[3];
+            //Map map = new Map(@"..\..\SimpleRiskMap.png"); //We will be using the same map - this needs to be changed
+            Map map = Map.loadMap(@"..\..\SimpleRisk.map");
+            Player[] players = new Player[3];
             MockClient[] clients = new MockClient[3];
             MockServer server = new MockServer();
             server.map = map;
@@ -519,8 +524,8 @@ namespace ClientDemo
             System.Drawing.Color[] colors = {System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue };
             for (int i = 0; i < 3; ++i)
             {
-                players[i] = new MockPlayer(names[i], colors[i]);
-                players[i].map = map;
+                players[i] = new Computer(names[i], colors[i], map);
+                //players[i].map = map;
                 clients[i] = new MockClient();
                 clients[i].player = players[i];
                 clients[i].server = server;

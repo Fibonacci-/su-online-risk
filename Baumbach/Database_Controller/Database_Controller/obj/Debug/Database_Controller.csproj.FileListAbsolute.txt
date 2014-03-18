@@ -26,3 +26,10 @@ H:\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe
 H:\Database_Controller\Database_Controller\bin\Debug\Database_Controller.pdb
 H:\Database_Controller\Database_Controller\bin\Debug\MySql.Data.dll
 H:\Database_Controller\Database_Controller\obj\Debug\Database_Controller.csprojResolveAssemblyReference.cache
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe.config
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\Database_Controller\obj\Debug\Database_Controller.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\Database_Controller\obj\Debug\Database_Controller.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\Database_Controller\bin\Debug\Database_Controller.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\Database_Controller\bin\Debug\Database_Controller.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\Database_Controller\bin\Debug\MySql.Data.dll
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\Database_Controller\obj\Debug\Database_Controller.csprojResolveAssemblyReference.cache

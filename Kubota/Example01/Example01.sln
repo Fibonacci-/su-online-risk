@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SURiskLibrary", "SURiskLibr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageDemo", "MessageDemo\MessageDemo.csproj", "{ED94ACEE-FDEC-4CE1-BADC-B9A2CC9CA7B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LewisGUIExample", "LewisGUI\LewisGUIExample.csproj", "{484F55A7-0158-4A02-A811-10C2CF494329}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitializationGUI", "InitializationGUI\InitializationGUI.csproj", "{1AD01A3E-385F-4B59-AD09-A8760D986E84}"
 EndProject
 Global
@@ -61,10 +59,6 @@ Global
 		{ED94ACEE-FDEC-4CE1-BADC-B9A2CC9CA7B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED94ACEE-FDEC-4CE1-BADC-B9A2CC9CA7B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED94ACEE-FDEC-4CE1-BADC-B9A2CC9CA7B7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{484F55A7-0158-4A02-A811-10C2CF494329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{484F55A7-0158-4A02-A811-10C2CF494329}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{484F55A7-0158-4A02-A811-10C2CF494329}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{484F55A7-0158-4A02-A811-10C2CF494329}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1AD01A3E-385F-4B59-AD09-A8760D986E84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1AD01A3E-385F-4B59-AD09-A8760D986E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AD01A3E-385F-4B59-AD09-A8760D986E84}.Release|Any CPU.ActiveCfg = Release|Any CPU

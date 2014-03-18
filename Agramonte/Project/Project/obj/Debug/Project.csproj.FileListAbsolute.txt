@@ -1,1 +1,9 @@
 Z:\Prac\Project\Project\bin\Debug\Project.exe.config
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Agramonte\Project\Project\bin\Debug\Project.exe.config
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Agramonte\Project\Project\bin\Debug\Project.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Agramonte\Project\Project\bin\Debug\Project.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Agramonte\Project\Project\obj\Debug\Project.csprojResolveAssemblyReference.cache
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Agramonte\Project\Project\obj\Debug\Project.Properties.Resources.resources
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Agramonte\Project\Project\obj\Debug\Project.csproj.GenerateResource.Cache
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Agramonte\Project\Project\obj\Debug\Project.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Agramonte\Project\Project\obj\Debug\Project.pdb
