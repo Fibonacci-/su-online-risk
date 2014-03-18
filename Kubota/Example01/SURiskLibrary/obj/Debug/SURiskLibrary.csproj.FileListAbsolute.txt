@@ -2,3 +2,7 @@ C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\SURiskLibrar
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\SURiskLibrary\obj\Debug\SURiskLibrary.dll
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\SURiskLibrary\obj\Debug\SURiskLibrary.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\SURiskLibrary\obj\Debug\SURiskLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Roger\Desktop\Risk\Kubota\Example01\SURiskLibrary\bin\Debug\SURiskLibrary.pdb
+C:\Users\Roger\Desktop\Risk\Kubota\Example01\SURiskLibrary\obj\Debug\SURiskLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Roger\Desktop\Risk\Kubota\Example01\SURiskLibrary\obj\Debug\SURiskLibrary.dll
+C:\Users\Roger\Desktop\Risk\Kubota\Example01\SURiskLibrary\obj\Debug\SURiskLibrary.pdb

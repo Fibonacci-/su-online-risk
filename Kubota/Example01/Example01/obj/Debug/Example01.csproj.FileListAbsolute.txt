@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Z:\472\Example01\Example01\bin\Debug\Example01.exe.config
 Z:\472\Example01\Example01\bin\Debug\Example01.exe
 Z:\472\Example01\Example01\bin\Debug\Example01.pdb
@@ -10,3 +11,20 @@ Z:\472\Example01\Example01\obj\Debug\Example01.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\bin\Debug\Example01.exe.config
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\obj\Debug\Example01.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\obj\Debug\Example01.pdb
+=======
+Z:\472\Example01\Example01\bin\Debug\Example01.exe.config
+Z:\472\Example01\Example01\bin\Debug\Example01.exe
+Z:\472\Example01\Example01\bin\Debug\Example01.pdb
+Z:\472\Example01\Example01\obj\Debug\Example01.csprojResolveAssemblyReference.cache
+Z:\472\Example01\Example01\obj\Debug\Example01.Form1.resources
+Z:\472\Example01\Example01\obj\Debug\Example01.Properties.Resources.resources
+Z:\472\Example01\Example01\obj\Debug\Example01.csproj.GenerateResource.Cache
+Z:\472\Example01\Example01\obj\Debug\Example01.exe
+Z:\472\Example01\Example01\obj\Debug\Example01.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\bin\Debug\Example01.exe.config
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\obj\Debug\Example01.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\obj\Debug\Example01.pdb
+C:\Users\Roger\Desktop\Risk\Kubota\Example01\Example01\bin\Debug\Example01.exe.config
+C:\Users\Roger\Desktop\Risk\Kubota\Example01\Example01\obj\Debug\Example01.exe
+C:\Users\Roger\Desktop\Risk\Kubota\Example01\Example01\obj\Debug\Example01.pdb
+>>>>>>> 9f0acf469de8efb5a05f71aef2e5b177f9535e52

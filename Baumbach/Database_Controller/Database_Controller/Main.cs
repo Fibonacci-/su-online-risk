@@ -53,10 +53,20 @@ namespace Database_Controller
                 Console.Out.WriteLine(s);
             }
 
-            string [] users = {"ablivion", "rogera24", "bob", "robert", "joejoe", "steve"};
+            string [] users = {"ablivion", "rogera24", "bob", null, null, null};
 
             int game_id = Session.create_game(connection, users, "blahgah");
             Console.Out.WriteLine(game_id);
+
+            int message_id = Session.message_save(connection, "This is not a drill! Woop Woop!", 12);
+            Console.Out.WriteLine(message_id);
+
+            string mess = Session.get_message(connection, message_id);
+            Console.Out.WriteLine(mess);
+
+            Session.no_finish(connection, 16);
+            Session.game_finished(connection, 18, "Ablivion");
+
             connection.Close();
 
         }
