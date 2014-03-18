@@ -1,0 +1,20 @@
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemoClient\bin\Debug\ServiceDemoClient.exe.config
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemoClient\bin\Debug\ServiceDemoClient.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemoClient\bin\Debug\ServiceDemoClient.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemoClient\bin\Debug\ServiceDemo.dll
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemoClient\bin\Debug\SURiskLibrary.dll
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemoClient\bin\Debug\ServiceDemo.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemoClient\bin\Debug\SURiskLibrary.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemoClient\obj\Debug\ServiceDemoClient.csprojResolveAssemblyReference.cache
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemoClient\obj\Debug\ServiceDemoClient.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ServiceDemoClient\obj\Debug\ServiceDemoClient.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ServiceDemoClient\bin\Debug\ServiceDemoClient.exe.config
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ServiceDemoClient\bin\Debug\ServiceDemoClient.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ServiceDemoClient\bin\Debug\ServiceDemoClient.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ServiceDemoClient\bin\Debug\ServiceDemo.dll
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ServiceDemoClient\bin\Debug\SURiskLibrary.dll
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ServiceDemoClient\bin\Debug\ServiceDemo.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ServiceDemoClient\bin\Debug\SURiskLibrary.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ServiceDemoClient\obj\Debug\ServiceDemoClient.csprojResolveAssemblyReference.cache
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ServiceDemoClient\obj\Debug\ServiceDemoClient.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ServiceDemoClient\obj\Debug\ServiceDemoClient.pdb

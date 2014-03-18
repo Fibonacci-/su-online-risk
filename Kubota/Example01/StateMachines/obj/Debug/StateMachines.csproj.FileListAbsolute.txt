@@ -10,5 +10,16 @@ C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\StateMachine
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\StateMachines\bin\Debug\StateMachines.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\StateMachines\bin\Debug\StateMachines.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\StateMachines\obj\Debug\StateMachines.csprojResolveAssemblyReference.cache
+<<<<<<< HEAD
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\StateMachines\bin\Debug\MapLibrary.dll
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\StateMachines\bin\Debug\MapLibrary.pdb
+=======
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\StateMachines\bin\Debug\StateMachines.exe.config
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\StateMachines\bin\Debug\StateMachines.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\StateMachines\bin\Debug\StateMachines.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\StateMachines\bin\Debug\MapLibrary.dll
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\StateMachines\bin\Debug\MapLibrary.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\StateMachines\obj\Debug\StateMachines.csprojResolveAssemblyReference.cache
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\StateMachines\obj\Debug\StateMachines.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\StateMachines\obj\Debug\StateMachines.pdb
+>>>>>>> 09c282c9a06eda9f91660f8e5d1466fb082c3bb0

@@ -4,9 +4,18 @@ T:\Profiles\kubota\Desktop\FileIOExample\bin\Debug\FileIOExample.pdb
 T:\Profiles\kubota\Desktop\FileIOExample\obj\Debug\FileIOExample.csprojResolveAssemblyReference.cache
 T:\Profiles\kubota\Desktop\FileIOExample\obj\Debug\FileIOExample.exe
 T:\Profiles\kubota\Desktop\FileIOExample\obj\Debug\FileIOExample.pdb
+<<<<<<< HEAD
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\FileIOExample\bin\Debug\FileIOExample.exe.config
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\FileIOExample\bin\Debug\FileIOExample.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\FileIOExample\bin\Debug\FileIOExample.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\FileIOExample\obj\Debug\FileIOExample.csprojResolveAssemblyReference.cache
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\FileIOExample\obj\Debug\FileIOExample.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\FileIOExample\obj\Debug\FileIOExample.pdb
+=======
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\FileIOExample\bin\Debug\FileIOExample.exe.config
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\FileIOExample\bin\Debug\FileIOExample.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\FileIOExample\bin\Debug\FileIOExample.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\FileIOExample\obj\Debug\FileIOExample.csprojResolveAssemblyReference.cache
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\FileIOExample\obj\Debug\FileIOExample.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\FileIOExample\obj\Debug\FileIOExample.pdb
+>>>>>>> 09c282c9a06eda9f91660f8e5d1466fb082c3bb0
