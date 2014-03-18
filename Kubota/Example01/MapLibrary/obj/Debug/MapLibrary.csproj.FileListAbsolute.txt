@@ -3,3 +3,8 @@ C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapLibrary\b
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapLibrary\bin\Debug\MapLibrary.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapLibrary\obj\Debug\MapLibrary.dll
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapLibrary\obj\Debug\MapLibrary.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MapLibrary\bin\Debug\MapLibrary.dll
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MapLibrary\bin\Debug\MapLibrary.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MapLibrary\obj\Debug\MapLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MapLibrary\obj\Debug\MapLibrary.dll
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MapLibrary\obj\Debug\MapLibrary.pdb

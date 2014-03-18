@@ -10,3 +10,12 @@ Z:\472\Example01\Example01\obj\Debug\Example01.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\bin\Debug\Example01.exe.config
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\obj\Debug\Example01.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\Example01\obj\Debug\Example01.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\Example01\bin\Debug\Example01.exe.config
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\Example01\bin\Debug\Example01.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\Example01\bin\Debug\Example01.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\Example01\obj\Debug\Example01.csprojResolveAssemblyReference.cache
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\Example01\obj\Debug\Example01.Form1.resources
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\Example01\obj\Debug\Example01.Properties.Resources.resources
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\Example01\obj\Debug\Example01.csproj.GenerateResource.Cache
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\Example01\obj\Debug\Example01.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\Example01\obj\Debug\Example01.pdb

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SUOnlineRisk;
-using SUOnlineRisk;
 
 namespace SUOnlineRisk
 {

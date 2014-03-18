@@ -6,3 +6,11 @@ C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\b
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\bin\Debug\SURiskLibrary.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\obj\Debug\ClientDemo.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\ClientDemo\obj\Debug\ClientDemo.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ClientDemo\bin\Debug\ClientDemo.exe.config
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ClientDemo\obj\Debug\ClientDemo.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ClientDemo\obj\Debug\ClientDemo.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ClientDemo\bin\Debug\ClientDemo.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ClientDemo\bin\Debug\ClientDemo.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ClientDemo\bin\Debug\SURiskLibrary.dll
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ClientDemo\bin\Debug\SURiskLibrary.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\ClientDemo\obj\Debug\ClientDemo.csprojResolveAssemblyReference.cache

@@ -6,3 +6,11 @@ C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MessageDemo\
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MessageDemo\obj\Debug\MessageDemo.csprojResolveAssemblyReference.cache
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MessageDemo\obj\Debug\MessageDemo.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MessageDemo\obj\Debug\MessageDemo.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MessageDemo\bin\Debug\MessageDemo.exe.config
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MessageDemo\bin\Debug\MessageDemo.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MessageDemo\bin\Debug\MessageDemo.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MessageDemo\bin\Debug\SURiskLibrary.dll
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MessageDemo\bin\Debug\SURiskLibrary.pdb
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MessageDemo\obj\Debug\MessageDemo.csprojResolveAssemblyReference.cache
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MessageDemo\obj\Debug\MessageDemo.exe
+C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MessageDemo\obj\Debug\MessageDemo.pdb
