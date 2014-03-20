@@ -25,13 +25,6 @@ namespace ComputerImplementation02
 
         // public methods
         // override virtual methods in Player class:
-
-        // PURPOSE: these methods are called by the Client during individual phases of gameplay
-        // PARAMETERS: the incoming message provides information necessary for completing the phase
-        //             the incoming message should be more specific for some methods
-        // RETURN: the message that is returned is (usually) just an acknowledgement of the action that was just taken
-        //         the MainState of the outgoing message should (usually) be the same as the MainState of the incoming message
-
         public override Message Update(Message incoming)
         {
             //Since the Player shares the same map with the Server, nothing needs to be done
@@ -42,34 +35,35 @@ namespace ComputerImplementation02
         {
             ArmyPlacementMessage message = new ArmyPlacementMessage(MainState.Initialize, nickname);
             //Figure out which territory to place an army. (randomly)
-            //Territory selected = Territories.ElementAt(rand.Next(0, Territories.Count));
-            List<Territory> ts = map.getAllTerritories();
-            List<Territory> untaken = new List<Territory>();
-            foreach(Territory t in ts)
-            {
-                if(t.getOwner() == "unoccupied")
-                {
-                    untaken.Add(t);
-                }
-            }
-            if (untaken.Count>0)
-            {
-                Territory selected = untaken.ElementAt(rand.Next(0, untaken.Count));
-                this.Territories.Add(selected);
-                selected.setOwner(this.nickname);
-                addArmy(selected, 1);
-                message.territory_army.Add(new ArmyPlacement(selected.getName(), incoming.playerName, 1));
-            }
+            Territory selected = Territories.ElementAt(rand.Next(0, Territories.Count));
+            addArmy(selected, 1);
+            message.territory_army.Add(new ArmyPlacement(selected.getName(), incoming.playerName, 1));
             return message;
         }
 
         public override Message Distribute(Message incoming)
         {
-
             ArmyPlacementMessage message = new ArmyPlacementMessage(MainState.Distribute, nickname);
-            Territory selected = Territories.ElementAt(rand.Next(0, Territories.Count));
-            addArmy(selected, 1);
-            message.territory_army.Add(new ArmyPlacement(selected.getName(), nickname, 1));
+            if (incoming is ArmyPlacementMessage)
+            {
+                foreach (ArmyPlacement placement in ((ArmyPlacementMessage)incoming).territory_army)
+                {
+                    // choose a random territory from Territories and place the army there
+                    Territory selected;
+                    if (placement.territory == "any")
+                    {
+                        selected = Territories.ElementAt(rand.Next(0, Territories.Count));
+                    }
+                    else
+                    {
+                        selected = Territories.Find(t => t.getName() == placement.territory);
+                    }
+                    // place the number of armies in the selected territory
+                    addArmy(selected, placement.numArmies);
+                    // put a new ArmyPlacement in the outgoing message
+                    message.territory_army.Add(new ArmyPlacement(selected.getName(), nickname, placement.numArmies));
+                }
+            }
             return message;
         }
 
@@ -270,12 +264,7 @@ namespace ComputerImplementation02
                 }
             }
 
-            int m = rand.Next(0, 2);
-
-            // REMOVE THIS CODE
-            if (nickname == "Tom") m = 1;
-
-            if (m == 0 || possibleAttacks.Count == 0)
+            if (possibleAttacks.Count == 0)
             {
                 AttackDoneMessage message = new AttackDoneMessage(MainState.AttackDone, nickname);
                 return message;
@@ -308,20 +297,6 @@ namespace ComputerImplementation02
                 message.roll[i] = rand.Next(1, 7);
             }
 
-            /*
-             * REMOVE THIS BLOCK OF CODE BEFORE RUNNING
-             */
-            if(nickname == "Tom")
-            {
-                for (int i = 0; i < message.roll.Length; i++)
-                {
-                    message.roll[i] = 6;
-                }
-            }
-            /*
-             * END CODE TO REMOVE
-             */
-
             return message;
         }
 
@@ -339,7 +314,7 @@ namespace ComputerImplementation02
                 // TODO: did we actually move any armies?
                 //       have we added the new territory to my list?
             }
-            return new Message(MainState.Conquer, nickname);
+            return new Message(MainState.Update, nickname);
         }
 
         public override Message ReinforcementCard(Message message)
@@ -365,7 +340,7 @@ namespace ComputerImplementation02
 
         public override Message Fortify(Message message)
         {
-            ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Fortify, nickname);
+            ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Reinforce, nickname);
             // i don't see a good reason to redistribute for the random implementation
             return outgoing;
         }
