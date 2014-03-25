@@ -13,6 +13,7 @@ namespace ComputerImplementation02
         // private data
         private Random rand;
         int numDiceRolled;
+        List<ArmyPlacement> newArmies;
 
         // public data
 
@@ -41,8 +42,7 @@ namespace ComputerImplementation02
         public override Message Initialize(Message incoming)
         {
             ArmyPlacementMessage message = new ArmyPlacementMessage(MainState.Initialize, nickname);
-            //Figure out which territory to place an army. (randomly)
-            //Territory selected = Territories.ElementAt(rand.Next(0, Territories.Count));
+            // Figure out which Territories are unoccupied
             List<Territory> ts = map.getAllTerritories();
             List<Territory> untaken = new List<Territory>();
             foreach(Territory t in ts)
@@ -54,7 +54,11 @@ namespace ComputerImplementation02
             }
             if (untaken.Count>0)
             {
+                // Choose a territory on which to place an army. (randomly)
+                // ------------------------------------------------------------------
                 Territory selected = untaken.ElementAt(rand.Next(0, untaken.Count));
+                // ------------------------------------------------------------------
+                // add the Territory to my list
                 this.Territories.Add(selected);
                 selected.setOwner(this.nickname);
                 addArmy(selected, 1);
@@ -66,40 +70,15 @@ namespace ComputerImplementation02
         public override Message Distribute(Message incoming)
         {
             ArmyPlacementMessage message = new ArmyPlacementMessage(MainState.Distribute, nickname);
-            if (incoming is ArmyPlacementMessage)
-            {
-                foreach (ArmyPlacement placement in ((ArmyPlacementMessage)incoming).territory_army)
-                {
-                    // choose a random territory from Territories and place the army there
-                    Territory selected;
-                    if (placement.territory == "any")
-                    {
-                        selected = Territories.ElementAt(rand.Next(0, Territories.Count));
-                    }
-                    else
-                    {
-                        selected = Territories.Find(t => t.getName() == placement.territory);
-                    }
-                    // place the number of armies in the selected territory
-                    addArmy(selected, placement.numArmies);
-                    // put a new ArmyPlacement in the outgoing message
-                    message.territory_army.Add(new ArmyPlacement(selected.getName(), nickname, 1));
-                }
-            }
+            // choose a random territory from Territories and place the army there
+            // ------------------------------------------------------------------
+            Territory selected = Territories.ElementAt(rand.Next(0, Territories.Count));
+            // ------------------------------------------------------------------
+            // place one army in the selected territory
+            addArmy(selected, 1);
+            // put a new ArmyPlacement in the outgoing message
+            message.territory_army.Add(new ArmyPlacement(selected.getName(), nickname, 1));
             return message;
-        }
-
-        public override Message NewArmies(Message message)
-        {
-            if (message is ArmyPlacementMessage)
-            {
-                //collect the new armies - add a new Army to armies for each ArmyPlacement in message
-                foreach (ArmyPlacement placement in ((ArmyPlacementMessage)message).territory_army)
-                {
-                    armies.Add(new Army(this, placement.numArmies, Territories.ElementAt(rand.Next(0, Territories.Count))));
-                }
-            }
-            return new Message(MainState.NewArmies, nickname);  //acknowledgement only
         }
 
         public override Message TradeCard(Message message)
@@ -253,17 +232,35 @@ namespace ComputerImplementation02
             return outgoing;
         }
 
-        public override Message AdditionalArmies(Message message)
+        public override Message NewArmies(Message message)
         {
             if (message is ArmyPlacementMessage)
             {
-                //collect the new armies - add a new Army to armies for each ArmyPlacement in message
-                foreach (ArmyPlacement placement in ((ArmyPlacementMessage)message).territory_army)
-                {
-                    armies.Add(new Army(this, placement.numArmies, Territories.ElementAt(rand.Next(0, Territories.Count))));
-                }
+                // collect the new armies - save the list of ArmyPlacements in newArmies
+                newArmies = ((ArmyPlacementMessage)message).territory_army;
             }
             return new Message(MainState.NewArmies, nickname);  //acknowledgement only
+        }
+
+        public override Message Reinforce(Message message)
+        {
+            ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Reinforce, nickname);
+            foreach (ArmyPlacement p in newArmies)
+            {
+                Territory selected;
+                if (p.territory != "unoccupied")
+                {
+                    selected = map.getAllTerritories().Find(t => t.getName() == p.territory);
+                }
+                else
+                {
+                    selected = Territories.ElementAt(rand.Next(0, Territories.Count));
+                }
+                selected.numArmies += p.numArmies;
+                outgoing.territory_army.Add(new ArmyPlacement(selected.getName(), nickname, p.numArmies));
+            }
+            newArmies.Clear();
+            return outgoing;
         }
 
         public override Message Attack(Message incoming)
@@ -290,11 +287,13 @@ namespace ComputerImplementation02
             if (m==0 || possibleAttacks.Count == 0)
             {
                 AttackDoneMessage message = new AttackDoneMessage(MainState.AttackDone, nickname);
+                state = MainState.AttackDone;
                 return message;
             }
             else
             {
                 // pick a random attack from the possibleAttacks list
+                state = MainState.Attack;
                 return possibleAttacks.ElementAt(rand.Next(possibleAttacks.Count));
             }
         }
@@ -303,7 +302,7 @@ namespace ComputerImplementation02
         {
             RollMessage message = new RollMessage(MainState.Roll, nickname);
             // if attacking, roll 3 dice
-            if (((RollMessage)message).attacker)
+            if (state == MainState.Attack)
             {
                 message.roll = new int[3];
                 numDiceRolled = 3;
@@ -323,6 +322,16 @@ namespace ComputerImplementation02
             return message;
         }
 
+/*        public override Message AttackOutcome(Message incoming)
+        {
+            // update the number of armies on my territory as a result of the attack
+            foreach(ArmyPlacement p in ((ArmyPlacementMessage)incoming).territory_army)
+            {
+                map.getAllTerritories().Find(t => t.getName() == p.territory).numArmies += p.numArmies;
+            }
+            return new Message(MainState.AttackOutcome, nickname); // acknowledgement
+        }
+*/
         public override Message Conquer(Message incoming)
         {
             if (incoming is ArmyPlacementMessage)
@@ -347,18 +356,6 @@ namespace ComputerImplementation02
                 addCard(((ReinforcementCardMessage)message).card);
             }
             return new Message(MainState.ReinforcementCard, nickname);
-        }
-
-        public override Message Reinforce(Message message)
-        {
-            ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Reinforce, nickname);
-            foreach (Army a in armies)
-            {
-                addArmy(a.getTerritory(), a.units);
-                outgoing.territory_army.Add(new ArmyPlacement(a.getTerritory().getName(), nickname, a.units));
-            }
-            armies.Clear();
-            return outgoing;
         }
 
         public override Message Fortify(Message message)
