@@ -15,3 +15,6 @@ C:\Users\Tyler\SkyDrive\VS\RiskServer\git\Helwig\RiskServer\bin\Debug\SURiskLibr
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Helwig\RiskServer\bin\Debug\RiskServer.exe.config
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Helwig\RiskServer\obj\Debug\RiskServer.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Helwig\RiskServer\obj\Debug\RiskServer.pdb
+C:\Users\Tyler\Documents\Visual Studio 2012\Projects\git\su-online-risk\Helwig\RiskServer\bin\Debug\RiskServer.exe.config
+C:\Users\Tyler\Documents\Visual Studio 2012\Projects\git\su-online-risk\Helwig\RiskServer\obj\Debug\RiskServer.exe
+C:\Users\Tyler\Documents\Visual Studio 2012\Projects\git\su-online-risk\Helwig\RiskServer\obj\Debug\RiskServer.pdb

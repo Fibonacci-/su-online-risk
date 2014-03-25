@@ -33,3 +33,10 @@ C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\Database_Controller\bin\Debug\Database_Controller.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\Database_Controller\bin\Debug\MySql.Data.dll
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Baumbach\Database_Controller\Database_Controller\obj\Debug\Database_Controller.csprojResolveAssemblyReference.cache
+C:\Users\Tyler\Documents\Visual Studio 2012\Projects\git\su-online-risk\Baumbach\Database_Controller\Database_Controller\obj\Debug\Database_Controller.pdb
+C:\Users\Tyler\Documents\Visual Studio 2012\Projects\git\su-online-risk\Baumbach\Database_Controller\Database_Controller\bin\Debug\Database_Controller.pdb
+C:\Users\Tyler\Documents\Visual Studio 2012\Projects\git\su-online-risk\Baumbach\Database_Controller\Database_Controller\bin\Debug\MySql.Data.dll
+C:\Users\Tyler\Documents\Visual Studio 2012\Projects\git\su-online-risk\Baumbach\Database_Controller\Database_Controller\obj\Debug\Database_Controller.csprojResolveAssemblyReference.cache
+C:\Users\Tyler\Documents\Visual Studio 2012\Projects\git\su-online-risk\Baumbach\Database_Controller\Database_Controller\bin\Debug\Database_Controller.dll.config
+C:\Users\Tyler\Documents\Visual Studio 2012\Projects\git\su-online-risk\Baumbach\Database_Controller\Database_Controller\bin\Debug\Database_Controller.dll
+C:\Users\Tyler\Documents\Visual Studio 2012\Projects\git\su-online-risk\Baumbach\Database_Controller\Database_Controller\obj\Debug\Database_Controller.dll
