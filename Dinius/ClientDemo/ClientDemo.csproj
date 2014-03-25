@@ -34,7 +34,7 @@
   <ItemGroup>
     <Reference Include="SURiskLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Kubota\Example01\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
+      <HintPath>..\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

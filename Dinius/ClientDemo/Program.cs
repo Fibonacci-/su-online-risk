@@ -188,10 +188,10 @@ namespace ClientDemo
                     }
                 }
             }
-            else if (message.state == MainState.AdditionalArmies)
+            /*else if (message.state == MainState.AdditionalArmies)
             {
                 //no change to the map
-            }
+            }*/
             else if (message.state == MainState.Attack)
             {
                 if (message is AttackMessage)
@@ -334,7 +334,7 @@ namespace ClientDemo
             else if (currentState == MainState.TradeCard)//reinforcement cards have been submitted.
             {
                 //still collect phase
-                ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.AdditionalArmies, current.name);
+                ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.NewArmies, current.name);
                 int collected = 0; 
                 //Figure out how many armies should be awarded
                 if(tradedCount <= tradedArmyCounts.Length)
@@ -353,11 +353,11 @@ namespace ClientDemo
                 ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Reinforce, current.name);
                 queue.Enqueue(outgoing);
             }
-            else if (currentState == MainState.AdditionalArmies)
+            /*else if (currentState == MainState.AdditionalArmies)
             {
                 Message outgoing = new Message(MainState.Reinforce, current.name);
                 queue.Enqueue(outgoing);
-            }
+            }*/
             else if (currentState == MainState.Reinforce)
             {
                 //still collect phase
@@ -387,29 +387,33 @@ namespace ClientDemo
                 {
                     int defenderLoss = 0;
                     int attackerLoss = 0;
-                    {
-                        ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Conquer, current.name);
-                        outgoing.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, 0));
-                        outgoing.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, 0));
-                        queue.Enqueue(outgoing);
+                    ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.AttackOutcome, current.name);
+                    outgoing.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, 0));
+                    outgoing.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, 0));
+                    queue.Enqueue(outgoing);
 
-                    }
-                    if (attackTo.numArmies == 0)
-                    {
-                        ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Conquer, current.name);
-                        outgoing.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, 0));
-                        outgoing.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, 0));
-                        queue.Enqueue(outgoing);
-                    }
-                    else
-                    {
-                        Message outgoing = new Message(MainState.Attack, current.name);
-                        queue.Enqueue(outgoing);
-                    }
+
                 }
                 else
                 {
                     //wait for both rolls to arrive.
+                    Message outgoing = new Message(MainState.Idle, current.name);
+                    queue.Enqueue(outgoing);
+                }
+            }
+            else if (currentState == MainState.AttackOutcome)
+            {
+                if (attackTo.numArmies == 0)
+                {
+                    ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Conquer, current.name);
+                    outgoing.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, 0));
+                    outgoing.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, 0));
+                    queue.Enqueue(outgoing);
+                }
+                else
+                {
+                    Message outgoing = new Message(MainState.Attack, current.name);
+                    queue.Enqueue(outgoing);
                 }
             }
             else if (currentState == MainState.Conquer)
@@ -539,10 +543,10 @@ namespace ClientDemo
             {
                 outgoing = player.TradeCard(incoming);
             }
-            else if (state == MainState.AdditionalArmies)
+            /*else if (state == MainState.AdditionalArmies)
             {
                 outgoing = player.AdditionalArmies(incoming);
-            }
+            }*/
             else if (state == MainState.Reinforce)
             {
                 outgoing = player.Reinforce(incoming);
