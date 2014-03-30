@@ -36,9 +36,13 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="SURiskLibrary">
+      <HintPath>..\..\Kubota\Example01\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
@@ -46,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database Controller.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="IRiskServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RiskServer.cs" />
