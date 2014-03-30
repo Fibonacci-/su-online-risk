@@ -188,10 +188,10 @@ namespace ClientDemo
                     }
                 }
             }
-            else if (message.state == MainState.AdditionalArmies)
+            /*else if (message.state == MainState.AdditionalArmies)
             {
                 //no change to the map
-            }
+            }*/
             else if (message.state == MainState.Attack)
             {
                 if (message is AttackMessage)
@@ -245,6 +245,16 @@ namespace ClientDemo
                         //Decide how many armies are lost from each side 
                         int attackerLoss = 0; //set this one
                         int defenderLoss = 0; //set this one
+                        int aIndex = attackerRoll.Length - 1;
+                        for(int i = defenderRoll.Length - 1; i > -1; i--)
+                        {
+                            if (aIndex == -1) break;
+                            if (attackerRoll[aIndex] > defenderRoll[i])
+                            {
+                                defenderLoss++;
+                            }
+                            else attackerLoss++;
+                        }
                         ArmyPlacement a = new ArmyPlacement(attackFrom.getName(), attacker.name, attackerLoss);
                         ArmyPlacement b = new ArmyPlacement(attackTo.getName(), defender.name, defenderLoss);
                         changes.Add(a); 
@@ -334,7 +344,7 @@ namespace ClientDemo
             else if (currentState == MainState.TradeCard)//reinforcement cards have been submitted.
             {
                 //still collect phase
-                ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.AdditionalArmies, current.name);
+                ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.NewArmies, current.name);
                 int collected = 0; 
                 //Figure out how many armies should be awarded
                 if(tradedCount <= tradedArmyCounts.Length)
@@ -353,11 +363,11 @@ namespace ClientDemo
                 ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Reinforce, current.name);
                 queue.Enqueue(outgoing);
             }
-            else if (currentState == MainState.AdditionalArmies)
+            /*else if (currentState == MainState.AdditionalArmies)
             {
                 Message outgoing = new Message(MainState.Reinforce, current.name);
                 queue.Enqueue(outgoing);
-            }
+            }*/
             else if (currentState == MainState.Reinforce)
             {
                 //still collect phase
@@ -387,29 +397,41 @@ namespace ClientDemo
                 {
                     int defenderLoss = 0;
                     int attackerLoss = 0;
+                    ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.AttackOutcome, current.name);
+                    int aIndex = attackerRoll.Length - 1;
+                    for (int i = defenderRoll.Length - 1; i > -1; i--)
                     {
-                        ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Conquer, current.name);
-                        outgoing.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, 0));
-                        outgoing.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, 0));
-                        queue.Enqueue(outgoing);
-
+                        if (aIndex == -1) break;
+                        if (attackerRoll[aIndex] > defenderRoll[i])
+                        {
+                            defenderLoss++;
+                        }
+                        else attackerLoss++;
                     }
-                    if (attackTo.numArmies == 0)
-                    {
-                        ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Conquer, current.name);
-                        outgoing.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, 0));
-                        outgoing.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, 0));
-                        queue.Enqueue(outgoing);
-                    }
-                    else
-                    {
-                        Message outgoing = new Message(MainState.Attack, current.name);
-                        queue.Enqueue(outgoing);
-                    }
+                    outgoing.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, 0));
+                    outgoing.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, 0));
+                    queue.Enqueue(outgoing);
                 }
                 else
                 {
                     //wait for both rolls to arrive.
+                    Message outgoing = new Message(MainState.Idle, current.name);
+                    queue.Enqueue(outgoing);
+                }
+            }
+            else if (currentState == MainState.AttackOutcome)
+            {
+                if (attackTo.numArmies == 0)
+                {
+                    ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Conquer, current.name);
+                    outgoing.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, 0));
+                    outgoing.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, 0));
+                    queue.Enqueue(outgoing);
+                }
+                else
+                {
+                    Message outgoing = new Message(MainState.Attack, current.name);
+                    queue.Enqueue(outgoing);
                 }
             }
             else if (currentState == MainState.Conquer)
@@ -539,10 +561,10 @@ namespace ClientDemo
             {
                 outgoing = player.TradeCard(incoming);
             }
-            else if (state == MainState.AdditionalArmies)
+            /*else if (state == MainState.AdditionalArmies)
             {
                 outgoing = player.AdditionalArmies(incoming);
-            }
+            }*/
             else if (state == MainState.Reinforce)
             {
                 outgoing = player.Reinforce(incoming);
@@ -584,7 +606,8 @@ namespace ClientDemo
             System.Drawing.Color[] colors = {System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue };
             for (int i = 0; i < 3; ++i)
             {
-                players[i] = new Computer(names[i], colors[i], map);
+                Map map2 = Map.loadMap(@"..\..\SimpleRisk.map");
+                players[i] = new Computer(names[i], colors[i], map2);
                 //players[i].map = map;
                 clients[i] = new MockClient();
                 clients[i].player = players[i];
