@@ -36,16 +36,6 @@ namespace RiskMessageThread
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //MessageBox.Show("Progress changed.");
-            if(this.attackButton.Enabled == true)
-            {
-                this.attackButton.Enabled = false;
-            }
-            else
-            {
-                this.attackButton.Enabled = true;
-            }
-            //this.Invalidate();
         }
     }
 }

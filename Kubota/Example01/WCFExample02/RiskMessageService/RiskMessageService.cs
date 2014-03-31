@@ -39,11 +39,11 @@ namespace RiskMessageService
 
         public int createGame(int mapId)
         {
-            if (games.ContainsKey(mapId))
+            /*if (games.ContainsKey(mapId))
             {
                 return 0;
             }
-            else
+            else*/
             {
                 Game game = new Game();
                 //for now, assign a random number. This number should come from DB.

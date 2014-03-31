@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SUOnlineRisk;
 using ComputerImplementation02;
 
-namespace ClientDemo
+namespace ClientDemoPhil
 {
     class MockServer
     {
