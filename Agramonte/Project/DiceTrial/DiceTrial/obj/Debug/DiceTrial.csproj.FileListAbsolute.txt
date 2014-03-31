@@ -1,6 +1,5 @@
 Z:\Prac\DiceTrial\DiceTrial\bin\Debug\DiceTrial.exe.config
 Z:\Prac\DiceTrial\DiceTrial\obj\Debug\DiceTrial.csprojResolveAssemblyReference.cache
-Z:\Prac\DiceTrial\DiceTrial\obj\Debug\DiceTrial.Form1.resources
 Z:\Prac\DiceTrial\DiceTrial\obj\Debug\DiceTrial.Properties.Resources.resources
 Z:\Prac\DiceTrial\DiceTrial\obj\Debug\DiceTrial.csproj.GenerateResource.Cache
 Z:\Prac\DiceTrial\DiceTrial\bin\Debug\DiceTrial.exe
@@ -19,6 +18,4 @@ Y:\Prac\DiceTrial\DiceTrial\obj\Debug\DiceTrial.csproj.GenerateResource.Cache
 Z:\Prac\DiceTrial\DiceTrial\obj\Debug\LewisGUIExample.DiceRollDefend.resources
 Z:\Prac\DiceTrial\DiceTrial\obj\Debug\LewisGUIExample.DiceForm.resources
 Z:\Prac\DiceTrial\DiceTrial\obj\Debug\LewisGUIExample.MainForm.resources
-C:\Users\Abel\Desktop\su-online-risk\Agramonte\Project\DiceTrial\DiceTrial\bin\Debug\DiceTrial.exe.config
-C:\Users\Abel\Desktop\su-online-risk\Agramonte\Project\DiceTrial\DiceTrial\obj\Debug\DiceTrial.exe
-C:\Users\Abel\Desktop\su-online-risk\Agramonte\Project\DiceTrial\DiceTrial\obj\Debug\DiceTrial.pdb
+Z:\Prac\DiceTrial\DiceTrial\bin\Debug\SURiskLibrary.pdb

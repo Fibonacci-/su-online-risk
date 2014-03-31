@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SURiskLibrary">
-      <HintPath>C:\Users\Abel\Desktop\su-online-risk\Kubota\Example01\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
+      <HintPath>C:\Users\agramonte\Desktop\su-online-risk-c47eb886e6fc\Kubota\Example01\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
