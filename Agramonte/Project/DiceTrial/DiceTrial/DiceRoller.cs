@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SUOnlineRisk;
 
 namespace LewisGUIExample
 {
@@ -17,7 +18,7 @@ namespace LewisGUIExample
         int[] numberAttacker;
         Random rg;
         int[] dieChoiceAttacker;
-
+        Player roller; 
 
         public DiceForm()
         {
@@ -121,9 +122,10 @@ namespace LewisGUIExample
 
         }
 
-        public void setOptionAttack()
+        public void setOptionAttack()//Player player)
         {
             comboBox1.DataSource = dieChoiceAttacker;
+            //roller = player;
         }
 
         //provides a number for the 3 attackers die and displays them 
@@ -132,7 +134,6 @@ namespace LewisGUIExample
 
             //Will update all if the user chooses to have all 3 die rolled. Otherwise no update is done.
             //Roll is inside to avoid advancing the random numbers unless they are to be used.
-            
                 if (comboBox1.SelectedValue.Equals((object)NumDiceAttacker))
                 {
                     if (pictureBox2.Visible == false || pictureBox3.Visible == false)
