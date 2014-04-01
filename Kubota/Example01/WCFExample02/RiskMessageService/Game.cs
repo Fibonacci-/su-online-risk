@@ -93,6 +93,14 @@ namespace RiskMessageService
                     tics++;
                     if (state == MainState.Idle)
                     {
+                        state = MainState.Initialize;
+                    }
+                    else if (state == MainState.Initialize)
+                    {
+                        state = MainState.Distribute;
+                    }
+                    else if (state == MainState.Distribute)
+                    {
                         state = MainState.NewArmies;
                     }
                     else if (state == MainState.NewArmies)
