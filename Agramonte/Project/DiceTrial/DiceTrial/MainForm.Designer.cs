@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.attackButton = new System.Windows.Forms.Button();
-            this.defendButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,38 +43,18 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
-            // 
-            // attackButton
-            // 
-            this.attackButton.Location = new System.Drawing.Point(2, 12);
-            this.attackButton.Name = "attackButton";
-            this.attackButton.Size = new System.Drawing.Size(75, 23);
-            this.attackButton.TabIndex = 1;
-            this.attackButton.Text = "Attack";
-            this.attackButton.UseVisualStyleBackColor = true;
-            this.attackButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // defendButton
-            // 
-            this.defendButton.Location = new System.Drawing.Point(515, 356);
-            this.defendButton.Name = "defendButton";
-            this.defendButton.Size = new System.Drawing.Size(75, 23);
-            this.defendButton.TabIndex = 2;
-            this.defendButton.Text = "Defend";
-            this.defendButton.UseVisualStyleBackColor = true;
-            this.defendButton.Click += new System.EventHandler(this.button2_Click);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 391);
-            this.Controls.Add(this.defendButton);
-            this.Controls.Add(this.attackButton);
             this.Controls.Add(this.pictureBox1);
             this.Name = "MainForm";
             this.Text = "Form1";
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -85,8 +63,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button attackButton;
-        private System.Windows.Forms.Button defendButton;
     }
 }
 

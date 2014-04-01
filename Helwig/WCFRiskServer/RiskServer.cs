@@ -45,6 +45,11 @@ namespace WCFRiskServer
 
         }
 
+        public Boolean newUser(string username, string hashpass)
+        {
+            return sUtilities.Instance.createUser(username, hashpass);
+        }
+
         public Boolean chatMessage(string username, string chatmessage, int gameID)
         {
             sUtilities u = sUtilities.Instance;
@@ -100,6 +105,11 @@ namespace WCFRiskServer
 
             sUtilities.Instance.addGame(g);
             return g.getID();
+        }
+
+        public Map getMap(int gameID, string mapname)
+        {
+            return sUtilities.Instance.findGame(gameID).getMap();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace SUOnlineRisk
         public List<Territory> Territories;
         public List<ReinforcementCard> ReinforcementCards;
         public List<Army> armies;
-        public MainState state; // maintains which state the player is in: e.g. Attack, Reinforce, Conquer, etc.
+        public MainState state; // what is this designed to do?
 
         public Map map;
 
@@ -28,9 +28,6 @@ namespace SUOnlineRisk
             this.numOfTerritories = 0;
             this.ArmySize = 0;
             this.map = map;
-            Territories = new List<Territory>();
-            ReinforcementCards = new List<ReinforcementCard>();
-            armies = new List<Army>();
         }
 
         public String getName()
@@ -187,7 +184,7 @@ namespace SUOnlineRisk
             {
                 //collect the new additional armies - obtained by trading in cards
             }
-            return new Message(MainState.NewArmies, nickname); //acknowledgement only.
+            return new Message(MainState.AdditionalArmies, nickname); //acknowledgement only.
         }
         virtual public Message Attack(Message incoming)
         {

@@ -24,6 +24,9 @@ namespace WCFRiskServer
         Boolean Login(string username, string password);
 
         [OperationContract]
+        Boolean newUser(string username, string hashpass);
+
+        [OperationContract]
         Boolean chatMessage(string username, string chatmessage, int gameID);
 
         [OperationContract]
@@ -44,6 +47,9 @@ namespace WCFRiskServer
 
         [OperationContract]
         int newGame(string username, string mapname);
+
+        [OperationContract]
+        Map getMap(int gameID, string mapname);
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

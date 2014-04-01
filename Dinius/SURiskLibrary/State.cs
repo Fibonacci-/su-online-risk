@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace SUOnlineRisk
 {
-    public enum MainState { Idle, Start, Initialize, Distribute, TradeCard, NewArmies, Reinforce, Attack, Roll, Conquer, AttackDone, AttackOutcome, ReinforcementCard, Fortify, Update, Over};
+    public enum MainState { Start, Initialize, Distribute, TradeCard, NewArmies, AdditionalArmies, Reinforce, Attack, Roll, Conquer, AttackDone, ReinforcementCard, Fortify, Update, Over};
 }
