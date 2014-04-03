@@ -38,16 +38,13 @@ namespace SUOnlineRisk
 //                Console.Out.WriteLine("     Computer::Update for " + nickname);
                 foreach (ArmyPlacement p in ((ArmyPlacementMessage)incoming).territory_army)
                 {
-                    Territory selected = map.getAllTerritories().Find(t => t.getName() == p.territory);
+                    Territory selected = map.getTerritory(p.territory);
+                    if (selected == null)
+                    {
+                        Console.Out.WriteLine("Computer::Update - selected null territory");
+                    }
                     selected.numArmies += p.numArmies;
-                    if (selected.getOwner() != p.owner)
-                    {
-                        selected.setOwner(p.owner);
-                    }
-                    if (p.owner == nickname && !Territories.Contains(selected))
-                    {
-                        Territories.Add(selected);
-                    }
+                    selected.setOwner(p.owner);
                 }
             }
             else
@@ -56,58 +53,12 @@ namespace SUOnlineRisk
             }
 
 
-
-            //// Initialization
-            //if (incoming.state == MainState.Initialize)
-            //{
-            //    Territory selected = map.getAllTerritories().Find(t => t.getName() == ((ArmyPlacementMessage)incoming).territory_army[0].territory);
-            //    selected.setOwner(((ArmyPlacementMessage)incoming).territory_army[0].owner);
-            //    selected.numArmies = 1;
-            //    if (selected.getOwner() == nickname)
-            //    {
-            //        Territories.Add(selected);
-            //    }
-            //}
-            //// Distribution
-            //else if (incoming.state == MainState.Distribute)
-            //{
-            //    Territory selected = map.getAllTerritories().Find(t => t.getName() == ((ArmyPlacementMessage)incoming).territory_army[0].territory);
-            //    selected.numArmies += ((ArmyPlacementMessage)incoming).territory_army[0].numArmies;
-            //}
-            //// Reinforcement
-            //else if (incoming.state == MainState.Reinforce)
-            //{
-            //    foreach (ArmyPlacement p in ((ArmyPlacementMessage)incoming).territory_army)
-            //    {
-            //        Territory selected = map.getAllTerritories().Find(t => t.getName() == p.territory);
-            //        selected.numArmies += p.numArmies;
-            //    }
-            //}
-            //// AttackOutcome
-            //else if (incoming.state == MainState.AttackDone) // AttackOutcome
-            //{
-            //    Territory selected = map.getAllTerritories().Find(t => t.getName() == ((ArmyPlacementMessage)incoming).territory_army[0].territory);
-            //    selected.numArmies += ((ArmyPlacementMessage)incoming).territory_army[0].numArmies;
-            //    selected = map.getAllTerritories().Find(t => t.getName() == ((ArmyPlacementMessage)incoming).territory_army[1].territory);
-            //    selected.numArmies += ((ArmyPlacementMessage)incoming).territory_army[1].numArmies;
-            //}
-            //// Conquer
-
-            //// Fortify
-            //else if (incoming.state == MainState.Fortify)
-            //{
-            //    Territory selected = map.getAllTerritories().Find(t => t.getName() == ((ArmyPlacementMessage)incoming).territory_army[0].territory);
-            //    selected.numArmies += ((ArmyPlacementMessage)incoming).territory_army[0].numArmies;
-            //    selected = map.getAllTerritories().Find(t => t.getName() == ((ArmyPlacementMessage)incoming).territory_army[1].territory);
-            //    selected.numArmies += ((ArmyPlacementMessage)incoming).territory_army[1].numArmies;
-            //}
-
             return incoming;
         }
 
         public override Message Initialize(Message incoming)
         {
-            ArmyPlacementMessage message = new ArmyPlacementMessage(MainState.Initialize, nickname);
+            ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Initialize, nickname);
             // Figure out which Territories are unoccupied
             List<Territory> ts = map.getAllTerritories();
             List<Territory> untaken = new List<Territory>();
@@ -124,13 +75,9 @@ namespace SUOnlineRisk
                 // ------------------------------------------------------------------
                 Territory selected = untaken.ElementAt(rand.Next(0, untaken.Count));
                 // ------------------------------------------------------------------
-//                // add the Territory to my list
-//                this.Territories.Add(selected);
-//                selected.setOwner(this.nickname);
-//                addArmy(selected, 1);
-                message.territory_army.Add(new ArmyPlacement(selected.getName(), nickname, 1));
+                outgoing.territory_army.Add(new ArmyPlacement(selected.getName(), nickname, 1));
             }
-            return message;
+            return outgoing;
         }
 
         public override Message Distribute(Message incoming)
@@ -138,7 +85,8 @@ namespace SUOnlineRisk
             ArmyPlacementMessage message = new ArmyPlacementMessage(MainState.Distribute, nickname);
             // choose a random territory from Territories and place the army there
             // ------------------------------------------------------------------
-            Territory selected = Territories.ElementAt(rand.Next(0, Territories.Count));
+            List<Territory> owned = map.getAllTerritories().FindAll(x => x.getOwner() == nickname);
+            Territory selected = owned.ElementAt(rand.Next(0, owned.Count));
             // ------------------------------------------------------------------
             // place one army in the selected territory
 //            addArmy(selected, 1);
@@ -317,12 +265,17 @@ namespace SUOnlineRisk
                 // the armies may HAVE to be placed on a specific territory (bonus from cards whose territory I own)
                 if (p.territory != "any")
                 {
-                    selected = map.getAllTerritories().Find(t => t.getName() == p.territory);
+                    selected = map.getTerritory(p.territory);
+                    if (selected == null)
+                    {
+                        Console.Out.WriteLine("Computer::Reinforce - null territory selected");
+                    }
                 }
                 else // choose a random territory
                 {
                     // ------------------------------------------------------------------
-                    selected = Territories.ElementAt(rand.Next(0, Territories.Count));
+                    List<Territory> owned = map.getAllTerritories().FindAll(x => x.getOwner() == nickname);
+                    selected = owned.ElementAt(rand.Next(0, owned.Count));
                     // ------------------------------------------------------------------
                 }
 //              selected.numArmies += p.numArmies;
@@ -370,7 +323,12 @@ namespace SUOnlineRisk
             {
                 // pick a random attack from the possibleAttacks list
                 state = MainState.Attack;
-                return possibleAttacks.ElementAt(rand.Next(0, possibleAttacks.Count));
+                AttackMessage outgoing = possibleAttacks.ElementAt(rand.Next(0, possibleAttacks.Count));
+                if (outgoing == null || map.getTerritory(outgoing.from).getOwner() != nickname)
+                {
+                    Console.Out.WriteLine("Computer::Attack - null outgoing message or attacking from unowned territory");
+                }
+                return outgoing;
             }
         }
 
@@ -407,16 +365,18 @@ namespace SUOnlineRisk
         {
             if (incoming is ArmyPlacementMessage)
             {
-                // change the owner of the conquered territory
-                Territory conquered = map.getAllTerritories().Find(t => t.getName() == ((ArmyPlacementMessage)incoming).territory_army[1].territory);
-                conquered.setOwner(nickname);
+                // find the conquered territory
+                Territory conquered = map.getTerritory(((ArmyPlacementMessage)incoming).territory_army[1].territory);
+//                conquered.setOwner(nickname);
                 // decide how many armies to move
-                int totalArmies = Territories.Find(t => t.getName() == ((ArmyPlacementMessage)incoming).territory_army[0].territory).numArmies;
+                int totalArmies = map.getTerritory(((ArmyPlacementMessage)incoming).territory_army[0].territory).numArmies;
                 int numArmyToMove = rand.Next(numDiceRolled, totalArmies);
                 // the first ArmyPlacement is From territory (attacker)
                 ((ArmyPlacementMessage)incoming).territory_army[0].numArmies = -numArmyToMove;
+                ((ArmyPlacementMessage)incoming).territory_army[0].owner = nickname;
                 // the second ArmyPlacement is To territory (newly conquered)
                 ((ArmyPlacementMessage)incoming).territory_army[1].numArmies = numArmyToMove;
+                ((ArmyPlacementMessage)incoming).territory_army[1].owner = nickname;
             }
             return new Message(MainState.Conquer, nickname);
         }

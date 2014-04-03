@@ -111,8 +111,29 @@ namespace ClientDemo
          */
         int numArmiesCollected(Map map, string playerName)
         {
-            //NOT YET IMPLEMENTED.
-            return 0;
+            int terrs = 0;
+            foreach (Territory T in map.getAllTerritories())
+            {
+                if (T.getOwner() == playerName)
+                {
+                    terrs++;
+                }
+            }
+            int numCollect = terrs / 3;
+            if (numCollect < 3) numCollect = 3;
+            foreach (Continent C in map.getAllContinents())
+            {
+                bool owned = true;
+                foreach (Territory T in C.getTerritories())
+                {
+                    if (T.getOwner() != playerName) owned = false;
+                }
+                if (owned)
+                {
+                    numCollect += C.getBonus();
+                }
+            }
+            return numCollect;
         }
         /*
          * this method takes a message from a client/player and update the map and other variables accordingly.
@@ -199,6 +220,10 @@ namespace ClientDemo
                     Territory from = map.getTerritory(message2.from);
                     Territory to = map.getTerritory(message2.to);
                     Console.Out.WriteLine("owners: " + from.getOwner() + " " + to.getOwner());
+                    if (from.getOwner() != current.name)
+                    {
+                        Console.Out.WriteLine("Player attacking from a territory they don't own");
+                    }
                     if (from.getOwner() == message2.playerName && to.getOwner() != message2.playerName)
                     {
                         if (from.isNeighbor(to) && to.isNeighbor(from))
@@ -209,7 +234,7 @@ namespace ClientDemo
                             defender = clients.Find(x => x.name == to.getOwner());
                             if(attacker == null || defender == null)
                             {
-                                attacker = null;
+                                Console.Out.WriteLine("MockServer::Update - Attack state - null attacker or defender");
                             }
                         }
                     }
@@ -249,9 +274,19 @@ namespace ClientDemo
                         //Decide how many armies are lost from each side 
                         int attackerLoss = 0; //set this one
                         int defenderLoss = 0; //set this one
+                        int aIndex = attackerRoll.Length - 1;
+                        for (int i = defenderRoll.Length - 1; i > -1; i--)
+                        {
+                            if (aIndex == -1) break;
+                            if (attackerRoll[aIndex] > defenderRoll[i])
+                            {
+                                defenderLoss++;
+                            }
+                            else attackerLoss++;
+                        }
                         ArmyPlacement a = new ArmyPlacement(attackFrom.getName(), attacker.name, attackerLoss);
                         ArmyPlacement b = new ArmyPlacement(attackTo.getName(), defender.name, defenderLoss);
-                        changes.Add(a); 
+                        changes.Add(a);
                         changes.Add(b);
                     }
                 }
@@ -318,22 +353,6 @@ namespace ClientDemo
                     Message outgoing = new Message(MainState.TradeCard, current.name);
                     queue.Enqueue(outgoing);
                 }
-
-
-                //if (idx == clients.Count() - 1) //go to the next phase
-                //{
-                //    current = clients[0];
-                //    ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.TradeCard, current.name);
-                //    int collected = numArmiesCollected(map, current.name);
-                //    outgoing.territory_army.Add(new ArmyPlacement("any", current.name, collected));
-                //    queue.Enqueue(outgoing);
-                //}
-                //else //move to the next player and continue Distribution
-                //{
-                //    current = clients[idx + 1];
-                //    Message outgoing = new Message(MainState.Distribute, current.name);
-                //    queue.Enqueue(outgoing);
-                //}
             }
             else if (currentState == MainState.TradeCard)//reinforcement cards have been submitted.
             {
@@ -486,7 +505,7 @@ namespace ClientDemo
             Queue<Message> incomingQueue = new Queue<Message>();
             Message message = new Message(MainState.Start, "nobody");
             incomingQueue.Enqueue(message);
-            while (incomingQueue.Count > 0 && count < 200)
+            while (incomingQueue.Count > 0 && count < 400)
             {
                 Message incoming = incomingQueue.Dequeue();
                 MainState state = incoming.state;
