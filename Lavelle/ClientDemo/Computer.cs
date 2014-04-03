@@ -248,13 +248,16 @@ namespace ComputerImplementation02
             foreach (ArmyPlacement p in newArmies)
             {
                 Territory selected;
+                // the armies may HAVE to be placed on a specific territory (bonus from cards whose territory I own)
                 if (p.territory != "unoccupied")
                 {
                     selected = map.getAllTerritories().Find(t => t.getName() == p.territory);
                 }
-                else
+                else // choose a random territory
                 {
+                    // ------------------------------------------------------------------
                     selected = Territories.ElementAt(rand.Next(0, Territories.Count));
+                    // ------------------------------------------------------------------
                 }
                 selected.numArmies += p.numArmies;
                 outgoing.territory_army.Add(new ArmyPlacement(selected.getName(), nickname, p.numArmies));
@@ -268,7 +271,8 @@ namespace ComputerImplementation02
             List<AttackMessage> possibleAttacks = new List<AttackMessage>();
             foreach (Territory t in Territories)
             {
-                foreach (Territory n in t.returnNeighbors())
+                List<Territory> neighbors = t.returnNeighbors();
+                foreach (Territory n in neighbors)
                 {
                     if (n.getOwner() != nickname) // if someone else owns this neighbor
                     {
@@ -283,6 +287,7 @@ namespace ComputerImplementation02
                 }
             }
 
+            // decide which attack to make, if any
             int m = rand.Next(0, 2);
             if (m==0 || possibleAttacks.Count == 0)
             {
@@ -322,7 +327,7 @@ namespace ComputerImplementation02
             return message;
         }
 
-/*        public override Message AttackOutcome(Message incoming)
+        public override Message AttackOutcome(Message incoming)
         {
             // update the number of armies on my territory as a result of the attack
             foreach(ArmyPlacement p in ((ArmyPlacementMessage)incoming).territory_army)
@@ -331,7 +336,7 @@ namespace ComputerImplementation02
             }
             return new Message(MainState.AttackOutcome, nickname); // acknowledgement
         }
-*/
+
         public override Message Conquer(Message incoming)
         {
             if (incoming is ArmyPlacementMessage)

@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using SUOnlineRisk;
 using System.Xml.Serialization;
 using System.IO;
-using MySql;
-using MySql.Data.MySqlClient;
 
 namespace MessageDemo
 {
@@ -21,16 +19,9 @@ namespace MessageDemo
             m.territory_army.Add(new ArmyPlacement("PA", "gonbe", 5));
             m.territory_army.Add(new ArmyPlacement("Snyder", "gonbe", 3));
             XmlSerializer ser = new XmlSerializer(typeof(ArmyPlacementMessage));
-            Console.Out.WriteLine(ser);
             TextWriter writer = new StreamWriter(filename);
             ser.Serialize(writer, m);
             writer.Close();
-
-            string s = File.ReadAllText(@"../../bonge.txt");
-            Database_Controller Session = new Database_Controller();
-            MySqlConnection connection = Session.Input_Form();
-            int message_id = Session.message_save(connection, s, 12);
-            connection.Close();
 
             {
                 ArmyPlacementMessage myObject;

@@ -10,10 +10,9 @@ using System.Collections;
 
 namespace Database_Controller
 {
-    public class Database_Controller
+    class Database_Controller
     {
         public MySqlConnection Input_Form()
-            //Command Line login for a database use only once.
         {
             Console.Out.Write("Please enter the database location: ");
             string url = Console.In.ReadLine();
@@ -40,7 +39,6 @@ namespace Database_Controller
             return connection;
         }
         public MySqlConnection Connect(string url, string port, string username, string password)
-            //Used to create a connection string to database, for easier access use Input_Form().
         {
             string MyConnectionString = "datasource=" + url + ";port=" + port + ";username=" + username + ";password=" + password + ";";
             MySqlConnection connection = new MySqlConnection(MyConnectionString);
@@ -57,7 +55,6 @@ namespace Database_Controller
             return connection;
         }
         public int Login(MySqlConnection connection, string usrname, string hashpass)
-            //Attempts to log user in with ha
             //------------------------------------
             //Login Return Codes
             //------------------------------------
@@ -110,7 +107,6 @@ namespace Database_Controller
             }
         }
         public Boolean Create_Usr(MySqlConnection connection, string usrname, string hashpass)
-            //Takes username, connection, and hashed password and checks values against the Database, if no values, creates a new user.
         {
             try
             {
@@ -145,12 +141,11 @@ namespace Database_Controller
             catch { Console.Out.Write("User Creation was unsuccessful."); return false; }
             
         }
-        public Boolean insert_chat(MySqlConnection connection, string username, string chatmessage, int gameid)
-            //Collects connection, username, chat message, and the game where it origionated from and inserts it into database.
+        public Boolean insert_chat(MySqlConnection connection, string username, string log, int gameid)
         {
             try
             {
-                string insert = "INSERT INTO `risk`.`chat_log` VALUES('"+gameid+"','"+username+"',NOW(),'"+chatmessage+"','')";
+                string insert = "INSERT INTO `risk`.`chat_log` VALUES('"+gameid+"','"+username+"',NOW(),'"+log+"','')";
                 MySqlCommand chatinsert = new MySqlCommand(insert);
                 chatinsert.Connection = connection;
                 chatinsert.ExecuteNonQuery();
@@ -160,7 +155,6 @@ namespace Database_Controller
             
         }
         public List<string> chatroom_recall(MySqlConnection connection, int gameid)
-            //Recalls messages based on the game they origionated from.
         {
             MySqlDataReader dataReader;
             List<string> log = new List<string>();
@@ -183,7 +177,6 @@ namespace Database_Controller
             return log;
         }
         public List<string> playerchat_recall(MySqlConnection connection, string username)
-            //Recalls messages based on the player who they origionated from.
         {
             MySqlDataReader dataReader;
             List<string> log = new List<string>();
@@ -206,9 +199,7 @@ namespace Database_Controller
             return log;
         }
         public int create_game(MySqlConnection connection, string[] users, string game_name)
-            //Creates a game log in database and returns the gameid.
-            //User list must be 6 values long.
-            //Use null if no player is present.
+            //users List must be 6 values long, null is allowed
         {
             for (int i = 0; i < 6; i++)
             {
@@ -239,155 +230,13 @@ namespace Database_Controller
             }
             return game_id;
         }
-        public Boolean no_finish(MySqlConnection connection, int gameid)
-            //Ties loose ends in database if a game is not finished.
+        public Boolean premature_close(MySqlConnection connection, string[] players, int gameid)
         {
-            try
-            {
-                string closecmd = "UPDATE `risk`.`game_log` SET game_end = NOW( ) WHERE game_id = @game_id";
-                MySqlCommand close = new MySqlCommand(closecmd, connection);
-                close.Parameters.AddWithValue("@game_id", gameid);
-                close.ExecuteNonQuery();
-                Boolean succeed = playerupdate(connection, gameid, null);
-                if (succeed == false)
-                {
-                    Console.Out.WriteLine("Player Wins and Games Played update failed...Sorry man...");
-                }
-            }
-            catch
-            {
-                throw;
-                return false;
-            }
-            Console.Out.WriteLine("Updates succeeded. Player totals updated and game closed.");
-            return true;
+            return false;
         }
-        public Boolean game_finished(MySqlConnection connection, int gameid, string winner)
-            //Proper close for a game that has finished. Updates player and game log list values.
-           {
-            try
-            {
-                string closecmd = "UPDATE `risk`.`game_log` SET game_end = NOW( ) AND winner = @uname WHERE game_id = @game_id";
-                MySqlCommand close = new MySqlCommand(closecmd, connection);
-                close.Parameters.AddWithValue("@game_id", gameid);
-                close.Parameters.AddWithValue("@uname", winner);
-                close.ExecuteNonQuery();
-                Boolean succeed = playerupdate(connection, gameid, winner);
-                if (succeed == false)
-                {
-                    Console.Out.WriteLine("Player Wins and Games Played update failed...Sorry man...");
-                }
-            }
-            catch
-            {
-                throw;
-                return false;
-            }
-            Console.Out.WriteLine("Updates succeeded. Player totals updated and game closed.");
-            return true;
-        }
-        private Boolean playerupdate(MySqlConnection connection, int gameid, string winner)
-            //Updates player total wins and games played.
+        public Boolean game_finished(MySqlConnection connection)
         {
-            string[] plist = new string[6];
-            string gamescan = "SELECT * FROM `risk`.`game_log`";
-            MySqlDataReader dataReader;
-            MySqlCommand scan = new MySqlCommand(gamescan, connection);
-            try
-            {
-                dataReader = scan.ExecuteReader();
-
-                while (dataReader.Read())
-                {
-                    if (gameid == Convert.ToInt32(dataReader["game_id"]))
-                    {
-                        plist[0] = Convert.ToString(dataReader["lobby_leader"]);
-                        plist[1] = Convert.ToString(dataReader["user2"]);
-                        plist[2] = Convert.ToString(dataReader["user3"]);
-                        plist[3] = Convert.ToString(dataReader["user4"]);
-                        plist[4] = Convert.ToString(dataReader["user5"]);
-                        plist[5] = Convert.ToString(dataReader["user6"]);
-                        dataReader.Close();
-                        break;
-                    }
-                }
-            }
-            catch
-            {
-                throw;
-                dataReader.Close();
-                return false;
-            }
-            try
-            {
-                foreach (string p in plist)
-                {
-                    string player_update = "UPDATE `risk`.`user_table` SET games_played = games_played + 1 WHERE user_name = @uname";
-                    MySqlCommand pupdate = new MySqlCommand(player_update, connection);
-                    pupdate.Parameters.AddWithValue("@uname", p);
-                    pupdate.ExecuteNonQuery();
-                }
-                if (winner != null)
-                {
-                    string player_update = "UPDATE `risk`.`user_table` SET wins = wins + 1 WHERE user_name = @uname";
-                    MySqlCommand pupdate = new MySqlCommand(player_update, connection);
-                    pupdate.Parameters.AddWithValue("@uname", winner);
-                    pupdate.ExecuteNonQuery();
-                }
-            }
-            catch
-            {
-                throw;
-                return false;
-            }
-            return true;
-        }
-        public int message_save(MySqlConnection connection, string message, int gameid)
-            //Saves game state messages to the Server.
-        {
-            Int32 message_id = 0;
-            try
-            {
-                string script = "INSERT INTO risk.action_log VALUES(@game_id, @message, ''); SELECT LAST_INSERT_ID()";
-                MySqlCommand cr_message = new MySqlCommand(script, connection);
-
-                cr_message.Parameters.AddWithValue("@game_id", gameid);
-                cr_message.Parameters.AddWithValue("@message", message);
-
-                message_id = Convert.ToInt32(cr_message.ExecuteScalar());
-                Console.Out.WriteLine("Message Added");
-            }
-            catch
-            {
-                throw;
-                return 0;
-            }
-            return message_id;
-        }
-        public string get_message(MySqlConnection connection, int messageid)
-            //Returns game state messages from Server.
-        {
-            MySqlDataReader dataReader;
-            string message_save = null;
-            try
-            {
-                string callchat = "SELECT * FROM `risk`.`action_log`";
-                MySqlCommand call = new MySqlCommand(callchat, connection);
-                dataReader = call.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    if (Convert.ToInt32(dataReader["message_id"]) == messageid)
-                    {
-                        message_save = Convert.ToString(dataReader["message"]);
-                        dataReader.Close();
-                        return message_save;
-                    }
-                }
-                dataReader.Close();
-            }
-            catch { throw; dataReader.Close(); return message_save; }
-            dataReader.Close();
-            return message_save;
+            return false;
         }
     }
 }

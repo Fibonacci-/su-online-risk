@@ -29,6 +29,8 @@ namespace ClientDemo
 
         //used during the initialization phase
         int initialized = 0;
+        // used during distribution phase
+        int distributed = 0;
 
         //the number of armies to be awarded in sequence
         static int[] tradedArmyCounts = {4, 6, 8, 10, 12, 15};
@@ -50,26 +52,26 @@ namespace ClientDemo
         List<ReinforcementCard> generateReinforcementCards(Map map)
         {
             List<ReinforcementCard> cards = new List<ReinforcementCard>();
-            int i = 0;
-            List<Territory> terr = new List<Territory>();
-            terr = map.getAllTerritories();
-            Random rand = new Random();
-            while(terr.Count != 0)
+            List<Territory> territories = map.getAllTerritories();
+            int n = 0;
+            foreach (Territory t in map.getAllTerritories())
             {
-                int r = rand.Next(terr.Count);
-                switch(i)
+                ReinforcementCard r = null;
+                switch(n)
                 {
-                    case 0: cards.Add(new ReinforcementCard(terr[r].getName(), ReinforcemenCardUnit.Infantry));
+                    case(0):
+                        r = new ReinforcementCard(t.getName(), ReinforcemenCardUnit.Infantry);
                         break;
-                    case 1: cards.Add(new ReinforcementCard(terr[r].getName(), ReinforcemenCardUnit.Cavalry));
+                    case(1):
+                        r = new ReinforcementCard(t.getName(), ReinforcemenCardUnit.Cavalry);
                         break;
-                    case 2: cards.Add(new ReinforcementCard(terr[r].getName(), ReinforcemenCardUnit.Artillery));
+                    case(2):
+                        r = new ReinforcementCard(t.getName(), ReinforcemenCardUnit.Artillery);
                         break;
                 }
-                i = ++i % 3;
+                cards.Add(r);
+                n = ++n % 3;
             }
-            cards.Add(new ReinforcementCard(null, ReinforcemenCardUnit.Wild));
-            cards.Add(new ReinforcementCard(null, ReinforcemenCardUnit.Wild));
             return cards;
         }
 
@@ -79,12 +81,14 @@ namespace ClientDemo
         bool gameOver(Map map)
         {
             String winner = null;
-            foreach(Territory t in map.getAllTerritories())
+            Boolean endGame = true;
+            foreach (Territory t in map.getAllTerritories())
             {
                 if (winner == null) winner = t.getOwner();
-                if (t.getOwner() != winner) return false;
+                if (t.getOwner() != winner) endGame = false;
+                if (t.getOwner() == "unoccupied") endGame = false;
             }
-            return true;
+            return endGame;
         }
 
         public void addClient(MockClient client)
@@ -119,19 +123,26 @@ namespace ClientDemo
             List<ArmyPlacement> changes = new List<ArmyPlacement>();
             int idx = clients.FindIndex(x => x == current);
             state = message.state;
-            if (message.state == MainState.Initialize)
+            if (message.state == MainState.Initialize || message.state == MainState.Distribute)
             {
                 if (message is ArmyPlacementMessage)
                 {
                     ArmyPlacementMessage message2 = (ArmyPlacementMessage)message;
-                    if (message2.territory_army.Count > 0)
+                    if (message2.territory_army.Count > 0) // false for distribution, why??
                     {
-                        initialized++;
+                        if (message.state == MainState.Initialize)
+                        {
+                            initialized++;
+                        }
+                        else // message.state == MainState.Distribute
+                        {
+                            distributed++;
+                        }
                         changes.Add(message2.territory_army[0]);
                     }
                 }
             }
-            else if (message.state == MainState.Distribute || message.state == MainState.Reinforce || message.state == MainState.Fortify)
+            else if (message.state == MainState.Reinforce || message.state == MainState.Fortify)
             {
                 if (message is ArmyPlacementMessage)
                 {
@@ -284,32 +295,41 @@ namespace ClientDemo
                 }
                 else //move on to distribution
                 {
-                    current = clients[0];
+                    current = clients[(idx + 1) % clients.Count]; //go to the next player
                     Message outgoing = new Message(MainState.Distribute, current.name);
                     queue.Enqueue(outgoing);
                 }
             }
             else if (currentState == MainState.Distribute)
             {
-                if (idx == clients.Count() - 1) //go to the next phase
+                if (distributed < ((10 - clients.Count)*5*clients.Count - initialized)) // continue distribution
                 {
-                    current = clients[0];
-                    ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.NewArmies, current.name);
-                    int collected = numArmiesCollected(map, current.name);
-                    outgoing.territory_army.Add(new ArmyPlacement("any", current.name, collected));
-                    queue.Enqueue(outgoing);
-                }
-                else //move to the next player and continue Distribution
-                {
-                    current = clients[idx + 1];
+                    current = clients[(idx + 1) % clients.Count]; // go to the next player
                     Message outgoing = new Message(MainState.Distribute, current.name);
                     queue.Enqueue(outgoing);
                 }
-            }
-            else if (currentState == MainState.NewArmies)
-            {
-                ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.TradeCard, current.name);
-                queue.Enqueue(outgoing);
+                else // move on to the next player's TradeCard phase
+                {
+                    current = clients[(idx + 1) % clients.Count]; // go to the next player
+                    Message outgoing = new Message(MainState.TradeCard, current.name);
+                    queue.Enqueue(outgoing);
+                }
+
+
+                //if (idx == clients.Count() - 1) //go to the next phase
+                //{
+                //    current = clients[0];
+                //    ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.TradeCard, current.name);
+                //    int collected = numArmiesCollected(map, current.name);
+                //    outgoing.territory_army.Add(new ArmyPlacement("any", current.name, collected));
+                //    queue.Enqueue(outgoing);
+                //}
+                //else //move to the next player and continue Distribution
+                //{
+                //    current = clients[idx + 1];
+                //    Message outgoing = new Message(MainState.Distribute, current.name);
+                //    queue.Enqueue(outgoing);
+                //}
             }
             else if (currentState == MainState.TradeCard)//reinforcement cards have been submitted.
             {
@@ -319,13 +339,18 @@ namespace ClientDemo
                 //Figure out how many armies should be awarded
                 if(tradedCount <= tradedArmyCounts.Length)
                 {
-                    collected = tradedArmyCounts[tradedCount - 1];
+                    collected = tradedArmyCounts[tradedCount];
                 }
                 else
                 {
                     collected = tradedArmyCounts[tradedArmyCounts.Length - 1] + 5 * (tradedCount - tradedArmyCounts.Length);
                 }
                 outgoing.territory_army.Add(new ArmyPlacement("any", current.name, collected));
+                queue.Enqueue(outgoing);
+            }
+            else if (currentState == MainState.NewArmies)
+            {
+                ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Reinforce, current.name);
                 queue.Enqueue(outgoing);
             }
             else if (currentState == MainState.AdditionalArmies)
@@ -341,17 +366,34 @@ namespace ClientDemo
             }
             else if (currentState == MainState.Attack)
             {
-                attackerRoll = null;
-                defenderRoll = null;
-                Message outgoing = new Message(MainState.Roll, attacker.name);
-                queue.Enqueue(outgoing);
-                Message outgoing2 = new Message(MainState.Roll, defender.name);
-                queue.Enqueue(outgoing2);
+                if (defender.name == "")
+                {
+                    Message outgoing = new Message(MainState.AttackDone, attacker.name);
+                    queue.Enqueue(outgoing);
+                }
+                else
+                {
+                    attackerRoll = null;
+                    defenderRoll = null;
+                    Message outgoing = new Message(MainState.Roll, attacker.name);
+                    queue.Enqueue(outgoing);
+                    Message outgoing2 = new Message(MainState.Roll, defender.name);
+                    queue.Enqueue(outgoing2);
+                }
             }
             else if (currentState == MainState.Roll)
             {
                 if (attackerRoll != null && defenderRoll != null) //end of the battle
                 {
+                    int defenderLoss = 0;
+                    int attackerLoss = 0;
+                    {
+                        ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Conquer, current.name);
+                        outgoing.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, 0));
+                        outgoing.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, 0));
+                        queue.Enqueue(outgoing);
+
+                    }
                     if (attackTo.numArmies == 0)
                     {
                         ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Conquer, current.name);
@@ -400,7 +442,7 @@ namespace ClientDemo
             {
                 //end of this player's turn. Move to the next player
                 current = clients[(idx + 1) % clients.Count()];
-                Message outgoing = new Message(MainState.NewArmies, current.name);
+                Message outgoing = new Message(MainState.TradeCard, current.name);
                 queue.Enqueue(outgoing);
             }
             else if (currentState == MainState.Start)
@@ -418,6 +460,8 @@ namespace ClientDemo
         }
         public void Run()
         {
+            int count = 0;
+
             Queue<Message> incomingQueue = new Queue<Message>();
             Message message = new Message(MainState.Start, "nobody");
             incomingQueue.Enqueue(message);
@@ -426,6 +470,8 @@ namespace ClientDemo
                 Message incoming = incomingQueue.Dequeue();
                 MainState state = incoming.state;
                 Console.Out.WriteLine(state + " " + incoming.playerName);
+
+                // update each player
                 Queue<Message> queue = Update(incoming);
                 foreach (Message m in queue)
                 {
@@ -440,20 +486,12 @@ namespace ClientDemo
                     Message msg = c.Request(m);
                     incomingQueue.Enqueue(msg);
                 }
+
+                count++;
             }
         }
     }
-    /*class MockPlayer: Player
-    {
-        public Map map
-        {
-            get;
-            set;
-        }
-        public MockPlayer(string n, System.Drawing.Color color): base(n, color)
-        {
-        }
-    }*/
+
     class MockClient
     {
         Message incoming;
