@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MapLibrary">
-      <HintPath>..\MapLibrary\bin\Debug\MapLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="SURiskLibrary">
       <HintPath>..\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
     </Reference>

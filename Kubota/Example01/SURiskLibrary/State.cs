@@ -8,5 +8,5 @@ namespace SUOnlineRisk
 {
     public enum MainState { 
         Start, Initialize, Distribute, TradeCard, NewArmies, AdditionalArmies, Reinforce, 
-        Attack, Roll, Conquer, AttackDone, ReinforcementCard, Fortify, Update, Over, Unknown, Idle};
+        Attack, AttackOutcome, Roll, Conquer, AttackDone, ReinforcementCard, Fortify, Update, Over, Unknown, Idle};
 }

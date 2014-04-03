@@ -9,3 +9,6 @@ C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\R
 C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.Form_MainMenu.resources
 C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.Form2.resources
 C:\Users\Davis\Documents\Visual Studio 2013\Projects\RiskGUI\RiskGUI\obj\Debug\RiskGUI.Form3.resources
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\RiskGUI\bin\Debug\RiskGUI.exe.config
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\RiskGUI\obj\Debug\RiskGUI.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\RiskGUI\obj\Debug\RiskGUI.pdb

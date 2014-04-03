@@ -4,8 +4,6 @@ C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\bin
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\obj\Debug\MapStuff.csprojResolveAssemblyReference.cache
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\obj\Debug\MapStuff.exe
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\obj\Debug\MapStuff.pdb
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\bin\Debug\MapLibrary.dll
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\bin\Debug\MapLibrary.pdb
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\bin\Debug\SURiskLibrary.dll
 C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\MapStuff\bin\Debug\SURiskLibrary.pdb
 C:\Users\Shannon\Documents\Visual Studio 2013\Projects\su-online-risk2\Kubota\Example01\MapStuff\bin\Debug\MapStuff.exe.config
