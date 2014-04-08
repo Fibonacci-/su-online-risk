@@ -72,6 +72,23 @@ namespace WCFRiskServer
             userList.Add(user);
         }
 
+        public Boolean remUser(string username)
+        {
+            return userList.Remove(findUser(username));
+        }
+
+        public User findUser(String username)
+        {
+            foreach (User u in userList)
+            {
+                if (String.Compare(u.getUserName(), username, false) == 0)
+                {
+                    return u;
+                }
+            }
+            return null;
+        }
+
         public Game findPlayer(string username)
         {
             foreach (Game g in gameList)

@@ -72,6 +72,7 @@ namespace WCFRiskServer
             //remove from game
             Game g = sUtilities.Instance.findPlayer(username);
             g.remPlayer(username);
+            sUtilities.Instance.remUser(username);
         }
 
         public List<int> findGames()
@@ -110,6 +111,18 @@ namespace WCFRiskServer
         public Map getMap(int gameID, string mapname)
         {
             return sUtilities.Instance.findGame(gameID).getMap();
+        }
+
+        public List<string> getPlayerList(int gameID)
+        {
+            List<string> ls = new List<string>();
+            Game g = sUtilities.Instance.findGame(gameID);
+            List<Player> lp = g.getPlayerList();
+            foreach (Player p in lp)
+            {
+                ls.Add(p.getName());
+            }
+            return ls;
         }
     }
 }

@@ -32,9 +32,8 @@ namespace WCFRiskServer
         [OperationContract]
         void sendSystemMessage(int gameID, Message message);
 
-        //todo
         [OperationContract]
-        void logoff(string username);//maybe
+        void logoff(string username);
 
         [OperationContract]
         List<int> findGames();
@@ -50,6 +49,9 @@ namespace WCFRiskServer
 
         [OperationContract]
         Map getMap(int gameID, string mapname);
+
+        [OperationContract]
+        List<string> getPlayerList(int gameID);
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

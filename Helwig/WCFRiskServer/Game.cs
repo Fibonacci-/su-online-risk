@@ -63,6 +63,7 @@ namespace WCFRiskServer
 
         public int startGame()
         {
+            //reset game ID and start game in database
             //phil's game logic code
             return 0;
         }
