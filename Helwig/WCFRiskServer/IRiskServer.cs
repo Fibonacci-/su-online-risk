@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using SUOnlineRisk;
 
 namespace WCFRiskServer
 {
@@ -20,10 +21,37 @@ namespace WCFRiskServer
         // TODO: Add your service operations here
 
         [OperationContract]
-        Boolean Login(string user, string hashpass);
+        Boolean Login(string username, string password);
+
+        [OperationContract]
+        Boolean newUser(string username, string hashpass);
 
         [OperationContract]
         Boolean chatMessage(string username, string chatmessage, int gameID);
+
+        [OperationContract]
+        void sendSystemMessage(int gameID, Message message);
+
+        [OperationContract]
+        void logoff(string username);
+
+        [OperationContract]
+        List<int> findGames();
+
+        [OperationContract]
+        Boolean joinGame(string username, int gameID);
+
+        [OperationContract]
+        int startGame(string username, int gameID);//returns new gameID to use
+
+        [OperationContract]
+        int newGame(string username, string mapname);
+
+        [OperationContract]
+        Map getMap(int gameID, string mapname);
+
+        [OperationContract]
+        List<string> getPlayerList(int gameID);
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

@@ -1,9 +1,0 @@
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\WindowsFormsApplication1\bin\Debug\SURiskLibrary.dll
-C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Kubota\Example01\WindowsFormsApplication1\bin\Debug\SURiskLibrary.pdb

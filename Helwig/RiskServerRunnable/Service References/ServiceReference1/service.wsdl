@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RiskServer" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/WCFRiskServer" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/SUOnlineRisk" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Drawing" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRiskServer_GetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_GetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_GetDataUsingDataContract_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_GetDataUsingDataContract_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_newUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:newUser" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_newUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:newUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_chatMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:chatMessage" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_chatMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:chatMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_sendSystemMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendSystemMessage" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_sendSystemMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendSystemMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_logoff_InputMessage">
+    <wsdl:part name="parameters" element="tns:logoff" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_logoff_OutputMessage">
+    <wsdl:part name="parameters" element="tns:logoffResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_findGames_InputMessage">
+    <wsdl:part name="parameters" element="tns:findGames" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_findGames_OutputMessage">
+    <wsdl:part name="parameters" element="tns:findGamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_joinGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:joinGame" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_joinGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:joinGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_startGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:startGame" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_startGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:startGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_newGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:newGame" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_newGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:newGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_getMap_InputMessage">
+    <wsdl:part name="parameters" element="tns:getMap" />
+  </wsdl:message>
+  <wsdl:message name="IRiskServer_getMap_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getMapResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IRiskServer">
+    <wsdl:operation name="GetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/GetData" message="tns:IRiskServer_GetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/GetDataResponse" message="tns:IRiskServer_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/GetDataUsingDataContract" message="tns:IRiskServer_GetDataUsingDataContract_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/GetDataUsingDataContractResponse" message="tns:IRiskServer_GetDataUsingDataContract_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/Login" message="tns:IRiskServer_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/LoginResponse" message="tns:IRiskServer_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="newUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/newUser" message="tns:IRiskServer_newUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/newUserResponse" message="tns:IRiskServer_newUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="chatMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/chatMessage" message="tns:IRiskServer_chatMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/chatMessageResponse" message="tns:IRiskServer_chatMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sendSystemMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/sendSystemMessage" message="tns:IRiskServer_sendSystemMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/sendSystemMessageResponse" message="tns:IRiskServer_sendSystemMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="logoff">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/logoff" message="tns:IRiskServer_logoff_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/logoffResponse" message="tns:IRiskServer_logoff_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="findGames">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/findGames" message="tns:IRiskServer_findGames_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/findGamesResponse" message="tns:IRiskServer_findGames_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="joinGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/joinGame" message="tns:IRiskServer_joinGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/joinGameResponse" message="tns:IRiskServer_joinGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="startGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/startGame" message="tns:IRiskServer_startGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/startGameResponse" message="tns:IRiskServer_startGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="newGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/newGame" message="tns:IRiskServer_newGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/newGameResponse" message="tns:IRiskServer_newGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getMap">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRiskServer/getMap" message="tns:IRiskServer_getMap_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRiskServer/getMapResponse" message="tns:IRiskServer_getMap_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IRiskServer" type="tns:IRiskServer">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/GetDataUsingDataContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="newUser">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/newUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="chatMessage">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/chatMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSystemMessage">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/sendSystemMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logoff">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/logoff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findGames">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/findGames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="joinGame">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/joinGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="startGame">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/startGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="newGame">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/newGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMap">
+      <soap:operation soapAction="http://tempuri.org/IRiskServer/getMap" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RiskServer">
+    <wsdl:port name="BasicHttpBinding_IRiskServer" binding="tns:BasicHttpBinding_IRiskServer">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/WCFRiskServer/Service1/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
