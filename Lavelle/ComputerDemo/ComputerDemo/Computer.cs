@@ -255,7 +255,7 @@ namespace SUOnlineRisk
             RiskMessage outgoing = new RiskMessage(MainState.Reinforce, nickname);
             foreach (ArmyPlacement p in newArmies)
             {
-                Territory selected = null;
+                Territory selected;
                 // the armies may HAVE to be placed on a specific territory (bonus from cards whose territory I own)
                 if (p.territory != "any")
                 {
@@ -269,17 +269,11 @@ namespace SUOnlineRisk
                 {
                     // ------------------------------------------------------------------
                     List<Territory> owned = map.getAllTerritories().FindAll(x => x.getOwner() == nickname);
-                    if (owned.Count > 0)
-                    {
-                        selected = owned.ElementAt(rand.Next(0, owned.Count));
-                    }
+                    selected = owned.ElementAt(rand.Next(0, owned.Count));
                     // ------------------------------------------------------------------
                 }
 //              selected.numArmies += p.numArmies;
-                if (selected != null)
-                {
-                    outgoing.territory_army.Add(new ArmyPlacement(selected.getName(), nickname, p.numArmies));
-                }
+                outgoing.territory_army.Add(new ArmyPlacement(selected.getName(), nickname, p.numArmies));
             }
             newArmies.Clear();
             return outgoing;
@@ -298,7 +292,7 @@ namespace SUOnlineRisk
                     {
                         if (n.getOwner() != nickname) // if someone else owns this neighbor
                         {
-                            //if (n.numArmies < t.numArmies) // and the neighbor has fewer armies than this territory
+                            if (n.numArmies < t.numArmies) // and the neighbor has fewer armies than this territory
                             {
                                 // maybe attack it
                                 possibleAttacks.Add(new RiskMessage(MainState.Attack, nickname));
@@ -312,10 +306,10 @@ namespace SUOnlineRisk
 
             // decide which attack to make, if any
             int m = rand.Next(0, 2);
-            /*if (nickname == "Tom")
+            if (nickname == "Tom")
             {
                 m = 1;
-            }*/
+            }
             if (m==0 || possibleAttacks.Count == 0)
             {
                 RiskMessage message = new RiskMessage(MainState.AttackDone, nickname);
@@ -384,14 +378,7 @@ namespace SUOnlineRisk
 
             for (int i = 0; i < outgoing.roll.Length; i++)
             {
-                if (this.nickname == "Tom")
-                {
-                    outgoing.roll[i] = 6;
-                }
-                else
-                {
-                    outgoing.roll[i] = rand.Next(1, 7);
-                }
+                outgoing.roll[i] = rand.Next(1, 7);
             }
 
             return outgoing;
