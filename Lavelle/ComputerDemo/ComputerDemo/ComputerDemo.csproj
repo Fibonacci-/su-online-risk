@@ -32,7 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SURiskLibrary">
+    <Reference Include="SURiskLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\su-online-risk2\Lavelle\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />

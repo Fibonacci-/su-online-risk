@@ -48,9 +48,9 @@ namespace ClientDemo
         /*
          * Generate ReinforcementCards for each territory in the map.
          */
-        List<ReinforcementCard> generateReinforcementCards(Map map)
+        public void generateReinforcementCards(Map map)
         {
-            List<ReinforcementCard> cards = new List<ReinforcementCard>();
+            reinforcementCards = new List<ReinforcementCard>();
             List<Territory> territories = map.getAllTerritories();
             int n = 0;
             foreach (Territory t in map.getAllTerritories())
@@ -68,10 +68,9 @@ namespace ClientDemo
                         r = new ReinforcementCard(t.getName(), ReinforcemenCardUnit.Artillery);
                         break;
                 }
-                cards.Add(r);
+                reinforcementCards.Add(r);
                 n = ++n % 3;
             }
-            return cards;
         }
 
         /*
@@ -111,57 +110,67 @@ namespace ClientDemo
          */
         int numArmiesCollected(Map map, string playerName)
         {
-            //NOT YET IMPLEMENTED.
-            return 0;
+            int terrs = 0;
+            foreach (Territory T in map.getAllTerritories())
+            {
+                if (T.getOwner() == playerName)
+                {
+                    terrs++;
+                }
+            }
+            int numCollect = terrs / 3;
+            if (numCollect < 3) numCollect = 3;
+            foreach (Continent C in map.getAllContinents())
+            {
+                bool owned = true;
+                foreach (Territory T in C.getTerritories())
+                {
+                    if (T.getOwner() != playerName) owned = false;
+                }
+                if (owned)
+                {
+                    numCollect += C.getBonus();
+                }
+            }
+            return numCollect;
         }
         /*
          * this method takes a message from a client/player and update the map and other variables accordingly.
          */
-        public Queue<Message> Update(Message message)
+        public Queue<RiskMessage> Update(RiskMessage message)
         {
             List<ArmyPlacement> changes = new List<ArmyPlacement>();
             int idx = clients.FindIndex(x => x == current);
             state = message.state;
             if (message.state == MainState.Initialize || message.state == MainState.Distribute)
             {
-                if (message is ArmyPlacementMessage)
+                if (message.territory_army.Count > 0) // false for distribution, why??
                 {
-                    ArmyPlacementMessage message2 = (ArmyPlacementMessage)message;
-                    if (message2.territory_army.Count > 0) // false for distribution, why??
+                    if (message.state == MainState.Initialize)
                     {
-                        if (message.state == MainState.Initialize)
-                        {
-                            initialized++;
-                        }
-                        else // message.state == MainState.Distribute
-                        {
-                            distributed++;
-                        }
-                        changes.Add(message2.territory_army[0]);
+                        initialized++;
                     }
+                    else // message.state == MainState.Distribute
+                    {
+                        distributed++;
+                    }
+                    changes.Add(message.territory_army[0]);
                 }
             }
             else if (message.state == MainState.Reinforce || message.state == MainState.Fortify)
             {
-                if (message is ArmyPlacementMessage)
+                foreach (ArmyPlacement a in message.territory_army)
                 {
-                    foreach (ArmyPlacement a in ((ArmyPlacementMessage)message).territory_army)
-                    {
-                        changes.Add(a);
-                    }
+                    changes.Add(a);
                 }
             }
             else if (message.state == MainState.Conquer)
             {
-                if (message is ArmyPlacementMessage)
+                foreach (ArmyPlacement p in message.territory_army)
                 {
-                    ArmyPlacementMessage message2 = (ArmyPlacementMessage)message;
-                    foreach (ArmyPlacement p in message2.territory_army)
-                    {
-                        changes.Add(p);
-                    }
-                    bConquered = true;
+                    changes.Add(p);
                 }
+                bConquered = true;
             }
             else if (message.state == MainState.NewArmies)
             {
@@ -169,22 +178,18 @@ namespace ClientDemo
             }
             else if (message.state == MainState.TradeCard)
             {
-                if (message is TradeCardMessage)
+                if (message.cardIds != null) //there is a set of cards to be traded for armies.
                 {
-                    TradeCardMessage message2 = (TradeCardMessage)message;
-                    if (message2.cardIds != null) //there is a set of cards to be traded for armies.
+                    foreach (int id in message.cardIds)
                     {
-                        foreach (int id in message2.cardIds)
-                        {
-                            ReinforcementCard card = usedPiles.Find(x => x.CardId == id);
-                            ArmyPlacement a = new ArmyPlacement();
-                            a.numArmies = ReinforcementCard.numArmies(card.UnitType);
-                            a.territory = card.TerritoryName;
-                            changes.Add(a);
-                            tradedCards.Add(card);
-                        }
-                        tradedCount++;
+                        ReinforcementCard card = usedPiles.Find(x => x.CardId == id);
+                        ArmyPlacement a = new ArmyPlacement();
+                        a.numArmies = ReinforcementCard.numArmies(card.UnitType);
+                        a.territory = card.TerritoryName;
+                        changes.Add(a);
+                        tradedCards.Add(card);
                     }
+                    tradedCount++;
                 }
             }
             else if (message.state == MainState.AdditionalArmies)
@@ -193,67 +198,76 @@ namespace ClientDemo
             }
             else if (message.state == MainState.Attack)
             {
-                if (message is AttackMessage)
+                Territory from = map.getTerritory(message.from);
+                Territory to = map.getTerritory(message.to);
+                Console.Out.WriteLine("owners: " + from.getOwner() + " " + to.getOwner());
+                Console.Out.WriteLine("Battle: " + from.getName() + "[" + from.getOwner() + "] => " + to.getName() + "[" + to.getOwner() + "]");
+                if (from.getOwner() != current.name)
                 {
-                    AttackMessage message2 = (AttackMessage)message;
-                    Territory from = map.getTerritory(message2.from);
-                    Territory to = map.getTerritory(message2.to);
-                    Console.Out.WriteLine("owners: " + from.getOwner() + " " + to.getOwner());
-                    if (from.getOwner() == message2.playerName && to.getOwner() != message2.playerName)
+                    Console.Out.WriteLine("Player attacking from a territory they don't own");
+                }
+                if (from.getOwner() == message.playerName && to.getOwner() != message.playerName)
+                {
+                    if (from.isNeighbor(to) && to.isNeighbor(from))
                     {
-                        if (from.isNeighbor(to) && to.isNeighbor(from))
+                        attackFrom = from;
+                        attackTo = to;
+                        attacker = clients.Find(x => x.name == from.getOwner());
+                        defender = clients.Find(x => x.name == to.getOwner());
+                        if(attacker == null || defender == null)
                         {
-                            attackFrom = from;
-                            attackTo = to;
-                            attacker = clients.Find(x => x.name == from.getOwner());
-                            defender = clients.Find(x => x.name == to.getOwner());
-                            if(attacker == null || defender == null)
-                            {
-                                attacker = null;
-                            }
+                            Console.Out.WriteLine("MockServer::Update - Attack state - null attacker or defender");
                         }
                     }
                 }
             }
             else if (message.state == MainState.AttackDone)
             {
-                if (message is AttackDoneMessage)
-                {
-                    AttackDoneMessage message2 = (AttackDoneMessage)message;
-                    //erase them so that we do not mistakenly start another battle
-                    attackFrom = null;
-                    attackTo = null;
-                    attacker = null;
-                    defender = null;
-                    attackerRoll = null;
-                    defenderRoll = null;
-                }
+                //erase them so that we do not mistakenly start another battle
+                attackFrom = null;
+                attackTo = null;
+                attacker = null;
+                defender = null;
+                attackerRoll = null;
+                defenderRoll = null;
             }
             else if (message.state == MainState.Roll)
             {
-                if (message is RollMessage)
+                if (message.playerName == attacker.name)
                 {
-                    RollMessage message2 = (RollMessage)message;
-                    if (message2.playerName == attacker.name)
+                    attackerRoll = (int[])message.roll.Clone();
+                    Array.Sort(attackerRoll);
+                }
+                else
+                {
+                    defenderRoll = (int[])message.roll.Clone();
+                    Array.Sort(defenderRoll);
+                }
+                if (attackerRoll != null && defenderRoll != null)
+                {
+                    //Decide how many armies are lost from each side 
+                    int attackerLoss = 0; //set this one
+                    int defenderLoss = 0; //set this one
+                    int aIndex = attackerRoll.Length - 1;
+                    for (int i = defenderRoll.Length - 1; i > -1; i--)
                     {
-                        attackerRoll = (int[])message2.roll.Clone();
-                        Array.Sort(attackerRoll);
+                        if (aIndex == -1) break;
+                        if (attackerRoll[aIndex] > defenderRoll[i])
+                        {
+                            defenderLoss++;
+                        }
+                        else attackerLoss++;
+
+                        // TODO: I don't think this hurts, but is it necessary? The defender shouldn't be rolling more dice than they have armies.
+                        if (defenderLoss == attackTo.numArmies)
+                        {
+                            break; // no more armies left in the defending territory
+                        }
                     }
-                    else
-                    {
-                        defenderRoll = (int[])message2.roll.Clone();
-                        Array.Sort(defenderRoll);
-                    }
-                    if (attackerRoll != null && defenderRoll != null)
-                    {
-                        //Decide how many armies are lost from each side 
-                        int attackerLoss = 0; //set this one
-                        int defenderLoss = 0; //set this one
-                        ArmyPlacement a = new ArmyPlacement(attackFrom.getName(), attacker.name, attackerLoss);
-                        ArmyPlacement b = new ArmyPlacement(attackTo.getName(), defender.name, defenderLoss);
-                        changes.Add(a); 
-                        changes.Add(b);
-                    }
+                    ArmyPlacement a = new ArmyPlacement(attackFrom.getName(), attacker.name, -attackerLoss);
+                    ArmyPlacement b = new ArmyPlacement(attackTo.getName(), defender.name, -defenderLoss);
+                    changes.Add(a);
+                    changes.Add(b);
                 }
             }
 
@@ -261,10 +275,10 @@ namespace ClientDemo
             updateMap(changes);
 
             //create broadcast messages to all the players - including the current player who initiated the change
-            Queue<Message> queue = new Queue<Message>();
+            Queue<RiskMessage> queue = new Queue<RiskMessage>();
             foreach(MockClient client in clients)
             {
-                ArmyPlacementMessage a = new ArmyPlacementMessage(MainState.Update, client.name);
+                RiskMessage a = new RiskMessage(MainState.Update, client.name);
                 foreach(ArmyPlacement p in changes)
                 {
                     a.territory_army.Add((ArmyPlacement)p.Clone());
@@ -277,15 +291,15 @@ namespace ClientDemo
          * This method takes a message from a client and decide what is the next phase.
          * Create outgoing messages and put them in the outgoing queue.
          */
-        public Queue<Message> Next(MainState currentState)
+        public Queue<RiskMessage> Next(MainState currentState)
         {
-            Queue<Message> queue = new Queue<Message>();
+            Queue<RiskMessage> queue = new Queue<RiskMessage>();
             int idx = clients.FindIndex(x => x == current);
             if(gameOver(map))
             {
                 foreach(MockClient client in clients)
                 {
-                    Message outgoing = new Message(MainState.Over, client.name);
+                    RiskMessage outgoing = new RiskMessage(MainState.Over, client.name);
                     queue.Enqueue(outgoing);
                 }
             }
@@ -294,51 +308,35 @@ namespace ClientDemo
                 if (initialized < map.getAllTerritories().Count) //continue initialization
                 {
                     current = clients[(idx + 1) % clients.Count]; //go to the next player
-                    Message outgoing = new Message(MainState.Initialize, current.name); 
+                    RiskMessage outgoing = new RiskMessage(MainState.Initialize, current.name); 
                     queue.Enqueue(outgoing);
                 }
                 else //move on to distribution
                 {
                     current = clients[(idx + 1) % clients.Count]; //go to the next player
-                    Message outgoing = new Message(MainState.Distribute, current.name);
+                    RiskMessage outgoing = new RiskMessage(MainState.Distribute, current.name);
                     queue.Enqueue(outgoing);
                 }
             }
             else if (currentState == MainState.Distribute)
             {
-                if (distributed < 30)//((10 - clients.Count)*5*clients.Count - initialized)) // continue distribution
+                if (distributed < 30 - initialized)//((10 - clients.Count)*5*clients.Count - initialized)) // continue distribution
                 {
                     current = clients[(idx + 1) % clients.Count]; // go to the next player
-                    Message outgoing = new Message(MainState.Distribute, current.name);
+                    RiskMessage outgoing = new RiskMessage(MainState.Distribute, current.name);
                     queue.Enqueue(outgoing);
                 }
                 else // move on to the next player's TradeCard phase
                 {
                     current = clients[(idx + 1) % clients.Count]; // go to the next player
-                    Message outgoing = new Message(MainState.TradeCard, current.name);
+                    RiskMessage outgoing = new RiskMessage(MainState.TradeCard, current.name);
                     queue.Enqueue(outgoing);
                 }
-
-
-                //if (idx == clients.Count() - 1) //go to the next phase
-                //{
-                //    current = clients[0];
-                //    ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.TradeCard, current.name);
-                //    int collected = numArmiesCollected(map, current.name);
-                //    outgoing.territory_army.Add(new ArmyPlacement("any", current.name, collected));
-                //    queue.Enqueue(outgoing);
-                //}
-                //else //move to the next player and continue Distribution
-                //{
-                //    current = clients[idx + 1];
-                //    Message outgoing = new Message(MainState.Distribute, current.name);
-                //    queue.Enqueue(outgoing);
-                //}
             }
             else if (currentState == MainState.TradeCard)//reinforcement cards have been submitted.
             {
                 //still collect phase
-                ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.NewArmies, current.name);
+                RiskMessage outgoing = new RiskMessage(MainState.NewArmies, current.name);
                 int collected = 0; 
                 //Figure out how many armies should be awarded
                 if(tradedCount <= tradedArmyCounts.Length)
@@ -354,62 +352,41 @@ namespace ClientDemo
             }
             else if (currentState == MainState.NewArmies)
             {
-                ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Reinforce, current.name);
+                RiskMessage outgoing = new RiskMessage(MainState.Reinforce, current.name);
                 queue.Enqueue(outgoing);
             }
             else if (currentState == MainState.AdditionalArmies)
             {
-                Message outgoing = new Message(MainState.Reinforce, current.name);
+                RiskMessage outgoing = new RiskMessage(MainState.Reinforce, current.name);
                 queue.Enqueue(outgoing);
             }
             else if (currentState == MainState.Reinforce)
             {
                 //still collect phase
-                Message outgoing = new Message(MainState.Attack, current.name);
+                RiskMessage outgoing = new RiskMessage(MainState.Attack, current.name);
                 queue.Enqueue(outgoing);
             }
             else if (currentState == MainState.Attack)
             {
-                /*if (defender.name == "")
-                {
-                    Message outgoing = new Message(MainState.AttackDone, attacker.name);
-                    queue.Enqueue(outgoing);
-                }
-                else*/
-                {
-                    attackerRoll = null;
-                    defenderRoll = null;
-                    
-                    Message outgoing = new Message(MainState.Roll, attacker.name);
-                    queue.Enqueue(outgoing);
-                    Message outgoing2 = new Message(MainState.Roll, defender.name);
-                    queue.Enqueue(outgoing2);
-                }
+                attackerRoll = null;
+                defenderRoll = null;
+
+                RiskMessage outgoing = new RiskMessage(MainState.Roll, attacker.name);
+                outgoing.from = this.attackFrom.getName();
+                outgoing.to = this.attackTo.getName();
+                outgoing.attacker = true;
+                queue.Enqueue(outgoing);
+                RiskMessage outgoing2 = new RiskMessage(MainState.Roll, defender.name);
+                outgoing2.from = this.attackFrom.getName();
+                outgoing2.to = this.attackTo.getName();
+                queue.Enqueue(outgoing2);
             }
             else if (currentState == MainState.Roll)
             {
                 if (attackerRoll != null && defenderRoll != null) //end of the battle
                 {
-                    int defenderLoss = 0;
-                    int attackerLoss = 0;
-                    ArmyPlacementMessage outgoingA = new ArmyPlacementMessage(MainState.AttackOutcome, current.name);
-//                    ArmyPlacementMessage outgoingD = new ArmyPlacementMessage(MainState.AttackOutcome, defender.name);
-                    int aIndex = attackerRoll.Length - 1;
-                    for (int i = defenderRoll.Length - 1; i > -1; i--)
-                    {
-                        if (aIndex == -1) break;
-                        if (attackerRoll[aIndex] > defenderRoll[i])
-                        {
-                            defenderLoss++;
-                        }
-                        else attackerLoss++;
-                    }
-                    outgoingA.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, -defenderLoss));
-                    outgoingA.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, -attackerLoss));
-//                    outgoingD.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, -defenderLoss));
-//                    outgoingD.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, -attackerLoss));
+                    RiskMessage outgoingA = new RiskMessage(MainState.AttackOutcome, current.name);
                     queue.Enqueue(outgoingA);
-//                    queue.Enqueue(outgoingD);
                 }
                 else
                 {
@@ -422,55 +399,60 @@ namespace ClientDemo
             {
                 if (attackTo.numArmies == 0)
                 {
-                    ArmyPlacementMessage outgoing = new ArmyPlacementMessage(MainState.Conquer, current.name);
+                    RiskMessage outgoing = new RiskMessage(MainState.Conquer, current.name);
                     outgoing.territory_army.Add(new ArmyPlacement(attackFrom.getName(), attacker.name, 0));
                     outgoing.territory_army.Add(new ArmyPlacement(attackTo.getName(), attacker.name, 0));
+                    outgoing.from = this.attackFrom.getName();
+                    outgoing.to = this.attackTo.getName();
                     queue.Enqueue(outgoing);
                 }
                 else
                 {
-                    Message outgoing = new Message(MainState.Attack, current.name);
+                    RiskMessage outgoing = new RiskMessage(MainState.Attack, current.name);
                     queue.Enqueue(outgoing);
                 }
             }
             else if (currentState == MainState.Conquer)
             {
-                Message outgoing = new Message(MainState.Attack, current.name);
+                RiskMessage outgoing = new RiskMessage(MainState.Attack, current.name);
                 queue.Enqueue(outgoing);
             }
             else if (currentState == MainState.AttackDone)
             {
                 if(bConquered)
                 {
-                    ReinforcementCardMessage outgoing = new ReinforcementCardMessage(MainState.ReinforcementCard, current.name);
-                    outgoing.card = reinforcementCards[0];
-                    reinforcementCards.Remove(outgoing.card);
+                    RiskMessage outgoing = new RiskMessage(MainState.ReinforcementCard, current.name);
+                    if (reinforcementCards.Count > 0)
+                    {
+                        outgoing.card = reinforcementCards[0];
+                        reinforcementCards.Remove(outgoing.card);
+                    }
                     queue.Enqueue(outgoing);
                     bConquered = false;
                 }
                 else
                 {
-                    Message outgoing = new Message(MainState.Fortify, current.name);
+                    RiskMessage outgoing = new RiskMessage(MainState.Fortify, current.name);
                     queue.Enqueue(outgoing);
                 }
             }
             else if (currentState == MainState.ReinforcementCard)
             {
-                Message outgoing = new Message(MainState.Fortify, current.name);
+                RiskMessage outgoing = new RiskMessage(MainState.Fortify, current.name);
                 queue.Enqueue(outgoing);
             }
             else if (currentState == MainState.Fortify)
             {
                 //end of this player's turn. Move to the next player
                 current = clients[(idx + 1) % clients.Count()];
-                Message outgoing = new Message(MainState.TradeCard, current.name);
+                RiskMessage outgoing = new RiskMessage(MainState.TradeCard, current.name);
                 queue.Enqueue(outgoing);
             }
             else if (currentState == MainState.Start)
             {
                 //the game is about to start. Let the first one to initialize
                 current = clients[0];
-                Message outgoing = new Message(MainState.Initialize, current.name);
+                RiskMessage outgoing = new RiskMessage(MainState.Initialize, current.name);
                 queue.Enqueue(outgoing);
             }
             else if (currentState == MainState.Idle)
@@ -483,28 +465,28 @@ namespace ClientDemo
         {
             int count = 0;
 
-            Queue<Message> incomingQueue = new Queue<Message>();
-            Message message = new Message(MainState.Start, "nobody");
+            Queue<RiskMessage> incomingQueue = new Queue<RiskMessage>();
+            RiskMessage message = new RiskMessage(MainState.Start, "nobody");
             incomingQueue.Enqueue(message);
-            while (incomingQueue.Count > 0 && count < 200)
+            while (incomingQueue.Count > 0)// && count < 400)
             {
-                Message incoming = incomingQueue.Dequeue();
+                RiskMessage incoming = incomingQueue.Dequeue();
                 MainState state = incoming.state;
                 Console.Out.WriteLine(state + " " + incoming.playerName);
 
                 // update each player
-                Queue<Message> queue = Update(incoming);
-                foreach (Message m in queue)
+                Queue<RiskMessage> queue = Update(incoming);
+                foreach (RiskMessage m in queue)
                 {
                     MockClient c = clients.Find(x => x.name == m.playerName);
                     c.Request(m);
                 }
 
-                Queue<Message> queue2 = Next(state); //figure out the next phase
-                foreach (Message m in queue2)
+                Queue<RiskMessage> queue2 = Next(state); //figure out the next phase
+                foreach (RiskMessage m in queue2)
                 {
                     MockClient c = clients.Find(x => x.name == m.playerName);
-                    Message msg = c.Request(m);
+                    RiskMessage msg = c.Request(m);
                     incomingQueue.Enqueue(msg);
                 }
 
@@ -515,8 +497,8 @@ namespace ClientDemo
 
     class MockClient
     {
-        Message incoming;
-        Message outgoing;
+        RiskMessage incoming;
+        RiskMessage outgoing;
         public Player player
         {
             get;
@@ -535,9 +517,9 @@ namespace ClientDemo
         {
             get { return player.state; }
         }
-        public Message Request(Message incoming)
+        public RiskMessage Request(RiskMessage incoming)
         {
-            Message outgoing = null;
+            RiskMessage outgoing = null;
             MainState state = incoming.state;
             player.state = state;
             if (state == MainState.Update) //this is for updating the map
@@ -605,6 +587,7 @@ namespace ClientDemo
             MockClient[] clients = new MockClient[3];
             MockServer server = new MockServer();
             server.map = map;
+            server.generateReinforcementCards(map);
             string[] names = { "Tom", "Amy", "Jack" };
             System.Drawing.Color[] colors = {System.Drawing.Color.Red, System.Drawing.Color.Green, System.Drawing.Color.Blue };
             for (int i = 0; i < 3; ++i)
