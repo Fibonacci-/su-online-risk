@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SURiskLibrary">
-      <HintPath>..\..\su-online-risk2\Lavelle\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -51,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\su-online-risk2\Lavelle\SURiskLibrary\SURiskLibrary.csproj">
+      <Project>{cd3bf920-b0d2-4744-adb1-3e8b18e9ece8}</Project>
+      <Name>SURiskLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
