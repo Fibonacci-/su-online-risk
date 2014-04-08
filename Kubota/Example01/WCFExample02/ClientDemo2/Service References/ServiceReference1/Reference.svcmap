@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="796d6a4c-1ecc-49a7-b7c6-41050f925e1a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/RiskMessageService/Service1/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="4f97a8c9-60d2-4f8c-900e-345ca6aa63df" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RiskMessageService/Service1/?xsd=xsd3" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="bfdd832a-b6cf-4939-8ae4-3f07348f0e45" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RiskMessageService/Service1/?xsd=xsd2" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="5698bbd2-2ced-4492-9bd4-865b6e90df93" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RiskMessageService/Service1/?xsd=xsd1" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="4e76d8e2-4c2f-476f-8a1b-b6529dc6af8e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RiskMessageService/Service1/?xsd=xsd0" />
+    <MetadataFile FileName="RiskMessageService.wsdl" MetadataType="Wsdl" ID="98c1233c-4c06-4046-8505-bbe44b624503" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RiskMessageService/Service1/?wsdl" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="d35a6a02-8dd0-48e7-831a-9ba5e3862184" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RiskMessageService/Service1/?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

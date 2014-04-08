@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SUOnlineRisk" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SUOnlineRisk" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/RiskMessageService/Service1/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="RiskMessage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Message">
+        <xs:sequence>
+          <xs:element name="attacker" type="xs:boolean" />
+          <xs:element name="card" nillable="true" type="tns:ReinforcementCard" />
+          <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="cardIds" nillable="true" type="q1:ArrayOfint" />
+          <xs:element name="from" nillable="true" type="xs:string" />
+          <xs:element name="playerName" nillable="true" type="xs:string" />
+          <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="roll" nillable="true" type="q2:ArrayOfint" />
+          <xs:element name="state" type="tns:MainState" />
+          <xs:element name="territory_army" nillable="true" type="tns:ArrayOfArmyPlacement" />
+          <xs:element name="to" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RiskMessage" nillable="true" type="tns:RiskMessage" />
+  <xs:complexType name="Message">
+    <xs:sequence>
+      <xs:element name="playerName" nillable="true" type="xs:string" />
+      <xs:element name="state" type="tns:MainState" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Message" nillable="true" type="tns:Message" />
+  <xs:simpleType name="MainState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Start" />
+      <xs:enumeration value="Initialize" />
+      <xs:enumeration value="Distribute" />
+      <xs:enumeration value="TradeCard" />
+      <xs:enumeration value="NewArmies" />
+      <xs:enumeration value="AdditionalArmies" />
+      <xs:enumeration value="Reinforce" />
+      <xs:enumeration value="Attack" />
+      <xs:enumeration value="Roll" />
+      <xs:enumeration value="Conquer" />
+      <xs:enumeration value="AttackDone" />
+      <xs:enumeration value="ReinforcementCard" />
+      <xs:enumeration value="Fortify" />
+      <xs:enumeration value="Update" />
+      <xs:enumeration value="Over" />
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Idle" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MainState" nillable="true" type="tns:MainState" />
+  <xs:complexType name="ReinforcementCard">
+    <xs:sequence>
+      <xs:element name="CardId" type="xs:int" />
+      <xs:element name="TerritoryName" nillable="true" type="xs:string" />
+      <xs:element name="UnitType" type="tns:ReinforcemenCardUnit" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReinforcementCard" nillable="true" type="tns:ReinforcementCard" />
+  <xs:simpleType name="ReinforcemenCardUnit">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Infantry" />
+      <xs:enumeration value="Cavalry" />
+      <xs:enumeration value="Artillery" />
+      <xs:enumeration value="Wild" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReinforcemenCardUnit" nillable="true" type="tns:ReinforcemenCardUnit" />
+  <xs:complexType name="ArrayOfArmyPlacement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArmyPlacement" nillable="true" type="tns:ArmyPlacement" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArmyPlacement" nillable="true" type="tns:ArrayOfArmyPlacement" />
+  <xs:complexType name="ArmyPlacement">
+    <xs:sequence>
+      <xs:element name="numArmies" type="xs:int" />
+      <xs:element name="owner" nillable="true" type="xs:string" />
+      <xs:element name="territory" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArmyPlacement" nillable="true" type="tns:ArmyPlacement" />
+</xs:schema>

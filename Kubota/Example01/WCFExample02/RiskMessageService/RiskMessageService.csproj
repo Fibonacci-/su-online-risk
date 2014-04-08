@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{44D1048D-F27F-419B-A327-0E18699F6BCA}</ProjectGuid>
+    <ProjectGuid>{02CBA4DE-DFB0-4598-8909-88B9E15A2A87}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServiceDemo</RootNamespace>
-    <AssemblyName>ServiceDemo</AssemblyName>
+    <RootNamespace>RiskMessageService</RootNamespace>
+    <AssemblyName>RiskMessageService</AssemblyName>
     <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SURiskLibrary">
-      <HintPath>..\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
+      <HintPath>..\..\SURiskLibrary\bin\Debug\SURiskLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,9 +48,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMessageService.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="IRiskMessageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MessageService.cs" />
+    <Compile Include="RiskMessageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
