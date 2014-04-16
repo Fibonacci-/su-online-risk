@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MapStuff")]
+[assembly: AssemblyTitle("SURiskLibrary")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Office of Information Technology")]
-[assembly: AssemblyProduct("MapStuff")]
-[assembly: AssemblyCopyright("Copyright © Office of Information Technology 2014")]
+[assembly: AssemblyCompany("Susquehanna University")]
+[assembly: AssemblyProduct("SURiskLibrary")]
+[assembly: AssemblyCopyright("Copyright © Susquehanna University 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("61f3ba9f-156e-492c-b952-0354ac0cd2f0")]
+[assembly: Guid("ee0ba310-74af-49e3-aacc-94490f320a1b")]
 
 // Version information for an assembly consists of the following four values:
 //

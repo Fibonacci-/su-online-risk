@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using SUOnlineRisk;
 
 namespace RiskMap
 {
@@ -15,12 +16,14 @@ namespace RiskMap
         public bool wasOkay = false;
         public string newName;
         public Continent newCont;
+        public List<Territory> terrList;
         public List<Territory> newNeighbors = new List<Territory>();
 
         // Constructor
         public DialTerrInfo(List<Continent> conts, List<Territory> terrs)
         {
             InitializeComponent();
+            this.terrList = terrs;
             for (int i = 0; i < conts.Count; i++) {
                 comboBox1.Items.Add(conts.ElementAt(i));
             }
@@ -31,10 +34,10 @@ namespace RiskMap
         }
 
         // Loading neighbors.
-        public void loadNeighbors(List<Territory> temp) {
+        /*public void loadNeighbors(List<Territory> temp) {
             for (int i = 0; i < checkedListBox1.SelectedItems.Count; i++) {
             }
-        }
+        }*/
 
         // Selecting a continent
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -60,8 +63,11 @@ namespace RiskMap
                 this.newName = textBox1.Text;
                 this.newCont = (Continent)comboBox1.SelectedItem;
                 this.wasOkay = true;
-                for (int i = 0; i < temp.Count; i++) {
-                    newNeighbors.Add();
+                for (int i = 0; i < checkedListBox1.Items.Count; i++) {
+                    if (checkedListBox1.GetItemChecked(i))
+                    {
+                        newNeighbors.Add(terrList.ElementAt(i));
+                    }
                 }
                 Close();
             }
@@ -77,6 +83,12 @@ namespace RiskMap
         public void setForEdit(string name, int owner) {
             textBox1.Text = name;
             comboBox1.SelectedIndex = owner;
+        }
+
+        // Checking a box.
+        public void checkBox(int i) {
+            //checkedListBox1.SetSelected(i, true);
+            checkedListBox1.SetItemChecked(i, true);
         }
     }
 }
