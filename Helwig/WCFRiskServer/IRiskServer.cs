@@ -52,6 +52,9 @@ namespace WCFRiskServer
 
         [OperationContract]
         List<string> getPlayerList(int gameID);
+
+        [OperationContract]
+        RiskMessage Request(RiskMessage msg);
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

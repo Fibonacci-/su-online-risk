@@ -101,7 +101,7 @@ namespace WCFRiskServer
         public int newGame(string username, string mapname)
         {
             //do some kind of authentication with userlist
-            Player p = new Player(username,System.Drawing.Color.Red,Map.loadMap(mapname));
+            Player p = new Player(username, System.Drawing.Color.Red, Map.loadMap(mapname));
             Game g = new Game(new Random().Next(1000), p, Map.loadMap(mapname));
 
             sUtilities.Instance.addGame(g);
@@ -123,6 +123,13 @@ namespace WCFRiskServer
                 ls.Add(p.getName());
             }
             return ls;
+        }
+
+        public RiskMessage Request(RiskMessage msg)
+        {
+            Game game = sUtilities.Instance.findPlayer(msg.playerName);
+            game.Update(msg);
+            return game.Next(msg);
         }
     }
 }
