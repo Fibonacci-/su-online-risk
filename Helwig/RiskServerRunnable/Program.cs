@@ -22,6 +22,7 @@ namespace RiskServerRunnable
                     {
                         break;
                     }
+                    Console.WriteLine("Didn't catch that");
                 }
             }
         }
