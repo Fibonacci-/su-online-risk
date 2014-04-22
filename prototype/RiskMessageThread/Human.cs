@@ -25,9 +25,9 @@ namespace SUOnlineRisk
         /*
          * This method defines a generic handling of the message.
          * 1. it copies the message to the message shared between GUI and worker thread.
-         * 2. wait for the user action by setting bWaitForUser bool variable.
+         * 2. wait for the user action while bWaitForUser bool variable is true.
          * 3. return the shared message.
-         * GUI needs to use the state to take proper action. 
+         * GUI needs to take proper action based on the state in the message. 
          * The result of the GUI needs to be stored into the shared message content.
          */ 
         RiskMessage GenericAction(RiskMessage incoming)
@@ -42,7 +42,12 @@ namespace SUOnlineRisk
             {
                 Thread.Sleep(100);
             }
-            return shared.message;
+            RiskMessage outgoing;
+            lock(shared)
+            {
+                outgoing = (RiskMessage) shared.message.Clone();
+            }
+            return outgoing;
         }
 
         override public RiskMessage Initialize(RiskMessage incoming)

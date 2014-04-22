@@ -329,7 +329,10 @@ namespace SURiskGUI
             }
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        /*
+         * This version implements a game playing against two computers.
+         * */
+        private void backgroundWorker1_AgainstComputers(object sender, DoWorkEventArgs e)
         {
             using (RiskMessageThread.ServiceReference1.RiskServerClient proxy = new RiskMessageThread.ServiceReference1.RiskServerClient())
             {
@@ -353,7 +356,7 @@ namespace SURiskGUI
                     }
                     proxy.joinGame(names[i], gameid);
                 }
-                int ret = proxy.startGame(names[0], gameid);
+                int ret = proxy.startGame(names[0], gameid); 
                 int count = 0;
                 bool bRunning = true;
                 while (bRunning)
@@ -392,7 +395,15 @@ namespace SURiskGUI
                                     backgroundWorker1.ReportProgress(0, resp);
                                 }
                                 RiskMessage resp2 = clients[i].Request(resp); //do whatever being told to do
+                                if(resp.state == MainState.Conquer)
+                                {
+                                    Console.Out.WriteLine(resp2.territory_army[0]); 
+                                }
                                 RiskMessage resp3 = proxy.Request(resp2); //update the Map at the Server side
+                            }
+                            else
+                            {
+                                Thread.Sleep(300);
                             }
                         }
                     }
@@ -402,6 +413,80 @@ namespace SURiskGUI
             }
         }
 
+        /*
+         * This version implements a game playing against other remote players.
+         * */
+        private void backgroundWorker1_AgainstRemotePlayers(object sender, DoWorkEventArgs e)
+        {
+            using (RiskMessageThread.ServiceReference1.RiskServerClient proxy = new RiskMessageThread.ServiceReference1.RiskServerClient())
+            {
+                if(MessageBox.Show("Do you want to start a new game?", "Question", MessageBoxButtons.YesNo)== System.Windows.Forms.DialogResult.Yes)
+                {
+                    int gameid = proxy.newGame(humanName, mapfilename);
+                    MessageBox.Show("A new game has been created. The id is " + gameid);
+                }
+                else
+                {
+                    //get the game id.
+                    int gameid = 0;
+                    proxy.joinGame(humanName, gameid);
+                }
+                RiskClient client = new RiskClient();
+                client.player = this.player;
+                //int ret = proxy.startGame(names[0], gameid);
+                bool bRunning = true;
+                while (bRunning)
+                {
+                    //get the fresh map from the Server
+                    {
+                        RiskMessage outgoing = new RiskMessage(MainState.GetMap, client.name);
+                        RiskMessage resp = proxy.Request(outgoing);
+                        resp.state = MainState.Update;
+                        if (client.player is Human)
+                        {
+                            Console.Out.WriteLine("Reporting progress with " + resp.state);
+                            backgroundWorker1.ReportProgress(0, resp);
+                        }
+                        client.Request(resp); //update the Map at the Client side.
+                    }
+                    //check for what to do
+                    {
+                        RiskMessage outgoing = new RiskMessage(MainState.Unknown, client.name);
+                        RiskMessage resp = proxy.Request(outgoing); //Get what to do
+                        if (resp.state == MainState.Over)
+                        {
+                            bRunning = false;
+                            break;
+                        }
+                        if (resp.state != MainState.Idle)
+                        {
+                            Console.Out.WriteLine("\t" + client.name + ": " + resp.state);
+                            if (client.player is Human)
+                            {
+                                Console.Out.WriteLine("Reporting progress with " + resp.state);
+                                shared.bWaitForUser = true; //Let the Human wait for GUI response
+                                backgroundWorker1.ReportProgress(0, resp);
+                            }
+                            RiskMessage resp2 = client.Request(resp); //do whatever being told to do
+                            RiskMessage resp3 = proxy.Request(resp2); //update the Map at the Server side
+                        }
+                        else
+                        {
+                            Thread.Sleep(300);
+                        }
+                    }
+                }
+                RiskMessage msg = new RiskMessage(MainState.Over, player.nickname);
+                this.backgroundWorker1.ReportProgress(100, msg);
+            }
+        }
+
+        /*
+         * Solicit action from the user according to the current state of the game.
+         * Set shared.bWaitForUser to false once the action is done.
+         * If it requires mouse action, do not set shared.bWaitForUser to false yet. 
+         * Wait until the mouse action is done.
+         * */
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             RiskMessage msg = (RiskMessage)e.UserState;
@@ -521,7 +606,12 @@ namespace SURiskGUI
                     {
                         shared.message.territory_army[1].numArmies = numDiceRolled; //this is the minimum amount we have to move.
                         shared.message.territory_army[0].numArmies -= numDiceRolled;
-                        MessageBox.Show("You won! Moving one army from " + shared.message.territory_army[0].territory + " to " + shared.message.territory_army[1].territory);
+
+                        /*
+                         * TK. The program needs to ask how many armies to move. 
+                         */
+
+                        MessageBox.Show("You won! Moving army from " + shared.message.territory_army[0].territory + " to " + shared.message.territory_army[1].territory);
                         shared.bWaitForUser = false;
                     }
                 }
