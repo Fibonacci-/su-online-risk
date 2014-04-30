@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskMessageThread", "RiskMessageThread\RiskMessageThread.csproj", "{767BBC9A-091F-42D5-B7BB-7731D8FF54A7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{15B3E0D2-6217-493A-A690-158C497F5318} = {15B3E0D2-6217-493A-A690-158C497F5318}
@@ -13,6 +11,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFRiskServer", "WCFRiskServer\WCFRiskServer.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerDemo", "ComputerDemo\ComputerDemo.csproj", "{FD115E72-009A-4A32-97E4-5FA8D989D0D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskServerRunnable", "RiskServerRunnable\RiskServerRunnable.csproj", "{866F553A-515E-402C-AB0F-0292C64A94EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +36,10 @@ Global
 		{FD115E72-009A-4A32-97E4-5FA8D989D0D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD115E72-009A-4A32-97E4-5FA8D989D0D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD115E72-009A-4A32-97E4-5FA8D989D0D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{866F553A-515E-402C-AB0F-0292C64A94EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{866F553A-515E-402C-AB0F-0292C64A94EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{866F553A-515E-402C-AB0F-0292C64A94EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{866F553A-515E-402C-AB0F-0292C64A94EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
