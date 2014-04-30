@@ -66,7 +66,7 @@ namespace SUOnlineRisk
         // Getting name.
         public string getName() { return (name); }
 
-        //add a neighbor
+        // Adding a neighbor.
         public bool addNeighbor(Territory t)
         {
             if (neighbors.Contains(t)) return false;
@@ -86,11 +86,14 @@ namespace SUOnlineRisk
             this.owner = owner;
         }
 
-        // To string
+        // To string.
         public override string ToString()
         {
             return name;
         }
+
+        // New name.
+        public void newName(string nue) { this.name = nue; }
 
         // New continent.
         public void newCont(Continent nue) { this.continent = nue; }

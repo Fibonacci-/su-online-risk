@@ -216,7 +216,7 @@ namespace SUOnlineRisk
                     }
                 }
             }
-            else if (client.state == MainState.AdditionalArmies)
+            else if (client.state == MainState.StandBy)
             {
                 //no change to the map
             }
@@ -352,7 +352,12 @@ namespace SUOnlineRisk
             else //active player
             {
                 int idx = clients.FindIndex(x => x == current);
-                if (client.state == MainState.Initialize)
+                if (client.state == MainState.StandBy)
+                {
+                    current.state = MainState.TradeCard;
+                    outgoing = new RiskMessage(MainState.TradeCard, current.name);
+                }
+                else if (client.state == MainState.Initialize)
                 {
                     if (initialized < map.getAllTerritories().Count) //continue initialization
                     {
@@ -592,7 +597,7 @@ namespace SUOnlineRisk
                     {
                         //Move to the next player
                         current = next;
-                        current.state = MainState.TradeCard;
+                        current.state = MainState.StandBy; //TK. by setting it StandBy, it should move to TradeCard next time.
                     }
                     else
                     {

@@ -36,14 +36,7 @@ namespace SUOnlineRisk
         // Getting unit bonus.
         public int getBonus() { return (unitBonus); }
 
-        // Checking to see if the whole continent has been captured by a single player.
-        public bool isCaptured()
-        {
-            // Will work on this later.
-            return (false);
-        }
-
-        //adding a territory
+        // Adding a territory.
         public void addTerritory(Territory t)
         {
             territories.Add(t);
@@ -55,7 +48,7 @@ namespace SUOnlineRisk
         // Checkking for a specific territory.
         public bool isTerritory(Territory czech) { return (territories.Contains(czech)); }
 
-        // To string
+        // To string.
         public override string ToString()
         {
             return name;

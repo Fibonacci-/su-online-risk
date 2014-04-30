@@ -33,6 +33,8 @@ namespace SURiskGUI
         //StateSelector selectorDlg;
         SharedMessage shared; //for synchronizing GUI with background worker.
         int numArmyAvailable; //keep the number of amies yet to be placed in Reinforcement.
+        int numArmyDistribution = 0; //the number of armies yet to be distributed - used only in the distribution phase.
+        int armyToMove; //number of armies movable for fortify
         List<ArmyPlacement> newArmies = new List<ArmyPlacement>();
         int numDiceRolled; //used during conquering as we need to move at least this many armies.
         public StateGUI()
@@ -59,18 +61,22 @@ namespace SURiskGUI
                 ta.BringToFront();
             }
             updateTerritoryLabels();
+        }
 
-            //player.Territories = new List<Territory>();
-            /*stateLabel.Left = 700 * pictureBox1.Width / map.getBitmap().Width - pictureBox1.Width / 30;
-            stateLabel.Top = 600 * pictureBox1.Height / map.getBitmap().Height - pictureBox1.Height / 30;
-            numInitialArmies = 10;
-            stateLabel.Text = "Start";
-            stateLabel.AutoSize = true;
-            this.Controls.Add(stateLabel);
-            stateLabel.BringToFront();*/
-            //state = MainState.Unknown;
-
-            //selectorDlg = new StateSelector();
+        /*
+         * This utility function computes the number of armies to be have at the beginning of the distribution phase.
+         * This function should be called only after the initialization so that all the territories are properly occupied.
+         * */
+        int computeDistributionArmies()
+        {
+            //first count the number of players in the game by looking through distinct owners in the map.
+            HashSet<string> names = new HashSet<string>();
+            foreach (Territory t in map.getAllTerritories())
+            {
+                names.Add(t.getOwner());
+            }
+            int total = ((10 - names.Count) * 5 * names.Count - map.getAllTerritories().Count); //a secret formula.
+            return total / names.Count;
         }
 
         /*
@@ -91,6 +97,11 @@ namespace SURiskGUI
                 ta.Top = wy;
                 ta.Text = t.getOwner() + " " + t.numArmies;
             }
+        }
+
+        void updateNumArmyLabel(int n)
+        {
+            numArmyLabel.Text = "Available armies: " + n;
         }
 
         /*
@@ -115,8 +126,6 @@ namespace SURiskGUI
         {
             if (map == null) return;
             updateTerritoryLabels();
-            //stateLabel.Left = 700 * pictureBox1.Width / map.getBitmap().Width - pictureBox1.Width / 30;
-            //stateLabel.Top = 600 * pictureBox1.Height / map.getBitmap().Height - pictureBox1.Height / 30;
         }
 
         //Depending on the current state of the game, handles what happens when a player clicks a territory
@@ -140,7 +149,7 @@ namespace SURiskGUI
                     if (t.getOwner() == "unoccupied")
                     {
                         if (MessageBox.Show("You selected " + t.getName() + ". Is this correct?",
-                            "Yes", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                            "Confirmation", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                         {
                             lock (shared)
                             {
@@ -163,8 +172,10 @@ namespace SURiskGUI
                     if (t.getOwner() == player.getName())
                     {
                         if (MessageBox.Show("You selected " + t.getName() + ". Is this correct?",
-                            "Yes", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                            "Confirmation", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                         {
+                            numArmyDistribution--;
+                            updateNumArmyLabel(numArmyDistribution);
                             lock (shared)
                             {
                                 shared.message.territory_army.Add(new ArmyPlacement(t.getName(), humanName, 1));
@@ -185,13 +196,14 @@ namespace SURiskGUI
                     if (t.getOwner() == player.getName())
                     {
                         if (MessageBox.Show("You selected " + t.getName() + ". Is this correct?",
-                            "Yes", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                            "Confirmation", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                         {
                             int k = newArmies.Count - numArmyAvailable;
                             newArmies[k].owner = player.getName();
                             newArmies[k].territory = t.getName();
                             newArmies[k].numArmies = 1;
                             numArmyAvailable--;
+                            updateNumArmyLabel(numArmyAvailable);
                             t.numArmies++; //update the local copy
                             updateTerritoryLabels(); //needed to update the local map, as we do not sent a message to the server yet.
                             if (numArmyAvailable <= 0)
@@ -217,6 +229,7 @@ namespace SURiskGUI
             //fortify: state to move armies from one territory to another
             else if (state == MainState.Fortify)
             {
+                //numArmyLabel.Text = "Available armies: ";
                 if (t != null)
                 {
                     if (t.getOwner() == player.getName())
@@ -270,27 +283,19 @@ namespace SURiskGUI
                         MessageBox.Show("You do not own this territory");
                     }
                     else if (MessageBox.Show("You want to move units from " + moveFrom.getName() + " to " + t.getName() + ". Is this correct?",
-                            "Yes", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                            "Confirmation", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                     {
                         moveTo = t;
-                        /*
-                         * TK. I have disabled this for now.
-                        FortifyMessage move = new FortifyMessage(moveFrom.numArmies - 1);
+                        FortifyMessage move = new FortifyMessage(moveFrom.numArmies - 1, 0);
+
                         if (move.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                         {
-                            t.numArmies = t.numArmies + move.getArmiesToMove();
-                            moveFrom.numArmies = moveFrom.numArmies - move.getArmiesToMove();
-                            Label owner = labelMap[t];
-                            owner.Text = t.getName() + " " + t.getOwner() + " " + t.numArmies;
-                            Label owner2 = labelMap[moveFrom];
-                            owner2.Text = moveFrom.getName() + " " + moveFrom.getOwner() + " " + moveFrom.numArmies;
-                            moves++;
-                            bDone = true;
-                        }*/
+                            armyToMove = move.getArmiesToMove();
+                        }
                         lock (shared)
                         {
-                            shared.message.territory_army.Add(new ArmyPlacement(moveTo.getName(), player.nickname, 1));
-                            shared.message.territory_army.Add(new ArmyPlacement(moveFrom.getName(), player.nickname, -1));
+                            shared.message.territory_army.Add(new ArmyPlacement(moveTo.getName(), player.nickname, armyToMove));
+                            shared.message.territory_army.Add(new ArmyPlacement(moveFrom.getName(), player.nickname, -armyToMove));
                             shared.bWaitForUser = false;
                         }
                     }
@@ -313,7 +318,7 @@ namespace SURiskGUI
                     else
                     {
                         if (MessageBox.Show("Do you want to attack from " + attackFrom.getName() + " to " + t.getName() + "?",
-                            "Yes", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                            "Confirmation", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                         {
                             //opens new form for attacking
                             attackTo = t;
@@ -369,12 +374,20 @@ namespace SURiskGUI
                             RiskMessage outgoing = new RiskMessage(MainState.GetMap, clients[i].name);
                             RiskMessage resp = proxy.Request(outgoing);
                             resp.state = MainState.Update;
+                            clients[i].Request(resp); //update the Map at the Client side.
                             if (clients[i].player is Human)
                             {
                                 Console.Out.WriteLine("Reporting progress with " + resp.state);
-                                backgroundWorker1.ReportProgress(0, resp);
+                                lock (shared)
+                                {
+                                    shared.bWaitForUser = true; //Let the Human wait for GUI response
+                                }
+                                backgroundWorker1.ReportProgress(0, resp); //update the GUI map
+                                while (shared.bWaitForUser == true)
+                                {
+                                    Thread.Sleep(10);
+                                }
                             }
-                            clients[i].Request(resp); //update the Map at the Client side.
                         }
                         //check for what to do
                         {
@@ -391,14 +404,22 @@ namespace SURiskGUI
                                 if (clients[i].player is Human)
                                 {
                                     Console.Out.WriteLine("Reporting progress with " + resp.state);
-                                    shared.bWaitForUser = true; //Let the Human wait for GUI response
-                                    backgroundWorker1.ReportProgress(0, resp);
+                                    lock (shared)
+                                    {
+                                        shared.bWaitForUser = true; //Let the Human wait for GUI response
+                                        shared.message = (RiskMessage) resp.Clone(); //shared message lives across threads
+                                    }
+                                    backgroundWorker1.ReportProgress(0, shared.message);
+                                    while(shared.bWaitForUser == true)
+                                    {
+                                        Thread.Sleep(10);
+                                    }
+                                    lock(shared)
+                                    {
+                                        resp = (RiskMessage) shared.message.Clone(); //copy back
+                                    }
                                 }
                                 RiskMessage resp2 = clients[i].Request(resp); //do whatever being told to do
-                                if(resp.state == MainState.Conquer)
-                                {
-                                    Console.Out.WriteLine(resp2.territory_army[0]); 
-                                }
                                 RiskMessage resp3 = proxy.Request(resp2); //update the Map at the Server side
                             }
                             else
@@ -493,6 +514,10 @@ namespace SURiskGUI
             if (msg.state == MainState.Update)
             {
                 updateTerritoryLabels();
+                lock (shared)
+                {
+                    shared.bWaitForUser = false;
+                }
             }
             else
             {
@@ -502,13 +527,37 @@ namespace SURiskGUI
                 }
                 else if (msg.state == MainState.Distribute)
                 {
-                    MessageBox.Show("You are in " + msg.state + " mode. Click your territory to add an army");
+                    if (numArmyDistribution == 0)
+                    {
+                        numArmyDistribution = computeDistributionArmies();
+                    }
+                    MessageBox.Show("You have " + numArmyDistribution + " armies to distribute. Click your territory to add an army");
+                    updateNumArmyLabel(numArmyDistribution);
                 }
                 else if (msg.state == MainState.TradeCard)
                 {
-                    MessageBox.Show("You are in " + msg.state + " mode. This mode has not been implemented");
+                    List<ReinforcementCard> cards = null;
+                    TradeCardGUI trade = new TradeCardGUI(player.getCards());
+                    if (trade.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        cards = trade.getReinforcementCards();
+                        if (cards.Count == 3) //since TradeCardGUI does not perform sufficient error check, I have to do it here...
+                        {
+                            player.removeCard(cards[0]);
+                            player.removeCard(cards[1]);
+                            player.removeCard(cards[2]);
+                        }
+                    }
                     lock (shared)
                     {
+                        if (cards != null && cards.Count == 3) //cards have been selected.
+                        {
+                            shared.message.cardIds = new int[3];
+                            for (int i = 0; i < 3; ++i)
+                            {
+                                shared.message.cardIds[i] = cards[i].CardId;
+                            }
+                        }
                         shared.bWaitForUser = false;
                     }
                 }
@@ -524,7 +573,7 @@ namespace SURiskGUI
                     }
                     numArmyAvailable = newArmies.Count();
                     MessageBox.Show("You are in " + msg.state + " mode.\nYou collected " + numArmyAvailable + " armies.");
-                    this.numArmyLabel.Text = "Available armies: " + numArmyAvailable;
+                    updateNumArmyLabel(numArmyAvailable);
                     lock (shared)
                     {
                         shared.bWaitForUser = false;
@@ -604,12 +653,18 @@ namespace SURiskGUI
                     //for now, we only move 1 army.
                     lock (shared)
                     {
-                        shared.message.territory_army[1].numArmies = numDiceRolled; //this is the minimum amount we have to move.
-                        shared.message.territory_army[0].numArmies -= numDiceRolled;
-
-                        /*
-                         * TK. The program needs to ask how many armies to move. 
-                         */
+                        armyToMove = numDiceRolled;
+                        if (MessageBox.Show("Would you like to move more than the minimum amount of armies?",
+                               "Confirmation", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            FortifyMessage move = new FortifyMessage(attackFrom.numArmies - 1, numDiceRolled);
+                            if (move.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                            {
+                                armyToMove = move.getArmiesToMove();
+                            }
+                        }
+                        shared.message.territory_army[1].numArmies = armyToMove; //this is the minimum amount we have to move.
+                        shared.message.territory_army[0].numArmies -= armyToMove;
 
                         MessageBox.Show("You won! Moving army from " + shared.message.territory_army[0].territory + " to " + shared.message.territory_army[1].territory);
                         shared.bWaitForUser = false;
@@ -617,7 +672,17 @@ namespace SURiskGUI
                 }
                 else if (msg.state == MainState.ReinforcementCard)
                 {
-                    MessageBox.Show("You are in " + msg.state + " mode. This mode has not been implemented");
+                    ReinforcementCard card = null;
+                    if(msg.card.Count > 0)
+                    {
+                        card = msg.card[0];
+                        MessageBox.Show("You have received a reinforcement card: " + card.TerritoryName + ", " + card.UnitType);
+                        player.addCard(card);
+                    }
+                    else
+                    {
+                        MessageBox.Show("You did not get any reinforcement card. Why? Darn it.");
+                    }
                     lock (shared)
                     {
                         shared.bWaitForUser = false;

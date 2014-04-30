@@ -96,6 +96,12 @@
     <Compile Include="StateSelector.Designer.cs">
       <DependentUpon>StateSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="TradeCardGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TradeCardGUI.Designer.cs">
+      <DependentUpon>TradeCardGUI.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DiceRoller.resx">
       <DependentUpon>DiceRoller.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +124,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="StateGUI.resx">
       <DependentUpon>StateGUI.cs</DependentUpon>
@@ -125,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StateSelector.resx">
       <DependentUpon>StateSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TradeCardGUI.resx">
+      <DependentUpon>TradeCardGUI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\SUOnlineRisk.Map.datasource" />
     <None Include="Properties\DataSources\SUOnlineRisk.RiskMessage.datasource" />
@@ -171,6 +181,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Resources\artilleryBlue.png" />
+    <None Include="Resources\cavalryBlue.png" />
+    <None Include="Resources\infantryBlue.png" />
     <Content Include="SimpleRiskMap.png" />
   </ItemGroup>
   <ItemGroup>

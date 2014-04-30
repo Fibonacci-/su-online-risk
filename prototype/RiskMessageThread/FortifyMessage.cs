@@ -14,20 +14,17 @@ namespace SURiskGUI
         int k;
         int max;
         int armiesToMove = 0;
-        public FortifyMessage(int max)
+        public FortifyMessage(int max, int min)
         {
             InitializeComponent();
             this.max = max;
             numericUpDown1.Maximum = max;
+            numericUpDown1.Minimum = min;
         }
 
         private void FortifyMessage_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)

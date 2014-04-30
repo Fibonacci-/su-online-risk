@@ -66,7 +66,7 @@ namespace SUOnlineRisk
         // Getting name.
         public string getName() { return (name); }
 
-        //add a neighbor
+        // Adding a neighbor.
         public bool addNeighbor(Territory t)
         {
             if (neighbors.Contains(t)) return false;
@@ -86,7 +86,7 @@ namespace SUOnlineRisk
             this.owner = owner;
         }
 
-        // To string
+        // To string.
         public override string ToString()
         {
             return name;
@@ -102,7 +102,6 @@ namespace SUOnlineRisk
         public void neighClear() { neighbors.Clear(); }
 
         // Some new neighbors just moved next door, Billy. They have a boy just about your age.
-        //public void neighNew(Territory nue) { neighbors.Add(nue); }
         public void neighNew(List<Territory> nue)
         {
             neighClear();

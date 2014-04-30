@@ -14,6 +14,7 @@ namespace SUOnlineRisk
         // Variables.
         protected List<Continent> continents;
         protected List<Territory> territories;
+        protected List<ReinforcementCard> cards;
         protected string fileName;
         protected Bitmap bitmap;
 
@@ -41,6 +42,7 @@ namespace SUOnlineRisk
             }
         }
 
+        // Other constructor?
         public Map(Bitmap bitmap)
         {
             this.fileName = "Not given";
@@ -49,13 +51,13 @@ namespace SUOnlineRisk
             this.bitmap = (Bitmap) bitmap.Clone();
         }
 
-        //add a continent
+        // Adding a continent.
         public void addContinent(Continent c)
         {
             continents.Add(c);
         }
 
-        //add a territory
+        // Adding a territory.
         public bool addTerritory(Territory t, Continent c)
         {
             if(continents.Exists(x => x.getName()==c.getName()))
@@ -69,6 +71,11 @@ namespace SUOnlineRisk
             {
                 return false;
             }
+        }
+
+        // Adding a reinforcement card.
+        public void addCard(ReinforcementCard temp) {
+            cards.Add(temp);
         }
 
         /*
@@ -87,10 +94,10 @@ namespace SUOnlineRisk
             }
         }
 
-        // Returning a specific continent.
+        // Returning a specific continent (given a position in the list).
         public Continent getOneContinent(int i) { return continents.ElementAt(i); }
 
-        // Returning a specific territory.
+        // Returning a specific territory (given a position in the list).
         public Territory getOneTerritory(int i) { return territories.ElementAt(i); }
 
         // Returning all continents.
@@ -99,8 +106,17 @@ namespace SUOnlineRisk
         // Returning all territories.
         public List<Territory> getAllTerritories() { return territories; }
 
-        // Retrive the bitmap
+        // Returning the bitmap.
         public Bitmap getBitmap() { return bitmap; }
+
+        // Setting the bitmap.
+        public void setBitmap(Bitmap temp) { this.bitmap = temp; }
+
+        // Returning all reinforcement cards.
+        public List<ReinforcementCard> getAllCards(int i) { return cards; }
+
+        // Returning a specific reinforcement card (given a position in the list).
+        public ReinforcementCard getCard(int i) { return cards.ElementAt(i); }
 
         // Saving the map.
         public void saveMap(string path)
@@ -153,7 +169,8 @@ namespace SUOnlineRisk
             }
             catch(System.Runtime.Serialization.SerializationException)
             {
-                Console.Error.WriteLine("Serialization failed. Could not save the map");
+                //Console.Error.WriteLine("Serialization failed. Could not save the map");
+                throw;         
             }
             finally
             {

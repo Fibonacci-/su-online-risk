@@ -13,7 +13,7 @@ namespace SUOnlineRisk
         Distribute,
         TradeCard,
         NewArmies,
-        AdditionalArmies,
+        StandBy,
         Reinforce,
         Attack,
         Roll,

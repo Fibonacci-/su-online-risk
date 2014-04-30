@@ -152,7 +152,7 @@ namespace RiskMap
             else {
                 
                 int tempX = MousePosition.X - pictureBox1.Left;
-                int tempY = MousePosition.Y - pictureBox1.Top - 22;
+                int tempY = MousePosition.Y - pictureBox1.Top - this.menuStrip1.Location.Y;
                 //int tempX = MousePosition.X * mapBitmap.Width / pictureBox1.Width;
                 //int tempY = MousePosition.Y * mapBitmap.Height / pictureBox1.Height;
                 MessageBox.Show("You clicked " + tempX + ", " + tempY);

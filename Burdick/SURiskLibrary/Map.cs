@@ -25,16 +25,9 @@ namespace SUOnlineRisk
             this.continents = new List<Continent>();
             this.territories = new List<Territory>();
             this.cards = new List<ReinforcementCard>();
-            /*try
-            {
-                bitmap = new Bitmap(this.fileName);
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                Console.Error.WriteLine("Map: File " + this.fileName + " does not exists.");
-            }*/
         }
 
+        // Other constructor?
         public Map(Bitmap bitmap)
         {
             this.fileName = "Not given";
@@ -43,13 +36,13 @@ namespace SUOnlineRisk
             this.bitmap = (Bitmap) bitmap.Clone();
         }
 
-        //add a continent
+        // Adding a continent.
         public void addContinent(Continent c)
         {
             continents.Add(c);
         }
 
-        //add a territory
+        // Adding a territory.
         public bool addTerritory(Territory t, Continent c)
         {
             if(continents.Exists(x => x.getName()==c.getName()))
@@ -65,15 +58,12 @@ namespace SUOnlineRisk
             }
         }
 
-        // Adding a card.
+        // Adding a reinforcement card.
         public void addCard(ReinforcementCard temp) {
             cards.Add(temp);
         }
 
-        /*
-         * find a territory by its name.
-         * return null if there is no such territory.
-         */
+        // Returning a specific territory (given a name).
         public Territory getTerritory(string name)
         {
             if(territories.Exists(x=> x.getName()==name))
@@ -86,10 +76,10 @@ namespace SUOnlineRisk
             }
         }
 
-        // Returning a specific continent.
+        // Returning a specific continent (given a position in the list).
         public Continent getOneContinent(int i) { return continents.ElementAt(i); }
 
-        // Returning a specific territory.
+        // Returning a specific territory (given a position in the list).
         public Territory getOneTerritory(int i) { return territories.ElementAt(i); }
 
         // Returning all continents.
@@ -98,13 +88,16 @@ namespace SUOnlineRisk
         // Returning all territories.
         public List<Territory> getAllTerritories() { return territories; }
 
-        // Retrive the bitmap
+        // Returning the bitmap.
         public Bitmap getBitmap() { return bitmap; }
 
-        // Retrieving list of reinforcement cards.
+        // Setting the bitmap.
+        public void setBitmap(Bitmap temp) { this.bitmap = temp; }
+
+        // Returning all reinforcement cards.
         public List<ReinforcementCard> getAllCards(int i) { return cards; }
 
-        // Retrieving a reinforcement card.
+        // Returning a specific reinforcement card (given a position in the list).
         public ReinforcementCard getCard(int i) { return cards.ElementAt(i); }
 
         // Saving the map.
@@ -134,7 +127,7 @@ namespace SUOnlineRisk
             }
         }
 
-        // Loading the necessary files and deciphering the mapcode.
+        // Loading the map.
         public static Map loadMap(string path)
         {
             Stream stream = null;
@@ -158,7 +151,6 @@ namespace SUOnlineRisk
             }
             catch(System.Runtime.Serialization.SerializationException)
             {
-                //Console.Error.WriteLine("Serialization failed. Could not save the map");
                 throw;         
             }
             finally
