@@ -460,8 +460,8 @@ namespace SUOnlineRisk
                 }
                 else if (client.state == MainState.Distribute)
                 {
-                    if (distributed < ((10 - clients.Count) * 5 * clients.Count - initialized)) // continue distribution
-                    //if (distributed < (1 * clients.Count)) // TK - for testing purpose
+                    //if (distributed < ((10 - clients.Count) * 5 * clients.Count - initialized)) // continue distribution
+                    if (distributed < (1 * clients.Count)) // TK - for testing purpose
                     {
                         outgoing = new RiskMessage(MainState.Distribute, current.name);
                         //current = clients[(idx + 1) % clients.Count]; // go to the next player
