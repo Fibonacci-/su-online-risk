@@ -28,5 +28,15 @@ namespace SUOnlineRisk
             else if (type == ReinforcemenCardUnit.Artillery) return 10;
             else return 0;
         }
+
+        public override bool Equals(object obj)
+        {
+            ReinforcementCard card = obj as ReinforcementCard;
+            if (card == null) return false;
+            if (this.CardId != card.CardId) return false;
+            else if (this.TerritoryName != card.TerritoryName) return false;
+            else if (this.UnitType != card.UnitType) return false;
+            else return true;
+        }
     }
 }

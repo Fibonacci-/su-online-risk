@@ -283,7 +283,7 @@
   </wsdl:binding>
   <wsdl:service name="RiskServer">
     <wsdl:port name="BasicHttpBinding_IRiskServer" binding="tns:BasicHttpBinding_IRiskServer">
-      <soap:address location="http://localhost:8733/RiskServer/" />
+      <soap:address location="http://192.168.1.106:8733/RiskServer/" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

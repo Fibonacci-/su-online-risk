@@ -27,6 +27,7 @@ namespace SUOnlineRisk
         Update,
         Over,
         Unknown,
-        Idle
+        Idle,
+        Acknowledge
     };
 }

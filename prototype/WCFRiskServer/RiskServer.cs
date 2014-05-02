@@ -7,6 +7,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using Database_Controller;
 using SUOnlineRisk;
+using System.IO;
 
 namespace WCFRiskServer
 {
@@ -118,6 +119,14 @@ namespace WCFRiskServer
             Player p = null;
             Game g = null;
             Map map;
+            if(File.Exists(mapname) == false)
+            {
+                //search it in likely places
+                if(File.Exists("C:\\"+mapname))
+                {
+                    mapname = "C:\\" + mapname;
+                }
+            }
             try
             {
                 map = Map.loadMap(mapname);

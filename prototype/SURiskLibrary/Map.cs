@@ -12,11 +12,11 @@ namespace SUOnlineRisk
     public class Map
     {
         // Variables.
-        protected List<Continent> continents;
-        protected List<Territory> territories;
-        protected List<ReinforcementCard> cards;
-        protected string fileName;
-        protected Bitmap bitmap;
+        public List<Continent> continents;
+        public List<Territory> territories;
+        public List<ReinforcementCard> cards;
+        public string fileName;
+        public Bitmap bitmap;
 
         // Constructor.
         public Map(string file)
@@ -113,7 +113,7 @@ namespace SUOnlineRisk
         public void setBitmap(Bitmap temp) { this.bitmap = temp; }
 
         // Returning all reinforcement cards.
-        public List<ReinforcementCard> getAllCards(int i) { return cards; }
+        public List<ReinforcementCard> getAllCards() { return cards; }
 
         // Returning a specific reinforcement card (given a position in the list).
         public ReinforcementCard getCard(int i) { return cards.ElementAt(i); }

@@ -49,7 +49,7 @@ namespace SURiskGUI
             }
             map = Map.loadMap(mapfilename);
             //player = new Player("Gary", Color.Red, map);
-            player = new Human(humanName, Color.Red, map, shared, backgroundWorker1);
+            player = new Human(humanName, Color.Red, map);
             this.pictureBox1.Image = map.getBitmap();
 
             foreach (Territory t in map.getAllTerritories())
@@ -448,8 +448,9 @@ namespace SURiskGUI
                 }
                 else
                 {
-                    //get the game id.
                     int gameid = 0;
+                    GameIDInput gameInput = new GameIDInput();
+                    if(gameInput.
                     proxy.joinGame(humanName, gameid);
                 }
                 RiskClient client = new RiskClient();

@@ -33,6 +33,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.stateLabel = new System.Windows.Forms.Label();
             this.numArmyLabel = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
             this.pictureBox1.Location = new System.Drawing.Point(16, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(755, 452);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -57,7 +58,7 @@
             // backgroundWorker1
             // 
             this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_AgainstComputers);
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_AgainstRemotePlayers);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
             // stateLabel
@@ -80,7 +81,13 @@
             this.numArmyLabel.TabIndex = 2;
             this.numArmyLabel.Text = "Available armies";
             // 
-            // StateGUI
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "map";
+            this.openFileDialog1.FileName = "*.map";
+            this.openFileDialog1.Title = "Map selection";
+            // 
+            // MainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -88,8 +95,8 @@
             this.Controls.Add(this.numArmyLabel);
             this.Controls.Add(this.stateLabel);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "StateGUI";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "MainGUI";
             this.Text = "Form1";
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -104,6 +111,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label stateLabel;
         private System.Windows.Forms.Label numArmyLabel;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

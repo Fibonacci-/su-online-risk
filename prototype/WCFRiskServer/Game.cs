@@ -45,6 +45,9 @@ namespace WCFRiskServer
                 Color c = Color.Red;
                 Player p = new Player(player.getName(), c, map);
                 playerList.Add(p);
+                RiskClient cl = new RiskClient();
+                cl.player = p;
+                sequencer.addClient(cl);
                 
                 return true;
             }
@@ -71,14 +74,16 @@ namespace WCFRiskServer
         public int startGame()
         {
             //reset game ID and start game in database
-            List<string> nameList = new List<string>();
+
+            //TK - this part has to be done when the player is added to the game.
+            /*List<string> nameList = new List<string>();
             foreach (Player p in playerList)
             {
                 nameList.Add(p.getName());
                 RiskClient c = new RiskClient();
                 c.player = p;
                 sequencer.addClient(c);
-            }
+            }*/
 #if DB_ENABLED
             DBID = sUtilities.Instance.createGame(nameList.ToArray<string>(), playerList[0].getName());
 #endif

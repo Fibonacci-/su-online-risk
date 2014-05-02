@@ -26,5 +26,14 @@ namespace SUOnlineRisk
         {
             return this.MemberwiseClone();
         }
+        public override bool Equals(object obj)
+        {
+            ArmyPlacement p = obj as ArmyPlacement;
+            if (p == null) return false;
+            if (this.numArmies != p.numArmies) return false;
+            else if (this.owner != p.owner) return false;
+            else if (this.territory != p.territory) return false;
+            else return true;
+        }
     }
 }

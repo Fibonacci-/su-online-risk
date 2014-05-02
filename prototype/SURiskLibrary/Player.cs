@@ -245,5 +245,13 @@ namespace SUOnlineRisk
             //outgoing.territory_army; //store the redistribution in this list.
             return outgoing;
         }
+        virtual public RiskMessage AttackDone(RiskMessage message)
+        {
+            //determine how you want to re-distribute the armies.
+            //store the information in the message. Use negative if armies are taken away and positive if they are added.
+            RiskMessage outgoing = new RiskMessage(MainState.AttackDone, nickname);
+            //outgoing.territory_army; //store the redistribution in this list.
+            return outgoing;
+        }
     }
 }

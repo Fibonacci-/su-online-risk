@@ -17,7 +17,7 @@ namespace RiskMessageThread
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SURiskGUI.StateGUI());
+            Application.Run(new SURiskGUI.MainGUI());
         }
     }
 }

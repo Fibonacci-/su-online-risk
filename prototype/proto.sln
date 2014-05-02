@@ -5,11 +5,16 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SURiskLibrary", "SURiskLibrary\SURiskLibrary.csproj", "{CD3BF920-B0D2-4744-ADB1-3E8B18E9ECE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFRiskServer", "WCFRiskServer\WCFRiskServer.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerDemo", "ComputerDemo\ComputerDemo.csproj", "{FD115E72-009A-4A32-97E4-5FA8D989D0D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskMessageThread", "RiskMessageThread\RiskMessageThread.csproj", "{767BBC9A-091F-42D5-B7BB-7731D8FF54A7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{15B3E0D2-6217-493A-A690-158C497F5318} = {15B3E0D2-6217-493A-A690-158C497F5318}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFRiskServer", "WCFRiskServer\WCFRiskServer.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerDemo3", "ServerDemo3\ServerDemo3.csproj", "{A62CB9E3-80DB-4CCF-9CE8-98378BF93944}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +26,6 @@ Global
 		{CD3BF920-B0D2-4744-ADB1-3E8B18E9ECE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD3BF920-B0D2-4744-ADB1-3E8B18E9ECE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD3BF920-B0D2-4744-ADB1-3E8B18E9ECE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15B3E0D2-6217-493A-A690-158C497F5318}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15B3E0D2-6217-493A-A690-158C497F5318}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD115E72-009A-4A32-97E4-5FA8D989D0D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD115E72-009A-4A32-97E4-5FA8D989D0D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD115E72-009A-4A32-97E4-5FA8D989D0D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +34,14 @@ Global
 		{767BBC9A-091F-42D5-B7BB-7731D8FF54A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{767BBC9A-091F-42D5-B7BB-7731D8FF54A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{767BBC9A-091F-42D5-B7BB-7731D8FF54A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B3E0D2-6217-493A-A690-158C497F5318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B3E0D2-6217-493A-A690-158C497F5318}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A62CB9E3-80DB-4CCF-9CE8-98378BF93944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A62CB9E3-80DB-4CCF-9CE8-98378BF93944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A62CB9E3-80DB-4CCF-9CE8-98378BF93944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A62CB9E3-80DB-4CCF-9CE8-98378BF93944}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

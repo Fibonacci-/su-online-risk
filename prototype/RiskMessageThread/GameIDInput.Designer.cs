@@ -1,4 +1,4 @@
-﻿namespace RiskMessageThread
+﻿namespace SURiskGUI
 {
     partial class GameIDInput
     {

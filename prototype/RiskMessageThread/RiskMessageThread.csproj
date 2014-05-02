@@ -33,9 +33,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -84,11 +86,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SharedMessage.cs" />
-    <Compile Include="StateGUI.cs">
+    <Compile Include="MainGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StateGUI.designer.cs">
-      <DependentUpon>StateGUI.cs</DependentUpon>
+    <Compile Include="MainGUI.designer.cs">
+      <DependentUpon>MainGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="StateSelector.cs">
       <SubType>Form</SubType>
@@ -126,8 +128,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="StateGUI.resx">
-      <DependentUpon>StateGUI.cs</DependentUpon>
+    <EmbeddedResource Include="MainGUI.resx">
+      <DependentUpon>MainGUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="StateSelector.resx">
@@ -151,6 +153,9 @@
     <None Include="Service References\ServiceReference1\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceReference1\RiskMessageThread.ServiceReference1.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ServiceReference1\service.wsdl" />
     <None Include="Service References\ServiceReference1\service.xsd">
       <SubType>Designer</SubType>
@@ -169,31 +174,29 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\artilleryBlue.png" />
+    <None Include="Resources\cavalryBlue.png" />
+    <None Include="Resources\infantryBlue.png" />
     <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference1\configuration.svcinfo" />
     <None Include="Service References\ServiceReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Resources\artilleryBlue.png" />
-    <None Include="Resources\cavalryBlue.png" />
-    <None Include="Resources\infantryBlue.png" />
     <Content Include="SimpleRiskMap.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SURiskLibrary\SURiskLibrary.csproj">
       <Project>{cd3bf920-b0d2-4744-adb1-3e8b18e9ece8}</Project>
       <Name>SURiskLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WCFRiskServer\WCFRiskServer.csproj">
-      <Project>{15b3e0d2-6217-493a-a690-158c497f5318}</Project>
-      <Name>WCFRiskServer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
