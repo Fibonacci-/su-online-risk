@@ -33,7 +33,6 @@
             this.multiplayerButton = new System.Windows.Forms.Button();
             this.profileButton = new System.Windows.Forms.Button();
             this.creditsButton = new System.Windows.Forms.Button();
-            this.optionsButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -46,11 +45,11 @@
             this.campaignButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.campaignButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.campaignButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.campaignButton.Font = new System.Drawing.Font("Calibri", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.campaignButton.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.campaignButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.campaignButton.Location = new System.Drawing.Point(50, 400);
+            this.campaignButton.Location = new System.Drawing.Point(50, 386);
             this.campaignButton.Name = "campaignButton";
-            this.campaignButton.Size = new System.Drawing.Size(275, 50);
+            this.campaignButton.Size = new System.Drawing.Size(275, 60);
             this.campaignButton.TabIndex = 1;
             this.campaignButton.Text = "Campaign";
             this.campaignButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -65,11 +64,11 @@
             this.multiplayerButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.multiplayerButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.multiplayerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.multiplayerButton.Font = new System.Drawing.Font("Calibri", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.multiplayerButton.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.multiplayerButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.multiplayerButton.Location = new System.Drawing.Point(50, 450);
+            this.multiplayerButton.Location = new System.Drawing.Point(50, 452);
             this.multiplayerButton.Name = "multiplayerButton";
-            this.multiplayerButton.Size = new System.Drawing.Size(275, 51);
+            this.multiplayerButton.Size = new System.Drawing.Size(275, 60);
             this.multiplayerButton.TabIndex = 2;
             this.multiplayerButton.Text = "Multiplayer";
             this.multiplayerButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -84,11 +83,11 @@
             this.profileButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.profileButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.profileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.profileButton.Font = new System.Drawing.Font("Calibri", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.profileButton.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.profileButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.profileButton.Location = new System.Drawing.Point(50, 500);
+            this.profileButton.Location = new System.Drawing.Point(50, 518);
             this.profileButton.Name = "profileButton";
-            this.profileButton.Size = new System.Drawing.Size(275, 59);
+            this.profileButton.Size = new System.Drawing.Size(275, 60);
             this.profileButton.TabIndex = 3;
             this.profileButton.Text = "Profiles";
             this.profileButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -103,35 +102,16 @@
             this.creditsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.creditsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.creditsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.creditsButton.Font = new System.Drawing.Font("Calibri", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.creditsButton.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.creditsButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.creditsButton.Location = new System.Drawing.Point(50, 600);
+            this.creditsButton.Location = new System.Drawing.Point(50, 584);
             this.creditsButton.Name = "creditsButton";
-            this.creditsButton.Size = new System.Drawing.Size(275, 51);
+            this.creditsButton.Size = new System.Drawing.Size(275, 60);
             this.creditsButton.TabIndex = 5;
             this.creditsButton.Text = "Credits";
             this.creditsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.creditsButton.UseVisualStyleBackColor = false;
             this.creditsButton.Click += new System.EventHandler(this.credits);
-            // 
-            // optionsButton
-            // 
-            this.optionsButton.AutoSize = true;
-            this.optionsButton.BackColor = System.Drawing.Color.Transparent;
-            this.optionsButton.FlatAppearance.BorderSize = 0;
-            this.optionsButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.optionsButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.optionsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.optionsButton.Font = new System.Drawing.Font("Calibri", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.optionsButton.ForeColor = System.Drawing.Color.DarkGray;
-            this.optionsButton.Location = new System.Drawing.Point(50, 550);
-            this.optionsButton.Name = "optionsButton";
-            this.optionsButton.Size = new System.Drawing.Size(275, 51);
-            this.optionsButton.TabIndex = 4;
-            this.optionsButton.Text = "Options";
-            this.optionsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.optionsButton.UseVisualStyleBackColor = false;
-            this.optionsButton.Click += new System.EventHandler(this.options);
             // 
             // exitButton
             // 
@@ -141,11 +121,11 @@
             this.exitButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.exitButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitButton.Font = new System.Drawing.Font("Calibri", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitButton.Font = new System.Drawing.Font("Calibri", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitButton.ForeColor = System.Drawing.Color.DarkGray;
             this.exitButton.Location = new System.Drawing.Point(50, 650);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(275, 51);
+            this.exitButton.Size = new System.Drawing.Size(275, 60);
             this.exitButton.TabIndex = 6;
             this.exitButton.Text = "Exit";
             this.exitButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -170,10 +150,9 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1366, 770);
+            this.ClientSize = new System.Drawing.Size(1362, 741);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.exitButton);
-            this.Controls.Add(this.optionsButton);
             this.Controls.Add(this.creditsButton);
             this.Controls.Add(this.profileButton);
             this.Controls.Add(this.multiplayerButton);
@@ -198,7 +177,6 @@
         private System.Windows.Forms.Button multiplayerButton;
         private System.Windows.Forms.Button profileButton;
         private System.Windows.Forms.Button creditsButton;
-        private System.Windows.Forms.Button optionsButton;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.PictureBox pictureBox1;
 

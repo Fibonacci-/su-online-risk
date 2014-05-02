@@ -36,13 +36,6 @@ namespace RiskGUI
             createProfile.Show();
         }
 
-        private void options(object sender, EventArgs e)
-        {
-            Options options = new Options();
-            options.Show();
-
-        }
-
         private void credits(object sender, EventArgs e)
         {
             Credits credits = new Credits();

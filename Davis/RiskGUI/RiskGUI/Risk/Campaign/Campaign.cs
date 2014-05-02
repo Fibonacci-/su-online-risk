@@ -25,8 +25,8 @@ namespace RiskGUI
         private void nextButton(object sender, EventArgs e)
         {
             this.Close();
-            Map map = new Map();
-            map.Show();
+            CampaignMap campaignMap = new CampaignMap();
+            campaignMap.Show();
             
         }
     }

@@ -397,10 +397,10 @@ namespace SUOnlineRisk
                 Console.Out.WriteLine("Player " + incoming.playerName + " does not exist.");
                 throw new NullReferenceException("Player " + incoming.playerName + " does not exist.");
             }
-            if (client.state != MainState.Idle)
+            /*if (client.state != MainState.Idle)
             {
                 Console.Out.WriteLine("Next(): Player " + incoming.playerName + " enters with " + client.state);
-            }
+            }*/
             RiskMessage outgoing = null;
             if (gameOver(map))
             {
@@ -409,10 +409,6 @@ namespace SUOnlineRisk
             else if (incoming.playerName != current.name)
             {
                 //if this message is from inactive player, and this player is under attack.
-                if(incoming.playerName == "han")
-                {
-                    Console.Out.WriteLine("han has arrived.");
-                }
                 if (defender != null && incoming.playerName == defender.name && current.state == MainState.Roll && defenderRoll == null)
                 {
                     defender.state = MainState.Roll;
@@ -464,8 +460,8 @@ namespace SUOnlineRisk
                 }
                 else if (client.state == MainState.Distribute)
                 {
-                    //if (distributed < ((10 - clients.Count) * 5 * clients.Count - initialized)) // continue distribution
-                    if (distributed < (1 * clients.Count)) // TK - for testing purpose
+                    if (distributed < ((10 - clients.Count) * 5 * clients.Count - initialized)) // continue distribution
+                    //if (distributed < (1 * clients.Count)) // TK - for testing purpose
                     {
                         outgoing = new RiskMessage(MainState.Distribute, current.name);
                         //current = clients[(idx + 1) % clients.Count]; // go to the next player

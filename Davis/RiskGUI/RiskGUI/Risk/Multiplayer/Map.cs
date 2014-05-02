@@ -19,14 +19,16 @@ namespace RiskGUI
 
         private void backButton(object sender, EventArgs e)
         {
+            Multiplayer multiplayer = new Multiplayer();
+            multiplayer.Show();
             this.Close();
         }
 
         private void playButton(object sender, EventArgs e)
         {
-            this.Close();
             Lobby lobby = new Lobby();
             lobby.Show();
+            this.Close();
         }
     }
 }

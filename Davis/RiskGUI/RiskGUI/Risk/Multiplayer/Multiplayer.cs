@@ -24,15 +24,21 @@ namespace RiskGUI
 
         private void playButton(object sender, EventArgs e)
         {
-            this.Close();
             Lobby lobby = new Lobby();
             lobby.Show();
+            this.Close();
         }
 
         private void mapButton(object sender, EventArgs e)
         {
             Map map = new Map();
             map.Show();
+            this.Close();
+        }
+
+        private void Server_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

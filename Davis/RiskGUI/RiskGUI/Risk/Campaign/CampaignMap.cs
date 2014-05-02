@@ -10,16 +10,24 @@ using System.Windows.Forms;
 
 namespace RiskGUI
 {
-    public partial class Options : Form
+    public partial class CampaignMap : Form
     {
-        public Options()
+        public CampaignMap()
         {
             InitializeComponent();
         }
 
         private void backButton(object sender, EventArgs e)
         {
+            Campaign campaign = new Campaign();
+            campaign.Show();
             this.Close();
+        }
+
+        private void playButton(object sender, EventArgs e)
+        {
+            Game game = new Game();
+            game.Show();
         }
     }
 }

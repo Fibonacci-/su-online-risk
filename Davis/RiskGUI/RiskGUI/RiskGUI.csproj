@@ -47,6 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,6 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Risk\Campaign\CampaignMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Risk\Campaign\CampaignMap.Designer.cs">
+      <DependentUpon>CampaignMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Risk\Multiplayer\Lobby.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,12 +77,6 @@
     </Compile>
     <Compile Include="Risk\Game\Game.Designer.cs">
       <DependentUpon>Game.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Risk\Options\Options.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Risk\Options\Options.Designer.cs">
-      <DependentUpon>Options.cs</DependentUpon>
     </Compile>
     <Compile Include="Risk\Credits\Credits.cs">
       <SubType>Form</SubType>
@@ -115,14 +116,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Risk\Campaign\CampaignMap.resx">
+      <DependentUpon>CampaignMap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Risk\Game\Game.resx">
       <DependentUpon>Game.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Risk\Multiplayer\Lobby.resx">
       <DependentUpon>Lobby.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Risk\Options\Options.resx">
-      <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Risk\Credits\Credits.resx">
       <DependentUpon>Credits.cs</DependentUpon>

@@ -172,8 +172,8 @@ namespace SURiskGUI
             {
                 names.Add(t.getOwner());
             }
-            //int total = ((10 - names.Count) * 5 * names.Count - map.getAllTerritories().Count); //a secret formula.
-            int total = 1 * names.Count; //TK - for testing purpose.
+            int total = ((10 - names.Count) * 5 * names.Count - map.getAllTerritories().Count); //a secret formula.
+            //int total = 1 * names.Count; //TK - for testing purpose.
             return total / names.Count;
         }
 

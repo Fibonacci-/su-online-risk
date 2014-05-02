@@ -48,6 +48,7 @@
             this.Server.Name = "Server";
             this.Server.Size = new System.Drawing.Size(711, 364);
             this.Server.TabIndex = 0;
+            this.Server.SelectedIndexChanged += new System.EventHandler(this.Server_SelectedIndexChanged);
             // 
             // hScrollBar1
             // 

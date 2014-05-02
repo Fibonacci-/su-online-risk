@@ -20,6 +20,8 @@ namespace RiskGUI
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+            Multiplayer multiplayer = new Multiplayer();
+            multiplayer.Show();
         }
     }
 }
