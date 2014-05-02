@@ -16,7 +16,7 @@
       <xs:enumeration value="Distribute" />
       <xs:enumeration value="TradeCard" />
       <xs:enumeration value="NewArmies" />
-      <xs:enumeration value="AdditionalArmies" />
+      <xs:enumeration value="StandBy" />
       <xs:enumeration value="Reinforce" />
       <xs:enumeration value="Attack" />
       <xs:enumeration value="Roll" />
@@ -31,18 +31,43 @@
       <xs:enumeration value="Over" />
       <xs:enumeration value="Unknown" />
       <xs:enumeration value="Idle" />
+      <xs:enumeration value="Acknowledge" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MainState" nillable="true" type="tns:MainState" />
   <xs:complexType name="Map">
     <xs:sequence>
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Drawing" name="bitmap" nillable="true" type="q1:Bitmap" />
+      <xs:element name="cards" nillable="true" type="tns:ArrayOfReinforcementCard" />
       <xs:element name="continents" nillable="true" type="tns:ArrayOfContinent" />
       <xs:element name="fileName" nillable="true" type="xs:string" />
       <xs:element name="territories" nillable="true" type="tns:ArrayOfTerritory" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Map" nillable="true" type="tns:Map" />
+  <xs:complexType name="ArrayOfReinforcementCard">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReinforcementCard" nillable="true" type="tns:ReinforcementCard" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReinforcementCard" nillable="true" type="tns:ArrayOfReinforcementCard" />
+  <xs:complexType name="ReinforcementCard">
+    <xs:sequence>
+      <xs:element name="CardId" type="xs:int" />
+      <xs:element name="TerritoryName" nillable="true" type="xs:string" />
+      <xs:element name="UnitType" type="tns:ReinforcemenCardUnit" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReinforcementCard" nillable="true" type="tns:ReinforcementCard" />
+  <xs:simpleType name="ReinforcemenCardUnit">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Infantry" />
+      <xs:enumeration value="Cavalry" />
+      <xs:enumeration value="Artillery" />
+      <xs:enumeration value="Wild" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReinforcemenCardUnit" nillable="true" type="tns:ReinforcemenCardUnit" />
   <xs:complexType name="ArrayOfContinent">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Continent" nillable="true" type="tns:Continent" />
@@ -94,29 +119,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="RiskMessage" nillable="true" type="tns:RiskMessage" />
-  <xs:complexType name="ArrayOfReinforcementCard">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReinforcementCard" nillable="true" type="tns:ReinforcementCard" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfReinforcementCard" nillable="true" type="tns:ArrayOfReinforcementCard" />
-  <xs:complexType name="ReinforcementCard">
-    <xs:sequence>
-      <xs:element name="CardId" type="xs:int" />
-      <xs:element name="TerritoryName" nillable="true" type="xs:string" />
-      <xs:element name="UnitType" type="tns:ReinforcemenCardUnit" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ReinforcementCard" nillable="true" type="tns:ReinforcementCard" />
-  <xs:simpleType name="ReinforcemenCardUnit">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Infantry" />
-      <xs:enumeration value="Cavalry" />
-      <xs:enumeration value="Artillery" />
-      <xs:enumeration value="Wild" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="ReinforcemenCardUnit" nillable="true" type="tns:ReinforcemenCardUnit" />
   <xs:complexType name="ArrayOfArmyPlacement">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ArmyPlacement" nillable="true" type="tns:ArmyPlacement" />

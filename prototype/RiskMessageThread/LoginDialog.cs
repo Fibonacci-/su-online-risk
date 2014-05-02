@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RiskMessageThread
+namespace SURiskGUI
 {
     public partial class LoginDialog : Form
     {
@@ -23,6 +23,10 @@ namespace RiskMessageThread
         public string getPassword()
         {
             return this.textBox2.Text;
+        }
+        public bool isComputer()
+        {
+            return this.checkBox1.Checked;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace SUOnlineRisk
         //Dictionary<MockClient, MainState> states = new Dictionary<MockClient, MainState>();
 
         RiskClient current; //currently active client/player
-        MainState currentState; //current state
+        //MainState currentState; //current state
 
         //these are used during the attack phase
         RiskClient attacker;
@@ -55,26 +55,34 @@ namespace SUOnlineRisk
          */
         public void generateReinforcementCards(Map map)
         {
-            reinforcementCards = new List<ReinforcementCard>();
-            List<Territory> territories = map.getAllTerritories();
-            int n = 0;
-            foreach (Territory t in map.getAllTerritories())
+            reinforcementCards = map.getAllCards(); //there may not be cards in a map.
+            if (reinforcementCards==null || reinforcementCards.Count == 0)
             {
-                ReinforcementCard r = null;
-                switch (n)
+                if(reinforcementCards == null)
                 {
-                    case (0):
-                        r = new ReinforcementCard(t.getName(), ReinforcemenCardUnit.Infantry);
-                        break;
-                    case (1):
-                        r = new ReinforcementCard(t.getName(), ReinforcemenCardUnit.Cavalry);
-                        break;
-                    case (2):
-                        r = new ReinforcementCard(t.getName(), ReinforcemenCardUnit.Artillery);
-                        break;
+                    reinforcementCards = new List<ReinforcementCard>();
                 }
-                reinforcementCards.Add(r);
-                n = ++n % 3;
+                //generate cards
+                List<Territory> territories = map.getAllTerritories();
+                int n = 0;
+                foreach (Territory t in map.getAllTerritories())
+                {
+                    ReinforcementCard r = null;
+                    switch (n)
+                    {
+                        case (0):
+                            r = new ReinforcementCard(t.getName(), ReinforcemenCardUnit.Infantry);
+                            break;
+                        case (1):
+                            r = new ReinforcementCard(t.getName(), ReinforcemenCardUnit.Cavalry);
+                            break;
+                        case (2):
+                            r = new ReinforcementCard(t.getName(), ReinforcemenCardUnit.Artillery);
+                            break;
+                    }
+                    reinforcementCards.Add(r);
+                    n = ++n % 3;
+                }
             }
         }
 
@@ -141,6 +149,48 @@ namespace SUOnlineRisk
             return numCollect;
         }
         /*
+         * this method takes an Acknowledge message from a client and possibly switch the current player to the next one.
+         */
+        public void TakeTurn(RiskMessage message)
+        {
+            RiskClient client = clients.Find(x => x.name == message.playerName);
+            if (client == null)
+            {
+                Console.Out.WriteLine("TakeTurn: Player " + message.playerName + " does not exist.");
+                throw new NullReferenceException("Player " + message.playerName + " does not exist.");
+            }
+            if(client != current)
+            {
+                return; //only the current player can release the turn.
+            }
+            if (client.state == MainState.Initialize || client.state == MainState.Distribute)
+            {
+                int idx = clients.FindIndex(x => x == current);
+                current = clients[(idx + 1) % clients.Count]; //go to the next player
+            }
+            else if (client.state == MainState.Fortify)
+            {
+                int idx = clients.FindIndex(x => x == current);
+                RiskClient next = null;
+                for (int i = 1; i < clients.Count(); ++i)
+                {
+                    RiskClient c = clients[(idx + i) % clients.Count()];
+                    if (map.getAllTerritories().FindAll(t => t.getOwner() == c.name).Count > 0)
+                    {
+                        next = c;
+                        break;
+                    }
+                }
+                if (next != null)
+                {
+                    //Move to the next player
+                    current = next;
+                    current.state = MainState.StandBy; //TK. by setting it StandBy, it should move to TradeCard next time.
+                }
+            }
+        }
+
+        /*
          * this method takes a message from a client/player and update the map and other variables accordingly.
          */
         public void Update(RiskMessage message)
@@ -149,9 +199,11 @@ namespace SUOnlineRisk
             RiskClient client = clients.Find(x => x.name == message.playerName);
             if(client == null)
             {
+                Console.Out.WriteLine("Update: Player " + message.playerName + " does not exist.");
                 throw new NullReferenceException("Player " + message.playerName + " does not exist.");
             }
             //int idx = clients.FindIndex(x => x == current);
+            Console.Out.WriteLine("Update(): Player " + message.playerName + " exits.");
 
             //TK. When Client is on a remote Server, the state change from Attack to AttackDone does not propagate to the Server.
             //We need to take care of the change right here.
@@ -175,7 +227,14 @@ namespace SUOnlineRisk
                     changes.Add(message.territory_army[0]);
                 }
             }
-            else if (client.state == MainState.Reinforce || client.state == MainState.Fortify)
+            else if (client.state == MainState.Reinforce)
+            {
+                foreach (ArmyPlacement a in message.territory_army)
+                {
+                    changes.Add(a);
+                }
+            }
+            else if(client.state == MainState.Fortify)
             {
                 foreach (ArmyPlacement a in message.territory_army)
                 {
@@ -216,31 +275,34 @@ namespace SUOnlineRisk
                     }
                 }
             }
-            else if (client.state == MainState.AdditionalArmies)
+            else if (client.state == MainState.StandBy)
             {
                 //no change to the map
             }
             else if (client.state == MainState.Attack)
             {
-                Territory from = map.getTerritory(message.from);
-                Territory to = map.getTerritory(message.to);
-                Console.Out.WriteLine("owners: " + from.getOwner() + " " + to.getOwner());
-                Console.Out.WriteLine("Battle: " + from.getName() + "[" + from.getOwner() + "] => " + to.getName() + "[" + to.getOwner() + "]");
-                if (from.getOwner() != current.name)
+                if (message.from != "none")
                 {
-                    Console.Out.WriteLine("Player attacking from a territory they don't own");
-                }
-                if (from.getOwner() == message.playerName && to.getOwner() != message.playerName)
-                {
-                    if (from.isNeighbor(to) && to.isNeighbor(from))
+                    Territory from = map.getTerritory(message.from);
+                    Territory to = map.getTerritory(message.to);
+                    Console.Out.WriteLine("owners: " + from.getOwner() + " " + to.getOwner());
+                    Console.Out.WriteLine("Battle: " + from.getName() + "[" + from.getOwner() + "] => " + to.getName() + "[" + to.getOwner() + "]");
+                    if (from.getOwner() != current.name)
                     {
-                        attackFrom = from;
-                        attackTo = to;
-                        attacker = clients.Find(x => x.name == from.getOwner());
-                        defender = clients.Find(x => x.name == to.getOwner());
-                        if (attacker == null || defender == null)
+                        Console.Out.WriteLine("Player attacking from a territory they don't own");
+                    }
+                    if (from.getOwner() == message.playerName && to.getOwner() != message.playerName)
+                    {
+                        if (from.isNeighbor(to) && to.isNeighbor(from))
                         {
-                            Console.Out.WriteLine("MockServer::Update - Attack state - null attacker or defender");
+                            attackFrom = from;
+                            attackTo = to;
+                            attacker = clients.Find(x => x.name == from.getOwner());
+                            defender = clients.Find(x => x.name == to.getOwner());
+                            if (attacker == null || defender == null)
+                            {
+                                Console.Out.WriteLine("MockServer::Update - Attack state - null attacker or defender");
+                            }
                         }
                     }
                 }
@@ -257,6 +319,10 @@ namespace SUOnlineRisk
             }
             else if (client.state == MainState.Roll)
             {
+                if(message.roll == null)
+                {
+                    message.roll = null;
+                }
                 if (message.playerName == attacker.name)
                 {
                     attackerRoll = (int[])message.roll.Clone();
@@ -299,6 +365,7 @@ namespace SUOnlineRisk
 
             //go ahead and update the map
             updateMap(changes);
+            Console.Out.WriteLine("Update(): Player " + message.playerName + " exits.");
 
             /*
              * TK
@@ -327,8 +394,13 @@ namespace SUOnlineRisk
             RiskClient client = clients.Find(x => x.name == incoming.playerName);
             if(client == null) //TK. Make sure the client exists.
             {
+                Console.Out.WriteLine("Player " + incoming.playerName + " does not exist.");
                 throw new NullReferenceException("Player " + incoming.playerName + " does not exist.");
             }
+            /*if (client.state != MainState.Idle)
+            {
+                Console.Out.WriteLine("Next(): Player " + incoming.playerName + " enters with " + client.state);
+            }*/
             RiskMessage outgoing = null;
             if (gameOver(map))
             {
@@ -337,12 +409,22 @@ namespace SUOnlineRisk
             else if (incoming.playerName != current.name)
             {
                 //if this message is from inactive player, and this player is under attack.
-                if (defender != null && incoming.playerName == defender.name && current.state == MainState.Roll)
+                if (defender != null && incoming.playerName == defender.name && current.state == MainState.Roll && defenderRoll == null)
                 {
                     defender.state = MainState.Roll;
                     outgoing = new RiskMessage(MainState.Roll, defender.name);
                     outgoing.from = this.attackFrom.getName();
                     outgoing.to = this.attackTo.getName();
+                }
+                else if (defender != null && incoming.playerName == defender.name && current.state == MainState.AttackOutcome)
+                {
+                    outgoing = new RiskMessage(MainState.AttackOutcome, defender.name);
+                    //TK. Inform the outcome
+                    outgoing.territory_army = new List<ArmyPlacement>();
+                    foreach (ArmyPlacement p in battleResult)
+                    {
+                        outgoing.territory_army.Add(p);
+                    }
                 }
                 else
                 {
@@ -352,12 +434,17 @@ namespace SUOnlineRisk
             else //active player
             {
                 int idx = clients.FindIndex(x => x == current);
-                if (client.state == MainState.Initialize)
+                if (client.state == MainState.StandBy)
+                {
+                    current.state = MainState.TradeCard;
+                    outgoing = new RiskMessage(MainState.TradeCard, current.name);
+                }
+                else if (client.state == MainState.Initialize)
                 {
                     if (initialized < map.getAllTerritories().Count) //continue initialization
                     {
                         outgoing = new RiskMessage(MainState.Initialize, current.name);
-                        current = clients[(idx + 1) % clients.Count]; //go to the next player
+                        //current = clients[(idx + 1) % clients.Count]; //go to the next player
                     }
                     else //move on to distribution
                     {
@@ -366,21 +453,22 @@ namespace SUOnlineRisk
                         {
                             c.state = MainState.Distribute;
                         }
-                        currentState = MainState.Distribute;
+                        //currentState = MainState.Distribute;
                         outgoing = new RiskMessage(MainState.Distribute, current.name);
-                        current = clients[(idx + 1) % clients.Count]; //go to the next player
+                        //current = clients[(idx + 1) % clients.Count]; //go to the next player
                     }
                 }
                 else if (client.state == MainState.Distribute)
                 {
                     if (distributed < ((10 - clients.Count) * 5 * clients.Count - initialized)) // continue distribution
+                    //if (distributed < (1 * clients.Count)) // TK - for testing purpose
                     {
                         outgoing = new RiskMessage(MainState.Distribute, current.name);
-                        current = clients[(idx + 1) % clients.Count]; // go to the next player
+                        //current = clients[(idx + 1) % clients.Count]; // go to the next player
                     }
                     else // move on to the next player's TradeCard phase
                     {
-                        currentState = MainState.TradeCard;
+                        //currentState = MainState.TradeCard;
                         //the current player moves to TradeCard. Others go Idle.
                         foreach (RiskClient c in clients)
                         {
@@ -454,6 +542,13 @@ namespace SUOnlineRisk
                 }
                 else if (client.state == MainState.Attack)
                 {
+                    // if the player has chosen to cancel an attack, attacker will still be null
+                    if (attacker == null)
+                    {
+                        outgoing = new RiskMessage(MainState.AttackDone, current.name);
+                    }   
+                    else
+                    {
                     attackerRoll = null;
                     defenderRoll = null;
 
@@ -462,6 +557,7 @@ namespace SUOnlineRisk
                     outgoing.to = this.attackTo.getName();
                     outgoing.attacker = true;
                     client.state = MainState.Roll;
+                    }
                 }
                 else if (client.state == MainState.Roll)
                 {
@@ -518,10 +614,6 @@ namespace SUOnlineRisk
                         outgoing = new RiskMessage(MainState.Attack, current.name);
                     }
                 }
-                //else if (client.state == MainState.Eliminate)
-                //{
-                //    // TODO: this
-                //}
                 else if (client.state == MainState.AttackDone)
                 {
                     if (bConquered)
@@ -566,38 +658,8 @@ namespace SUOnlineRisk
                 }
                 else if (client.state == MainState.Fortify)
                 {
-                    //end of this player's turn. 
-                    /*
-                     * TK - What if the next two players are already out?
-                     * */
-                    /*RiskClient next = clients[(idx + 1) % clients.Count()];
-                    // check that the next player still occupies territories
-                    if (map.getAllTerritories().FindAll(t => t.getOwner() == next.name).Count == 0)
-                    {
-                        next = clients[(idx + 2) % clients.Count()];
-                    }*/
                     current.state = MainState.Idle;
                     outgoing = new RiskMessage(MainState.Idle, current.name); //TK.
-                    RiskClient next = null;
-                    for (int i = 1; i < clients.Count(); ++i)
-                    {
-                        RiskClient c = clients[(idx + i) % clients.Count()];
-                        if (map.getAllTerritories().FindAll(t => t.getOwner() == c.name).Count > 0)
-                        {
-                            next = c;
-                            break;
-                        }
-                    }
-                    if (next != null)
-                    {
-                        //Move to the next player
-                        current = next;
-                        current.state = MainState.TradeCard;
-                    }
-                    else
-                    {
-                        //game over.
-                    }
                 }
                 else if (client.state == MainState.Start)
                 {
@@ -609,13 +671,16 @@ namespace SUOnlineRisk
                         c.state = MainState.Initialize;
                     }
                     outgoing = new RiskMessage(MainState.Initialize, current.name);
-                    current = clients[(idx + 1) % clients.Count]; //go to the next player
                 }
                 else //if (client.state == MainState.Idle) //TK. Put all other cases in here. Return Unknown. We should take care of this at the Client side as this should not happen.
                 {
                     //nothing to do
                     outgoing = new RiskMessage(MainState.Unknown, current.name);
                 }
+            }
+            if (client.state != MainState.Idle)
+            {
+                Console.Out.WriteLine("Next(): Player " + incoming.playerName + " exits with " + client.state);
             }
             return outgoing;
         }
@@ -625,6 +690,11 @@ namespace SUOnlineRisk
             if(msg.state == MainState.Unknown)
             {
                 return Next(msg);
+            }
+            else if(msg.state == MainState.Acknowledge)
+            {
+                TakeTurn(msg); //possibly move to the next player
+                return msg;
             }
             else if(msg.state == MainState.GetMap)
             {
@@ -646,8 +716,9 @@ namespace SUOnlineRisk
 
         public void Start()
         {
-            this.currentState = MainState.Start; //begin the game.
+            //this.currentState = MainState.Start; //begin the game.
             this.current = clients[0];
+            this.current.state = MainState.Start;
         }
 
     }

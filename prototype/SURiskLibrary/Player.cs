@@ -17,7 +17,7 @@ namespace SUOnlineRisk
         public List<Territory> Territories;
         public List<ReinforcementCard> ReinforcementCards;
         public List<Army> armies;
-        public MainState state; // what is this designed to do?
+        public MainState state; // maintains which state the player is in: e.g. Attack, Reinforce, Conquer, etc.
 
         public Map map;
 
@@ -177,7 +177,7 @@ namespace SUOnlineRisk
         virtual public RiskMessage AdditionalArmies(RiskMessage message)
         {
             //collect the new additional armies - obtained by trading in cards
-            return new RiskMessage(MainState.AdditionalArmies, nickname); //acknowledgement only.
+            return new RiskMessage(MainState.StandBy, nickname); //acknowledgement only.
         }
         virtual public RiskMessage Attack(RiskMessage incoming)
         {
@@ -242,6 +242,14 @@ namespace SUOnlineRisk
             //determine how you want to re-distribute the armies.
             //store the information in the message. Use negative if armies are taken away and positive if they are added.
             RiskMessage outgoing = new RiskMessage(MainState.Reinforce, nickname);
+            //outgoing.territory_army; //store the redistribution in this list.
+            return outgoing;
+        }
+        virtual public RiskMessage AttackDone(RiskMessage message)
+        {
+            //determine how you want to re-distribute the armies.
+            //store the information in the message. Use negative if armies are taken away and positive if they are added.
+            RiskMessage outgoing = new RiskMessage(MainState.AttackDone, nickname);
             //outgoing.territory_army; //store the redistribution in this list.
             return outgoing;
         }

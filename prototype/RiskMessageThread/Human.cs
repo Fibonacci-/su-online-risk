@@ -10,43 +10,25 @@ using System.Threading;
 
 namespace SUOnlineRisk
 {
+    /*
+     * This player does not implement anything. It only relays message from input to the output.
+     * All actions should be determined by GUI with an actual human player.
+     * The class only serves to provide a common interface of the Player class.
+     * */
     public class Human: Player
     {
-        BackgroundWorker worker;
-        SharedMessage shared; //used to communicate with the GUI
         // constructor
-        public Human(string UserName, Color ArmyColor, Map map, SharedMessage shared, BackgroundWorker worker)
+        public Human(string UserName, Color ArmyColor, Map map)
             : base(UserName, ArmyColor, map)
         {
-            this.shared = shared;
-            this.worker = worker;
         }
 
         /*
-         * This method defines a generic handling of the message.
-         * 1. it copies the message to the message shared between GUI and worker thread.
-         * 2. wait for the user action while bWaitForUser bool variable is true.
-         * 3. return the shared message.
-         * GUI needs to take proper action based on the state in the message. 
-         * The result of the GUI needs to be stored into the shared message content.
+         * Simply pass the message.
          */ 
         RiskMessage GenericAction(RiskMessage incoming)
         {
-            lock (shared)
-            {
-                shared.message = (RiskMessage) incoming.Clone(); //create a clean slate message
-                //shared.bWaitForUser = true; //We do this in the main loop
-                //worker.ReportProgress(0, shared.message);
-            }
-            while (shared.bWaitForUser)
-            {
-                Thread.Sleep(100);
-            }
-            RiskMessage outgoing;
-            lock(shared)
-            {
-                outgoing = (RiskMessage) shared.message.Clone();
-            }
+            RiskMessage outgoing = (RiskMessage) incoming.Clone();
             return outgoing;
         }
 

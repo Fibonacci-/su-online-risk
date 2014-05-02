@@ -9,3 +9,16 @@ C:\Users\Colton\Dropbox\Project 3\RiskMap\RiskMap\obj\x86\Debug\RiskMap.DialTerr
 C:\Users\Colton\Dropbox\Project 3\RiskMap\RiskMap\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Colton\Dropbox\Project 3\RiskMap\RiskMap\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Colton\Dropbox\Project 3\RiskMap\RiskMap\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\obj\x86\Debug\RiskMap.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\obj\x86\Debug\RiskMap.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\bin\Debug\RiskMap.exe
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\bin\Debug\RiskMap.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\bin\Debug\SURiskLibrary.dll
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\bin\Debug\SURiskLibrary.pdb
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\obj\x86\Debug\RiskMap.csprojResolveAssemblyReference.cache
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\obj\x86\Debug\RiskMap.Creator.resources
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\obj\x86\Debug\RiskMap.DialContInfo.resources
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\obj\x86\Debug\RiskMap.DialReinSelect.resources
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\obj\x86\Debug\RiskMap.DialTerrInfo.resources
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\obj\x86\Debug\RiskMap.Properties.Resources.resources
+C:\Toshiro\Classes\CSCI472\Programs\su-online-risk\Burdick\RiskMap\RiskMap\obj\x86\Debug\RiskMap.csproj.GenerateResource.Cache

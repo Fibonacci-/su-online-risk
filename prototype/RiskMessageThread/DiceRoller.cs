@@ -16,7 +16,7 @@ namespace SURiskGUI
 
         const int NumDiceAttacker = 3;
         public int[] numberAttacker;
-        static Random rg = new Random(0);
+        static Random rg = new Random();
         //int[] dieChoiceAttacker;
         Player roller;
         Territory attackFrom;

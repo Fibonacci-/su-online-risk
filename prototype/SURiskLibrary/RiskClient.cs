@@ -59,6 +59,10 @@ namespace SUOnlineRisk
             {
                 outgoing = player.Attack(incoming);
             }
+            else if (state == MainState.AttackDone)
+            {
+                outgoing = player.AttackDone(incoming);
+            }
             else if (state == MainState.AttackOutcome)
             {
                 outgoing = player.AttackOutcome(incoming);

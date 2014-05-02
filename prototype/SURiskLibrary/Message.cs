@@ -113,5 +113,50 @@ namespace SUOnlineRisk
         {
             return this.MemberwiseClone();
         }
+        public override bool Equals(object obj)
+        {
+            RiskMessage msg = obj as RiskMessage;
+            if(msg == null)
+            {
+                return false;
+            }
+            if (this.attacker != msg.attacker) return false;
+            else if (this.from != msg.from) return false;
+            else if (this.playerName != msg.playerName) return false;
+            else if (this.state != msg.state) return false;
+            else if (this.to != msg.to) return false;
+            //now compare items in each container
+            if (this.card.Count != msg.card.Count) return false;
+            for (int i = 0; i < this.card.Count; ++i)
+            {
+                if (this.card[i].Equals(msg.card[i]) == false) return false;
+            }
+            if (this.cardIds == null && msg.cardIds != null) return false;
+            else if (this.cardIds != null && msg.cardIds == null) return false;
+            else if (this.cardIds != null && msg.cardIds != null)
+            {
+                if (this.cardIds.Length != msg.cardIds.Length) return false;
+                for (int i = 0; i < this.cardIds.Length; ++i)
+                {
+                    if (this.cardIds[i] != msg.cardIds[i]) return false;
+                }
+            }
+            if (this.roll == null && msg.roll != null) return false;
+            else if (this.roll != null && msg.roll == null) return false;
+            else if (this.roll != null && msg.roll != null)
+            {
+                if (this.roll.Length != msg.roll.Length) return false;
+                for (int i = 0; i < this.roll.Length; ++i)
+                {
+                    if (this.roll[i] != msg.roll[i]) return false;
+                }
+            }
+            if (this.territory_army.Count != msg.territory_army.Count) return false;
+            for (int i = 0; i < this.territory_army.Count; ++i)
+            {
+                if (this.territory_army[i].Equals(msg.territory_army[i]) == false) return false;
+            }
+            return true;
+        }
     }
 }

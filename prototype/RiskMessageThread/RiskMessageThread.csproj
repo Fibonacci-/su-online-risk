@@ -33,9 +33,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -84,17 +86,23 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SharedMessage.cs" />
-    <Compile Include="StateGUI.cs">
+    <Compile Include="MainGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StateGUI.designer.cs">
-      <DependentUpon>StateGUI.cs</DependentUpon>
+    <Compile Include="MainGUI.designer.cs">
+      <DependentUpon>MainGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="StateSelector.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StateSelector.Designer.cs">
       <DependentUpon>StateSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TradeCardGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TradeCardGUI.Designer.cs">
+      <DependentUpon>TradeCardGUI.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="DiceRoller.resx">
       <DependentUpon>DiceRoller.cs</DependentUpon>
@@ -118,13 +126,17 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="StateGUI.resx">
-      <DependentUpon>StateGUI.cs</DependentUpon>
+    <EmbeddedResource Include="MainGUI.resx">
+      <DependentUpon>MainGUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="StateSelector.resx">
       <DependentUpon>StateSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TradeCardGUI.resx">
+      <DependentUpon>TradeCardGUI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\SUOnlineRisk.Map.datasource" />
     <None Include="Properties\DataSources\SUOnlineRisk.RiskMessage.datasource" />
@@ -140,6 +152,9 @@
     </Compile>
     <None Include="Service References\ServiceReference1\Arrays.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\RiskMessageThread.ServiceReference1.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ServiceReference1\service.wsdl" />
     <None Include="Service References\ServiceReference1\service.xsd">
@@ -167,6 +182,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\artilleryBlue.png" />
+    <None Include="Resources\cavalryBlue.png" />
+    <None Include="Resources\infantryBlue.png" />
     <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference1\configuration.svcinfo" />
     <None Include="Service References\ServiceReference1\Reference.svcmap">
@@ -179,10 +197,6 @@
     <ProjectReference Include="..\SURiskLibrary\SURiskLibrary.csproj">
       <Project>{cd3bf920-b0d2-4744-adb1-3e8b18e9ece8}</Project>
       <Name>SURiskLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WCFRiskServer\WCFRiskServer.csproj">
-      <Project>{15b3e0d2-6217-493a-a690-158c497f5318}</Project>
-      <Name>WCFRiskServer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
